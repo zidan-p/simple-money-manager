@@ -1,5 +1,6 @@
 
 import "./style.css"
+import IMG from "./asset/my-web.png";
 
 const Section1 = () => {
     return (
@@ -25,9 +26,10 @@ const Section2 = () => {
 
 const Section3 = () => {
     return (
-        <>
-        
-        </>
+        <div className="container container3">
+            <p>Ini adalah hasil projek saya sebelumnya</p>
+            <img src={IMG} alt="" />
+        </div>
     )
 }
 
@@ -37,6 +39,7 @@ const App = () => {
             <div className="layout-container">
                 <Section1 />
                 <Section2 />
+                <Section3 />
             </div>
         </>
     )

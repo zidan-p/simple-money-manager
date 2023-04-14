@@ -83,20 +83,27 @@ p{
 
 .flex-button button{
     font-weight: 500;
-    color: #0c4a6e;
-    background-color: #7dd3fc;
-    border: 1px solid #0369a1;
-    border-radius: 2px;
+    color: white;
+    background-color: #082f49;
+    border: 1px solid #082f49;
+    box-shadow: 1px 1px 1px gray ;
+    border-radius: 3px;
     cursor: pointer;
     padding: 5px 15px;
     transition: all .1s;
 }
 
 .flex-button button:hover{
-    background-color: #e0f2fe;
+    background-color: #0c4a6e;
+    box-shadow: none;
 }
 
 .flex-button button:active{
-    background-color: #0284c7;
+    background-color: #075985;
+    
+}
+
+img{
+    max-width: 100%;
 }
 

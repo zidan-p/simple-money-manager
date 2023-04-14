@@ -20,6 +20,17 @@ module.exports = {
             {
                 test : /\.css$/,
                 use : ["style-loader", "css-loader"]
+            },
+            //for file image
+            {
+                test : /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                type : "asset/resource"
+            },
+
+            //for inline file (like svg ot web font)
+            {
+                test : /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+                type : "asset/inline"
             }
         ]
     },
