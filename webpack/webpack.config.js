@@ -11,10 +11,16 @@ module.exports = {
             {
                 test : /\.(ts|js)x?$/,
                 exclude : "/mode_modules/",
-                use : [
-                    {loader : "babel-loader"}
-                ]
-            } 
+                //testing aja
+                // use : [
+                //     {loader : "babel-loader"}
+                // ]
+                use : ["babel-loader"]
+            },
+            {
+                test : /\.css$/,
+                use : ["style-loader", "css-loader"]
+            }
         ]
     },
     output : {
