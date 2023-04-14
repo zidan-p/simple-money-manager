@@ -14,9 +14,10 @@
       "strict": true /* Enable all strict type-checking options. */,
       "skipLibCheck": true /* Skip type checking of declaration files. */,
       "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
-      "resolveJsonModule": true
-      // "allowJs": true /* Allow javascript files to be compiled. Useful when migrating JS to TS */,
+      "resolveJsonModule": true,
+      "allowJs": true /* Allow javascript files to be compiled. Useful when migrating JS to TS */,
       // "checkJs": true /* Report errors in .js files. Works in tandem with allowJs. */,
     }, 
-    "include": ["view/**/*", "renderer"]
+    "include": ["view/**/*", "renderer"],
+    "exclude": ["node_modules/*", "build/*", "view/dist/*"]
 }

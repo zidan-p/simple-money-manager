@@ -33,6 +33,14 @@ const Section3 = () => {
     )
 }
 
+// const EnvSection = () => {
+//     return (
+//         <div style={{color : "red"}} className="container">
+//             <p>{process.env.NODE_ENV}</p>
+//         </div>
+//     )
+// }
+
 const App = () => {
     return (
         <>
