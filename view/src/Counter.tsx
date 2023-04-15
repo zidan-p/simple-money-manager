@@ -21,7 +21,7 @@ function CounterClick(){
                         fontSize : "23pt"
                     }}
                 >
-                    {count}
+                    {count} 
                 </div>
                 <button
                     className="button-primary"

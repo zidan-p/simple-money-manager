@@ -3,7 +3,7 @@ const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry : path.resolve(__dirname, "..", "./view/index.tsx"),
+    entry : path.resolve(__dirname, "..", "./src/index.tsx"),
     resolve : {
         extensions : [".tsx", ".ts", ".jsx", ".js"]
     },
