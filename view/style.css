@@ -93,12 +93,24 @@ p{
     transition: all .1s;
 }
 
-.flex-button button:hover{
+.button-primary{
+    font-weight: 500;
+    color: white;
+    background-color: #082f49;
+    border: 1px solid #082f49;
+    box-shadow: 1px 1px 1px gray ;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px 15px;
+    transition: all .1s;
+}
+
+.flex-button button:hover, .button-primary:hover{
     background-color: #0c4a6e;
     box-shadow: none;
 }
 
-.flex-button button:active{
+.flex-button button:active, .button-primary:active{
     background-color: #075985;
     
 }

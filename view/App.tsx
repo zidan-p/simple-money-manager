@@ -1,6 +1,7 @@
 
 import "./style.css"
 import IMG from "./asset/my-web.png";
+import CounterClick from "./Counter";
 
 const Section1 = () => {
     return (
@@ -45,6 +46,7 @@ const App = () => {
                 <Section1 />
                 <Section2 />
                 <Section3 />
+                <CounterClick />
             </div>
         </>
     )
