@@ -8,7 +8,7 @@ function CounterClick(){
 
     return (
         <div className="container">
-            <h3>klik counter ini [teredit]</h3>
+            <h3 >klik counter ini [teredit]</h3>
             <div style={{
                 display: "flex",
                 flexDirection : "column",
