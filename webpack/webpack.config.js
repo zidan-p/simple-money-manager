@@ -5,7 +5,15 @@ const commonConfig = require("./webpack.common");
 
 module.exports = (envVars) => {
     const {env} = envVars;
-    const envConfig = require(`./webpack.${env}.js`)
-    const config = merge(commonConfig, envConfig);
+    console.log(envVars);
+    let config;
+    if(env == "dev"){
+        const envConfig = require(`./webpack.dev.js`)
+        console.log(envConfig);
+        config = merge(commonConfig, envConfig);
+    }else if (env == "prod"){
+        const envConfig = require(`./webpack.prod.js`)
+        config = merge(commonConfig, envConfig);
+    }
     return config;
 }

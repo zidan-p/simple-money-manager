@@ -33,18 +33,15 @@ const Section3 = () => {
     )
 }
 
-// const EnvSection = () => {
-//     return (
-//         <div style={{color : "red"}} className="container">
-//             <p>{process.env.NODE_ENV}</p>
-//         </div>
-//     )
-// }
-
 const App = () => {
     return (
         <>
             <div className="layout-container">
+                {/* <EnvSection /> */}
+                <div style={{color : "red"}} className="container">
+                    {/* <p>{process.env.NODE_ENV}</p> */}
+                    <p>{process.env.name}</p>
+                </div>
                 <Section1 />
                 <Section2 />
                 <Section3 />

@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -10,12 +11,12 @@ module.exports = {
         rules : [
             {
                 test : /\.(ts|js)x?$/,
-                exclude : "/mode_modules/",
+                exclude : "/node_modules/",
                 //testing aja
-                // use : [
-                //     {loader : "babel-loader"}
-                // ]
-                use : ["babel-loader"]
+                use : [
+                    {loader : "babel-loader"}
+                ]
+                // use : ["babel-loader"]
             },
             {
                 test : /\.css$/,
@@ -41,7 +42,6 @@ module.exports = {
     devServer: {
         port : 3004
     },
-    mode : "development",
     plugins : [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "..", "./view/index.html")
