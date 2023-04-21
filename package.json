@@ -1,0 +1,36 @@
+{
+  "name": "simple-money-manager",
+  "private" : true,
+  "version": "0.1.0",
+  "description": "simple desktop app to manage your expense and income",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:view" : "",
+    "dev" : "",
+    "build:view" : "",
+    "build" : ""
+  },
+  "workspaces":[
+    "packages/view",
+    "packages/process-electron",
+    "packages/desktop-client"
+  ],
+  "keywords": [
+    "desktop-app",
+    "electron",
+    "money-manager",
+    "simple",
+    "free"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zidan-p/simple-money-manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zidan-p/simple-money-manager/issues"
+  },
+  "homepage": "https://github.com/zidan-p/simple-money-manager#readme"
+}

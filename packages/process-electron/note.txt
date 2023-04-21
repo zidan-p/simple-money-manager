@@ -1,0 +1,19 @@
+
+yang saya dapat
++ api antara electron browser dengan renderer sebisa mungkin dipisah
++ jangan menggunkana api langsung pada renderer
++ akan ada preload script untuk menghubungkan antara electron dengan renderer
++ project akan dibuat dengan arsitektur monorepo
++ pertimbangkan menggunkan tool mono repo seperti lerna atau turbopack
++ struktur folder sudah sesuai, namanay bisa diganti sesuai keinginan
+
+yang perlu dicari tahu
++ bagaimana cara menghubungkan packages menggunakan workspace ataupun tool monorepo
++ pertimbangkan bagaimana api antara renderer dengan electron akan dibuat
++ pertimbangkan pula menggunkana package baru untuk menghandle api antara keduanya
++ cari tahu command ataupun tooling untuk melakukan run script untuk subpackages
+    - baik secara pararel, seri, bersamaan atau hanya sebuah package di subpackages
++ mungkin perlu juga dicari  tahu implementasi terbaik anatar webpack dengan electron
+    - supaya api yang dibuat bisa sesuai best practice
+
+
