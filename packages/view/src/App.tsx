@@ -1,6 +1,6 @@
 
 import "./style.css"
-import IMG from "./asset/my-web.png";
+import IMG from "./../asset/my-web.png";
 import CounterClick from "./Counter";
 
 const Section1 = () => {
