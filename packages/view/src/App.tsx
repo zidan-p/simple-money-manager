@@ -1,65 +1,19 @@
 
-import "./style.css"
 import "./public/style/index.css"
-import IMG from "./public/asset/my-web.png";
-import CounterClick from "./Counter";
-
-const Section1 = () => {
-    return (
-        <div className="container container1">
-            <h1>Hallo nama saya zidan</h1>
-            <p>saat ini saya sedang mencari pekerjaan freelance untuk kedepanya.</p>
-            <p>sangat josh sekali</p>
-        </div>
-    )
-}
-
-const Section2 = () => {
-    return (
-        <div className="container container2">
-            <p>Mungkin Anda bisa menekan tombol ini</p>
-            <div className="flex-button">
-                <button>click ini</button>
-                <button>juga ini</button>
-            </div>
-        </div>
-    )
-}
-
-const Section3 = () => {
-    return (
-        <div className="container container3">
-            <p>Ini adalah hasil projek saya sebelumnya</p>
-            <p>bolehlah dilihat</p>
-            <img src={IMG} alt="" />
-        </div>
-    )
-}
-
-// const App = () => {
-//     return (
-//         <>
-//             <div className="layout-container">
-//                 {/* <EnvSection /> */}
-//                 <div style={{color : "red"}} className="container">
-//                     {/* <p>{process.env.NODE_ENV}</p> */}
-//                     <p>{process.env.name}</p>
-//                 </div>
-//                 <Section1 />
-//                 <Section2 />
-//                 <Section3 />
-//                 <CounterClick />
-//             </div>
-//         </>
-//     )
-// }
 
 const App = () =>{
     return (
-        <>
-            <h1 className="text-lg">Halloo, ada yang bisa saya bantu??</h1>
-            <p>tailwind class</p>
-        </>
+        <div className="h-screen bg-gray-200 flex flex-col justify-center">
+            <div className="max-w-lg bg-white rounded p-5 mx-auto">
+                <h1 className="text-2xl font-bold">Hello Tailwind</h1>
+                <p className="text-gray-800">
+                    this is the best way that i could think to start building my project. 
+                    actualy there are many more architecture could be used, but only this that come to my mind.
+                    so, i hope i can finish this project as quick as possible.
+                </p>
+                <p className="bg-red-100 rounded text-red-900 px-2">sorry my broke grammar</p>
+            </div>
+        </div>
     )
 }
 
