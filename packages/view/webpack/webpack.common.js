@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const {DIST_ASSET_DIRECTORY} = require("./../project.config")
 
 module.exports = {
     entry : path.resolve(__dirname, "..", "./src/index.tsx"),
@@ -27,7 +28,6 @@ module.exports = {
                 test : /\.(?:ico|gif|png|jpg|jpeg)$/i,
                 type : "asset/resource"
             },
-
             //for inline file (like svg ot web font)
             {
                 test : /\.(woff(2)?|eot|ttf|otf|svg|)$/,
@@ -36,7 +36,8 @@ module.exports = {
         ]
     },
     output : {
-        path : path.resolve(__dirname,"..","./dist"),
+        // path : path.resolve(__dirname,"..","./dist"),
+        path : DIST_ASSET_DIRECTORY,
         filename : "bundle.js"
     },
     plugins : [

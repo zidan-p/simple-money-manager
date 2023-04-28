@@ -1,6 +1,6 @@
 {
   "name": "@simple-money-manager/view",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "the view from simple money manager app",
   "main": "index.js",
   "scripts": {
