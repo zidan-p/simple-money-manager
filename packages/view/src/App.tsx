@@ -1,6 +1,7 @@
 
 import "./style.css"
-import IMG from "./../asset/my-web.png";
+import "./public/style/index.css"
+import IMG from "./public/asset/my-web.png";
 import CounterClick from "./Counter";
 
 const Section1 = () => {
@@ -29,25 +30,35 @@ const Section3 = () => {
     return (
         <div className="container container3">
             <p>Ini adalah hasil projek saya sebelumnya</p>
+            <p>bolehlah dilihat</p>
             <img src={IMG} alt="" />
         </div>
     )
 }
 
-const App = () => {
+// const App = () => {
+//     return (
+//         <>
+//             <div className="layout-container">
+//                 {/* <EnvSection /> */}
+//                 <div style={{color : "red"}} className="container">
+//                     {/* <p>{process.env.NODE_ENV}</p> */}
+//                     <p>{process.env.name}</p>
+//                 </div>
+//                 <Section1 />
+//                 <Section2 />
+//                 <Section3 />
+//                 <CounterClick />
+//             </div>
+//         </>
+//     )
+// }
+
+const App = () =>{
     return (
         <>
-            <div className="layout-container">
-                {/* <EnvSection /> */}
-                <div style={{color : "red"}} className="container">
-                    {/* <p>{process.env.NODE_ENV}</p> */}
-                    <p>{process.env.name}</p>
-                </div>
-                <Section1 />
-                <Section2 />
-                <Section3 />
-                <CounterClick />
-            </div>
+            <h1 className="text-lg">Halloo, ada yang bisa saya bantu??</h1>
+            <p>tailwind class</p>
         </>
     )
 }

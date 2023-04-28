@@ -21,7 +21,7 @@ module.exports = {
             },
             {
                 test : /\.css$/,
-                use : ["style-loader", "css-loader"]
+                use : ["style-loader", "css-loader", "postcss-loader"]
             },
             //for file image
             {
@@ -36,7 +36,6 @@ module.exports = {
         ]
     },
     output : {
-        // path : path.resolve(__dirname,"..","./dist"),
         path : DIST_ASSET_DIRECTORY,
         filename : "bundle.js"
     },
