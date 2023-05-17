@@ -67,6 +67,7 @@ const App = () =>{
         const onMouseMove = (e : MouseEvent) => {
             if(!isClicked.current) return;
 
+            //trace position based on deviation between start position and move posotion
             const nextX = e.clientX - coords.current.startX + coords.current.lastX;
             const nextY = e.clientY - coords.current.startY + coords.current.lastY;
 

@@ -7,14 +7,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:view": "npm run dev -w @simple-money-manager/view",
-    "dev:electron": "npm run dev -w ",
+    "dev:electron": "npm run dev -w @simple-money-manager/process-electron",
+    "dev:desktop": "",
     "build:view": "",
     "build:electron": "",
-    "preinstall": "npm install -- workspaces"
+    "preinstall": "npm install --workspaces"
   },
   "workspaces": [
     "packages/view",
-    "packages/process-electron"
+    "packages/process-electron",
+    "packages/desktop-api"
   ],
   "keywords": [
     "desktop-app",
@@ -35,5 +37,8 @@
   "homepage": "https://github.com/zidan-p/simple-money-manager#readme",
   "devDependencies": {
     "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "workspaces": "^0.1.0"
   }
 }
