@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom"
 import { Sidebar } from "../components/Sidebar"
+import { Header } from "../components/Header"
 
 
 
 
-export const MainLayout = () => {
+export const DesktopLayout = () => {
     return (
-        <div className="min-h-screen flex bg-gray-900">
+      <div className="min-h-screen bg-gray-900">
+        <Header />
+        <div className="flex">
           <aside className="basis-1/6 h-screen overflow-auto">
             <Sidebar/>
           </aside>
@@ -14,5 +17,6 @@ export const MainLayout = () => {
             <Outlet />
           </main>
         </div>
-      )
+      </div>
+    )
 }

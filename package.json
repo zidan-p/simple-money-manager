@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:view": "npm run dev -w @simple-money-manager/view",
     "dev:electron": "npm run dev -w @simple-money-manager/process-electron",
-    "dev:desktop": "",
+    "dev:desktop": "npm run dev ",
     "build:view": "",
     "build:electron": "",
     "preinstall": "npm install --workspaces"

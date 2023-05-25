@@ -3,11 +3,13 @@ import { forwardRef, useEffect, useRef } from "react"
 import "./public/style/index.css"
 import { MainLayout } from "./layouts/MainLayout";
 import { Main } from "./pages/main";
+import { DesktopLayout } from "./layouts/DesktopLayout";
 
 function App() {
     return (
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        {/* <Route path="/" element={<MainLayout />}> */}
+        <Route path="/" element={<DesktopLayout />}>
             <Route
             index
             path={"/"}

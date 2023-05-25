@@ -28,17 +28,22 @@ module.exports = {
                 test : /\.(?:ico|gif|png|jpg|jpeg)$/i,
                 type : "asset/resource"
             },
-            //for inline file (like svg ot web font)
-            {
-                test : /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-                type : "asset/inline"
-            },
             // svg to react component
             {
                 test: /\.svg$/i,
                 issuer: /\.[jt]sx?$/,
-                use: [{loader:'@svgr/webpack', option: {typescript: true}}],
+                use: [{
+                    loader: '@svgr/webpack',
+                    options: { 
+                        icon: true
+                    },
+                }],
             },
+            //for inline file (like svg ot web font)
+            // {
+            //     test : /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+            //     type : "asset/inline"
+            // },
         ]
     },
     output : {
