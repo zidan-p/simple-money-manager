@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import SideButton from "./../icons/Sidebar-icon.svg";
+import MenuIcon from "./../icons/menu-icon.svg"
 
 type SidebarProps = {
   routes: {
@@ -26,14 +27,19 @@ export const Sidebar = () => {
                 to={"/"}
                 className={({ isActive, isPending }: {isActive: boolean, isPending: boolean}) => {
                   let activeClass = isActive ? "text-white": "text-gray-500";
-                  return (
-                    `hover:bg-gray-700 w-full px-4 py-1 rounded block relative ` +
-                    activeClass
-                  );
+                  return `hover:bg-gray-700 w-full px-4 py-1 rounded block relative ` + activeClass
                 }}
               >
               <div className="top-2 bottom-2 left-0 w-1 rounded-sm bg-white absolute"></div>
-              Home
+
+              <div className="flex gap-2 items-center">
+                <div className="">
+                  <MenuIcon className="h-6 w-6" />
+                </div>
+                <h3>
+                  Home
+                </h3>
+              </div>
               </NavLink>
             </li>
         </ul>
