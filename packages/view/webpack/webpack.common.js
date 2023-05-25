@@ -32,7 +32,13 @@ module.exports = {
             {
                 test : /\.(woff(2)?|eot|ttf|otf|svg|)$/,
                 type : "asset/inline"
-            }
+            },
+            // svg to react component
+            {
+                test: /\.svg$/i,
+                issuer: /\.[jt]sx?$/,
+                use: [{loader:'@svgr/webpack', option: {typescript: true}}],
+            },
         ]
     },
     output : {
