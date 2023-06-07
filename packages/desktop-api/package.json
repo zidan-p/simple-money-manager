@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "@simple-money-manager/view": "^1.0.0"
+  },
   "devDependencies": {
     "typescript": "^5.0.4"
   }

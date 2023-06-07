@@ -8,16 +8,32 @@ module.exports = {
     resolve : {
         extensions : [".tsx", ".ts", ".jsx", ".js"]
     },
+    resolveLoader:{
+        modules: ['node_modules'],
+        // mainFields: ['loader', 'main'],
+    },
     module: {
         rules : [
             {
                 test : /\.(ts|js)x?$/,
                 exclude : "/node_modules/",
                 //testing aja
-                use : [
-                    {loader : "babel-loader"}
-                ]
-                // use : ["babel-loader"]
+                use : 
+                    {
+                        loader : require.resolve("babel-loader"),
+                        options : {
+                            presets: [
+                                require.resolve("@babel/preset-env"),
+                                [
+                                    require.resolve("@babel/preset-react"),
+                                    {
+                                        "runtime": "automatic"
+                                    }
+                                ],
+                                require.resolve("@babel/preset-typescript")
+                            ]
+                        }
+                    }
             },
             {
                 test : /\.css$/,
