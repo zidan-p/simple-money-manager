@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-const {LOCAL_PORT} = require("@simple-money-manager/desktop-api");
+const {portDev} = require("@simple-money-manager/desktop-view");
 
 let win;
 
@@ -12,7 +12,7 @@ const createWindow = () => {
   win.maximize();
   win.removeMenu();
 
-  win.loadURL(`http://localhost:${LOCAL_PORT}/`);
+  win.loadURL(`http://localhost:${portDev}/`);
 }
 
 app.on('window-all-closed', () => {
