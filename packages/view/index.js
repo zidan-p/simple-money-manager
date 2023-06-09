@@ -15,7 +15,7 @@ class ViewProcess{
 
     /**
      * 
-     * @param {string} apiDir a dorectory to attach api in view; default rest api
+     * @param {string} apiDir a directory to attach api in view; default rest api
      */
     constructor(apiDir){
         this.devConfig = devWebpack;

@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const {DIST_ASSET_DIRECTORY} = require("./../project.config")
+const postCssConfig = require("./../postcss.config");
 
 module.exports = {
     entry : path.resolve(__dirname, "..", "./src/index.tsx"),
@@ -19,25 +20,27 @@ module.exports = {
                 exclude : "/node_modules/",
                 //testing aja
                 use : 
-                    {
-                        loader : require.resolve("babel-loader"),
-                        options : {
-                            presets: [
-                                require.resolve("@babel/preset-env"),
-                                [
-                                    require.resolve("@babel/preset-react"),
-                                    {
-                                        "runtime": "automatic"
-                                    }
-                                ],
-                                require.resolve("@babel/preset-typescript")
-                            ]
-                        }
+                {
+                    loader : require.resolve("babel-loader"),
+                    options : {
+                        presets: [
+                            require.resolve("@babel/preset-env"),
+                            [require.resolve("@babel/preset-react"),{"runtime": "automatic"}],
+                            require.resolve("@babel/preset-typescript")
+                        ]
                     }
+                }
             },
             {
                 test : /\.css$/,
-                use : ["style-loader", "css-loader", "postcss-loader"]
+                use : [
+                    require.resolve("style-loader"), 
+                    require.resolve("css-loader"), 
+                    {
+                        loader: require.resolve("postcss-loader"),
+                        options: {postcssOptions: {...postCssConfig}}
+                    }
+                ]
             },
             //for file image
             {
@@ -49,7 +52,7 @@ module.exports = {
                 test: /\.svg$/i,
                 issuer: /\.[jt]sx?$/,
                 use: [{
-                    loader: '@svgr/webpack',
+                    loader: require.resolve('@svgr/webpack'),
                     options: { 
                         icon: true
                     },

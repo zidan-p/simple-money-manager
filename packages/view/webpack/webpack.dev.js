@@ -6,9 +6,9 @@ module.exports = {
     mode : "development",
     devtool : "cheap-module-source-map",
     devServer : {
-        hot : true,
-        open : IS_OPEN_IN_BROWSER, // maybe for open in browser
-        port : PORT_DEV,
+        // hot : true,
+        // open : IS_OPEN_IN_BROWSER, // maybe for open in browser
+        // port : PORT_DEV,
         watchFiles : ["./../src/**/*"]
     },
     plugins : [
