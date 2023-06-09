@@ -10,13 +10,12 @@
     "dev:electron": "npm run dev -w @simple-money-manager/process-electron",
     "dev:desktop": "npm run dev ",
     "build:view": "",
-    "build:electron": "",
-    "preinstall": "npm install --workspaces"
+    "build:electron": ""
   },
   "workspaces": [
     "packages/view",
     "packages/process-electron",
-    "packages/desktop-api"
+    "packages/desktop-view"
   ],
   "keywords": [
     "desktop-app",

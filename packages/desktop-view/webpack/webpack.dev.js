@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const {PORT_DEV, IS_OPEN_IN_BROWSER} = require("./../project.config")
+// const {PORT_DEV, IS_OPEN_IN_BROWSER} = require("@simple-money-manager/view/project.config")
 
 module.exports = {
     mode : "development",

@@ -1,17 +1,15 @@
 const path = require("path");
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {DIST_ASSET_DIRECTORY} = require("./../project.config")
-const postCssConfig = require("./../postcss.config");
+const project = require("../index");
+// const postCssConfig = require("../postcss.config");
+
+console.log(project);
 
 module.exports = {
-    entry : path.resolve(__dirname, "..", "./src/index.tsx"),
+    entry : project.entry,
     resolve : {
         extensions : [".tsx", ".ts", ".jsx", ".js"]
-    },
-    resolveLoader:{
-        modules: ['node_modules'],
-        // mainFields: ['loader', 'main'],
     },
     module: {
         rules : [
@@ -36,10 +34,7 @@ module.exports = {
                 use : [
                     require.resolve("style-loader"), 
                     require.resolve("css-loader"), 
-                    {
-                        loader: require.resolve("postcss-loader"),
-                        options: {postcssOptions: {...postCssConfig}}
-                    }
+                    {loader: require.resolve("postcss-loader")}
                 ]
             },
             //for file image
@@ -66,12 +61,12 @@ module.exports = {
         ]
     },
     output : {
-        path : DIST_ASSET_DIRECTORY,
+        path : project.outPath,
         filename : "bundle.js"
     },
     plugins : [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "..", "./src/index.html")
+            template: project.entryHtml
         })
     ]
 }

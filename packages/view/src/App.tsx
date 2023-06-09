@@ -14,7 +14,7 @@ function App() {
             index
             path={"/"}
             element={<Main />} 
-            />
+            /> 
           <Route path="*" element={<h1>no elemennt</h1> } />
         </Route>
       </Routes>
