@@ -1,9 +1,10 @@
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { forwardRef, useEffect, useRef } from "react"
 import "./public/style/index.css"
-import { MainLayout } from "./layouts/MainLayout";
+import { MainLayout } from "./components/layouts/BrowserLayout/MainLayout";
 import { Main } from "./pages/main";
-import { DesktopLayout } from "./layouts/DesktopLayout";
+import { DesktopLayout } from "./components/layouts/DesktopLayout/DesktopLayout";
+
 
 function App() {
     return (

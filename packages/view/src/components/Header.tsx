@@ -12,17 +12,17 @@ export const Header : FC = () => {
 
     return(
         <div className="flex justify-between items-center">
-            <div className="text-gray-600 px-4">
+            <div className="text-gray-400 px-4 text-sm">
                 Simple money manager v0.0.12
             </div>
             <div className="flex">
-                <div className="p-4 text-gray-400 hover:text-white hover:bg-gray-800">
+                <div className="p-3 px-4 text-gray-600 hover:text-white hover:bg-gray-400">
                     <Minus className=" w-3 h-3" />
                 </div>
-                <div className="p-4 text-gray-400 hover:text-white hover:bg-gray-800">
+                <div className="p-3 px-4 text-gray-600 hover:text-white hover:bg-gray-400">
                     <Maximize className=" w-3 h-3" />
                 </div>
-                <div className="p-4 text-gray-400 hover:text-white hover:bg-red-800">
+                <div className="p-3 px-4 text-gray-600 hover:text-white hover:bg-red-800">
                     <Close className=" w-3 h-3" />
                 </div>
             </div>
