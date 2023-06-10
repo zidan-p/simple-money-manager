@@ -12,7 +12,7 @@ module.exports = {
         extensions : [".tsx", ".ts", ".jsx", ".js"],
 
         // # Warning
-        // this is only wild card, find for another good solution
+        // this is only wild card, still finding for another good solution
         alias : {
             "@s-m-n/view" : path.join(project.parentModule.contentPath, "/src")
         }
