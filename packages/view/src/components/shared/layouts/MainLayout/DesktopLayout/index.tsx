@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
-import { Sidebar } from "../../Sidebar"
-import { Header } from "../../Header"
+import { Sidebar } from "../../../panels/Sidebar/Sidebar"
+import { Header } from "../../../panels/Header/Header"
 
 
 

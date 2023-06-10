@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import SideButton from "./../icons/Sidebar-icon.svg";
-import MenuIcon from "./../icons/menu-icon.svg"
+import SideButton from "./../../icons/Sidebar-icon.svg";
+import MenuIcon from "./../../icons/menu-icon.svg"
 
 type SidebarProps = {
   routes: {

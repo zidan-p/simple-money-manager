@@ -6,6 +6,7 @@ let _ServiceDependency = {};
  * in ther future, when this object would has been injected.
  * the object maybe look like this
  * ```
+ * // async function
  * _ServiceDependency = {
  *      getSomething: (id) => {
  *          //..blablabla

@@ -1,7 +1,7 @@
 import { FC } from "react";
-import Maximize from "./../icons/maximize-icon.svg";
-import Minus from "./../icons/minus-icon.svg";
-import Close from "./../icons/close-icon.svg";
+import Maximize from "./../../icons/maximize-icon.svg";
+import Minus from "./../../icons/minus-icon.svg";
+import Close from "./../../icons/close-icon.svg";
 
 
 

@@ -1,9 +1,9 @@
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { forwardRef, useEffect, useRef } from "react"
-import "./public/style/index.css"
-import { MainLayout } from "./components/layouts/BrowserLayout/MainLayout";
-import { Main } from "./pages/main";
-import { DesktopLayout } from "./components/layouts/DesktopLayout/DesktopLayout";
+import "./../public/style/index.css"
+import { BrowserLayout } from "../components/shared/layouts/MainLayout/BrowserLayout";
+import { Main } from "../pages/main";
+import { DesktopLayout } from "../components/shared/layouts/MainLayout/DesktopLayout";
 
 
 function App() {
