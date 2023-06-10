@@ -2,6 +2,8 @@ import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import SideButton from "./../../icons/Sidebar-icon.svg";
 import MenuIcon from "./../../icons/menu-icon.svg"
+import { useAppDispatch } from "@s-m-n/view/hooks/reduxHook";
+
 
 type SidebarProps = {
   routes: {
@@ -12,6 +14,7 @@ type SidebarProps = {
 };
 
 export const Sidebar = () => {
+  const dispatch = useAppDispatch();
   return (
     <div className="bg-gray-900 text-white h-full py-3">
       <div className="flex py-2  px-4 items-center mb-5 justify-between">

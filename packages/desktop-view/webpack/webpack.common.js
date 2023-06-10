@@ -9,7 +9,13 @@ console.log(project);
 module.exports = {
     entry : project.entry,
     resolve : {
-        extensions : [".tsx", ".ts", ".jsx", ".js"]
+        extensions : [".tsx", ".ts", ".jsx", ".js"],
+
+        // # Warning
+        // this is only wild card, find for another good solution
+        alias : {
+            "@s-m-n/view" : path.join(project.parentModule.contentPath, "/src")
+        }
     },
     module: {
         rules : [
