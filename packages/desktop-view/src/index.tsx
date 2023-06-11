@@ -11,9 +11,7 @@ const root = createRoot(domNode as HTMLDivElement);
 
 root.render(
     <React.StrictMode>
-      <HashRouter>
         <App />
-      </HashRouter>
     </React.StrictMode>
 );
   
