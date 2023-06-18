@@ -1,5 +1,5 @@
 import { provide, inject } from "./src/Api";
-import App from "./src/App/App";
+import App from "./src/App/app";
 
 
 

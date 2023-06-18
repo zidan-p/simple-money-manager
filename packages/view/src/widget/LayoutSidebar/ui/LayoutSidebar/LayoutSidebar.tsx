@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { NavList } from "../NavList/NavList";
 
 
-export const LayouSidebar = () => {
+export const LayoutSidebar = () => {
   const isExpanded = useAppSelector(state => state.mainLayout.isSidebarExpand)
 
 

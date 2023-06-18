@@ -1,5 +1,5 @@
 import { Main } from "../pages/main";
-import { DesktopLayout } from "@s-m-n/view/components/shared/layouts/MainLayout/DesktopLayout";
+import { DesktopLayout } from "./layouts/desktopLayout";
 
 import { createHashRouter, createBrowserRouter } from "react-router-dom";
 
