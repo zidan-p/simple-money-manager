@@ -5,8 +5,13 @@ import {motion} from "framer-motion";
 import { MainLayoutVariant, MainLayoutProps } from "./types";
 
 const sidebarVariant : MainLayoutVariant = {
-  expand: {width: "16%"},
-  narrow: {width: "56px"}
+  expand: {
+    width: "16%", 
+    
+  },
+  narrow: {
+    width: "56px",
+  }
 }
 
 export const MainLayout = (props: MainLayoutProps) => {
