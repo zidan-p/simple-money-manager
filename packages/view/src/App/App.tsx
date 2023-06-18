@@ -1,7 +1,7 @@
-import "./../public/style/index.css"
 import { Provider } from 'react-redux'
-import store from "./Store";
 import { RouterProvider } from "react-router-dom";
+import "./../public/style/index.css"
+import store from "./Store";
 import routes from "./Routes";
 
 

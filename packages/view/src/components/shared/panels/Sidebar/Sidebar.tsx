@@ -2,7 +2,7 @@ import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import SideButton from "@s-m-n/view/components/shared/icons/Sidebar-icon.svg";
 import MenuIcon from "@s-m-n/view/components/shared/icons/menu-icon.svg"
-import { useAppDispatch,useAppSelector } from "@s-m-n/view/hooks/reduxHook";
+import { useAppDispatch,useAppSelector } from "@s-m-n/view/shared/hooks/reduxHook";
 import { toggle } from "./SidebarSlice";
 import { LinkList } from "./elements/LinkLIst";
 
