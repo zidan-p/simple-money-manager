@@ -17,3 +17,5 @@ yang perlu dicari tahu
     - supaya api yang dibuat bisa sesuai best practice
 
 
+=== menggunakan clean code inspirasi dari repo ini ==
+https://github.com/harvic3/nodetskeleton

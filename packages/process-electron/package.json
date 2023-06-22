@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev" : "electron .",
+    "dev": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies" : {
-    "@simple-money-manager/view" : "1.0.0"
+  "dependencies": {
+    "@simple-money-manager/view": "1.0.0",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.32.1",
+    "sequelize-typescript": "^2.1.5",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "electron": "^24.1.2"
+    "electron": "^24.1.2",
+    "typescript": "^5.1.3"
   }
 }
