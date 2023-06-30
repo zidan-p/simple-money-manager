@@ -1,49 +1,38 @@
-import { Sequelize, DataTypes, Model, ModelStatic } from "sequelize";
+import { Sequelize, DataTypes, Model, ModelStatic, Optional } from "sequelize";
 import { Table, Column, AllowNull, HasMany, ForeignKey } from "sequelize-typescript";
-// import { Ledger } from "./LedgerDD.model";
+import { Ledger } from "./LedgerDB.model";
 
-
-@Table
-export class Ledger extends Model {
-  // # NOTE: because it's already handle by equelize, i didn't use another name for primary key
-
-  @Column(DataTypes.NUMBER)
-  amount!:number;
-
-  @Column(DataTypes.ENUM("income", "expense"))
-  type!: string;
-
-  @Column(DataTypes.TEXT("medium"))
-  @AllowNull
-  description?: string;
-
-  @Column(DataTypes.DATE)
-  date!: Date
-
-  @ForeignKey(() => Category)
-  @Column
-  category_id!: number;
-
-  @BelongsTo(() => Category)
-  @Column
-  Category!: Category;
+interface LedgerAttributes {
+  name: string;
+  description: string;
+  icon: string;
 }
 
-@Table
-export class Category extends Model{
+// # Model<OutputType, InputType>
+export class Category extends Model<LedgerAttributes>{
+  public name!: string;
+  public description!: string;
+  public icon!: string;
+}
 
-  @Column(DataTypes.STRING)
-  name!: string;
-
-  @AllowNull
-  @Column(DataTypes.TEXT("medium"))
-  description?: string;
-
-  @AllowNull
-  @Column(DataTypes.STRING)
-  icon?: string;
-
-  @HasMany(()=>Ledger)
-  @Column
-  Ledger!: Ledger[];
+export default (sequelize: Sequelize) : ModelStatic<Category> => {
+  // # the "Model" interface didnt work with this return value.
+  // # i just let it to be in "sequelize" onbject, not in my object
+  return Category.init({
+    // # NOTE: because it's already handle by equelize, i didn't use another name for primary key
+    name: {
+      allowNull : false,
+      type      : DataTypes.STRING
+    },
+    description: {
+      allowNull : true,
+      type      : DataTypes.TEXT("medium")
+    },
+    icon : {
+      allowNull : true,
+      type      : DataTypes.STRING
+    }
+  }, {
+    sequelize
+  })
 }

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES6" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
-    "module": "ESNext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
+    "target": "ES5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
+    "module": "commonjs" /*ESNext*/ /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
     "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */ /* Type declaration files to be included in compilation. */,
     "sourceMap": true,
-    "noEmit": true /* Do not emit outputs. */,
+    // "noEmit": true /* Do not emit outputs. enable this when working with bundle tool like webpack or rollup */,
     "isolatedModules": true /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */,
     "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
     "strict": true /* Enable all strict type-checking options. */,
@@ -12,7 +12,9 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "resolveJsonModule": true,
     "allowJs": true /* Allow javascript files to be compiled. Useful when migrating JS to TS */,
+    
     // "checkJs": true /* Report errors in .js files. Works in tandem with allowJs. */,
+    "rootDir": "./src",
     "baseUrl": "./src",
     "outDir": "./dist",
 
@@ -20,6 +22,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }, 
-  // "include": ["view/**/*", "renderer"],
+  "include": ["src"],
   "exclude": ["node_modules/*", "build/*", "dist/*"]
 }
