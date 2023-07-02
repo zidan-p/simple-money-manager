@@ -4,6 +4,7 @@ import { Category } from "./category";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
 import { Result } from "domain/shared/logic/Result";
 import { Guard } from "domain/shared/logic/Guard";
+import { CategoryId } from "./categoryId";
 
 
 
@@ -12,7 +13,7 @@ export interface LedgerProps {
   amount: number;
   type: "income" | "expense";
   description: string;
-  category: Category;
+  categoryId: CategoryId;
   date: Date;
 }
 
@@ -26,7 +27,7 @@ export class Ledger extends AggregateRoot<LedgerProps>{
 
   get description() : string { return this.props.description;}
 
-  get category() : Category { return this.props.category;}
+  get category() : CategoryId { return this.props.categoryId;}
 
   private constructor (props: LedgerProps, id?: UniqueEntityID){
     super(props,id);
@@ -37,7 +38,7 @@ export class Ledger extends AggregateRoot<LedgerProps>{
       {argument: props.amount, argumentName: "amount"},
       {argument: props.type, argumentName: "type"},
       {argument: props.description, argumentName: "description"},
-      {argument: props.category, argumentName: "category"}
+      {argument: props.categoryId, argumentName: "category Id"}
     ])
 
     if(!propsResult.succeeded) return Result.fail<Ledger>(propsResult.message);

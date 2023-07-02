@@ -6,7 +6,15 @@ const isEntity = (v: any): v is Entity<any> => {
 };
 
 export abstract class Entity<T> {
+  /**
+   * @description the id of every entity stored;
+   * access it with getter
+   */
   protected readonly _id: UniqueEntityID;
+
+  /**
+   * @description container to assign the defined props each entities
+   */
   public readonly props: T;
 
   constructor (props: T, id?: UniqueEntityID) {

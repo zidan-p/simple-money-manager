@@ -24,6 +24,11 @@ import { UniqueEntityID } from "./UniqueEntityID";
 export abstract class AggregateRoot<T> extends Entity<T> {
   private _domainEvents: IDomainEvent[] = [];
 
+  /**
+   * @description
+   * it's just wrapper id for aggregate root.
+   * maybe it purpose is to make aggregation easier
+   */
   get id (): UniqueEntityID {
     return this._id;
   }
