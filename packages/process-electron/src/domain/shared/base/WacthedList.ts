@@ -31,7 +31,6 @@ export class WatchedList<L extends Entity<any>> {
   }
 
   /**
-   * 
    * new list that recently added with addItems
    */
   newItems(): L[]{

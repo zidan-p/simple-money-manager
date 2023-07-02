@@ -27,7 +27,7 @@ export class Ledger extends AggregateRoot<LedgerProps>{
 
   get description() : string { return this.props.description;}
 
-  get category() : CategoryId { return this.props.categoryId;}
+  get categoryId() : CategoryId { return this.props.categoryId;}
 
   private constructor (props: LedgerProps, id?: UniqueEntityID){
     super(props,id);

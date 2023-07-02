@@ -59,16 +59,25 @@ export class Category extends Entity<CategoryProps> {
     let isIdPresent = Guard.againstNullOrUndefined(id, "category id");
     let isLedgersPresent = Guard.againstNullOrUndefined(props.ledgers, "ledgers data");
 
+    /** # when the data from database */
     if(isIdPresent){
+      // # to get the genre association from db, you can use the mapper for category
+      // # so every genre that retrieved, then create the ledger object.
+
       // # check if ledgers have coresponding category id
-      props.ledgers?.newItems().every(ledger => ledger.)
+      const matchCategoryId = props.ledgers?.newItems().every(ledger => ledger.categoryId.id === id)
+      if(!matchCategoryId) return Result.fail<Category>("ledger(s) category id didn't match");
+
+      // don't worry about the id, if it undefined then it will builded
+      return Result.ok<Category>( new Category({...props}, id)); 
 
     }
 
-    // # when the category haven't been created, then it can't be use to add data
-    if(!isIdPresent && isLedgersPresent) return Result.fail<Category>
-      ("can't do this action, the category have to be present in database");
-    
+    /** # when the object newly created */
+    // # when the category haven't been created, then it can't be used to hold ledger
+    if(isLedgersPresent) return Result.fail<Category>
+      ("can't do this action, the category have to be present in the database");
 
+    return Result.ok<Category>(new Category({...props}, id))
   }
 }
