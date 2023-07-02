@@ -37,6 +37,10 @@ export class Ledger extends AggregateRoot<LedgerProps>{
   /** date always present in object, it will provided by `create` method if absent */
   get date() : Date {return this.props.date!}
 
+  public changeToIcome(): void {this.props.type = "income"}
+
+  public changeToExpense(): void {this.props.type = "expense"}
+
   private constructor (props: LedgerProps, id?: UniqueEntityID){
     super(props,id);
   }

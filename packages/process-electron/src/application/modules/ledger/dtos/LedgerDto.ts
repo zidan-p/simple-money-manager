@@ -10,7 +10,7 @@ import { Result } from "domain/shared/logic/Result";
  * configure it to make sure the api is suit
  */
 export type ILedgerDto = {
-  id: number | string;
+  ledgerId: number | string;
   amount: number;
   type: "income" | "expense";
   description: string;
@@ -35,7 +35,7 @@ export class LedgerMap extends Mapper<Ledger>{
       type: raw.type
     // when id is present (string or number) it will be pass as `UniqueEntityID`
     // if not the let `Entity` create the id
-    }, raw.id ? new UniqueEntityID(raw.id) : undefined) //<--
+    }, raw.ledgerId ? new UniqueEntityID(raw.ledgerId) : undefined) //<--
 
     if(ledgerOrError.isFailure) console.log(ledgerOrError.errorValue);
     return ledgerOrError;
@@ -47,7 +47,7 @@ export class LedgerMap extends Mapper<Ledger>{
       description: ledger.description,
       type: ledger.type,
       date: ledger.date.toISOString(),
-      id: ledger.id.toString(),
+      ledgerId: ledger.ledgerId.id.toString(),
       categoryId: ledger.categoryId.id.toString()
     }
   }

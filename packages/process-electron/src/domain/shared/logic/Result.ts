@@ -13,16 +13,16 @@ export class Result<T> {
       throw new Error("InvalidOperation: A failing result needs to contain an error message");
     }
     // my code
-    if(!value){
-      throw new Error("InvalidOperation: A value is needed");
-    }
+    // if(!value){
+    //   throw new Error("InvalidOperation: A value is needed");
+    // }
 
     this.isSuccess = isSuccess;
     this.isFailure = !isSuccess;
 
     // because it's already handled above then it's no worries
     this.error = error!;
-    this._value = value;
+    this._value = value!; // if this didn't assigned, its value can't be gotten
     
     Object.freeze(this);
   }
