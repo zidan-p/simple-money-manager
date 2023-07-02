@@ -14,7 +14,12 @@ export interface LedgerProps {
   type: "income" | "expense";
   description: string;
   categoryId: CategoryId;
-  date: Date;
+  date?: Date; // <--
+  // if it doesn't exist it will provided for newly ledger
+  // UPDATE : i let date to be required, because it always present in object
+  // even tough it doesn't provided in create 
+
+  // UPDATE#2 : i just use conditional, it will broke my app if i don't do that
 }
 
 export class Ledger extends AggregateRoot<LedgerProps>{
@@ -28,6 +33,9 @@ export class Ledger extends AggregateRoot<LedgerProps>{
   get description() : string { return this.props.description;}
 
   get categoryId() : CategoryId { return this.props.categoryId;}
+
+  /** date always present in object, it will provided by `create` method if absent */
+  get date() : Date {return this.props.date!}
 
   private constructor (props: LedgerProps, id?: UniqueEntityID){
     super(props,id);
@@ -46,7 +54,7 @@ export class Ledger extends AggregateRoot<LedgerProps>{
     const ledger = new Ledger({
       ...props,
       date: props.date ? props.date : new Date()
-    })
+    }, id)
 
     const isNewlyCreated = !!id === false;
 
