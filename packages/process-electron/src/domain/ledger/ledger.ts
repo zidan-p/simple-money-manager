@@ -13,7 +13,8 @@ export interface LedgerProps {
   amount: number;
   type: "income" | "expense";
   description: string;
-  categoryId: CategoryId;
+  // categoryId: CategoryId;
+  category: Category;
   date?: Date; // <--
   // if it doesn't exist it will provided for newly ledger
   // UPDATE : i let date to be required, because it always present in object
@@ -32,7 +33,8 @@ export class Ledger extends AggregateRoot<LedgerProps>{
 
   get description() : string { return this.props.description;}
 
-  get categoryId() : CategoryId { return this.props.categoryId;}
+  // get categoryId() : CategoryId { return this.props.categoryId;}
+  get category() : Category {return this.props.category}
 
   /** date always present in object, it will provided by `create` method if absent */
   get date() : Date {return this.props.date!}
@@ -50,7 +52,8 @@ export class Ledger extends AggregateRoot<LedgerProps>{
       {argument: props.amount, argumentName: "amount"},
       {argument: props.type, argumentName: "type"},
       {argument: props.description, argumentName: "description"},
-      {argument: props.categoryId, argumentName: "category Id"}
+      {argument: props.category, argumentName: "category"}
+      // {argument: props.categoryId, argumentName: "category Id"}
     ])
 
     if(!propsResult.succeeded) return Result.fail<Ledger>(propsResult.message);

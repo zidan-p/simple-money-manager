@@ -61,12 +61,15 @@ export class CreateLedgerUseCase implements BaseUseCase<CreateLedgerUseCaseReque
     try {
       const categoryOrError = await this.getCategory(request);
       if(categoryOrError.isFailure) return Result.fail<Ledger>(categoryOrError.error);
+
+      const category = categoryOrError.getValue();
       const {categoryId,date, ...data} = request;
 
       const ledgerOrError = await Ledger.create({
         ...data,
+        category: category,
         date: date ? new Date(date) : undefined,
-        categoryId: CategoryId.create(new UniqueEntityID(categoryId))
+        // categoryId: CategoryId.create(new UniqueEntityID(categoryId))
       })
 
       if(ledgerOrError.isFailure) return Result.fail<Ledger>(ledgerOrError.error);
