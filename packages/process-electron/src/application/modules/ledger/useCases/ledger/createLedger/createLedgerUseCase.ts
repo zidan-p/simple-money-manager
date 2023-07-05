@@ -9,6 +9,7 @@ import { Result } from "domain/shared/logic/Result";
 import { TextUtil } from "utils/TextUtil";
 import { CategoryId } from "domain/ledger/categoryId";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
+import { CategoryDto } from "application/modules/ledger/dtos/CategoryDto";
 
 interface CreateLedgerUseCaseRequestDTO {
   // ledgerId: number | string; 
@@ -17,6 +18,9 @@ interface CreateLedgerUseCaseRequestDTO {
   description: string;
   categoryId: string | number;
   date?: string | undefined;
+
+  //i think better don't do this, the categiry must be present when creating ledger
+  // category: CategoryDto | string ; 
 }
 
 
@@ -27,8 +31,8 @@ interface CreateLedgerUseCaseRequestDTO {
 export class CreateLedgerUseCase implements BaseUseCase<CreateLedgerUseCaseRequestDTO, Result<Ledger>>{
 
   constructor(
-    private LegderRepo: ILedgerRepository,
-    private CategoryRepo: ICategoryRepository
+    private readonly ledgerRepo: ILedgerRepository,
+    private readonly categoryRepo: ICategoryRepository
   ){}
 
   /**
@@ -47,7 +51,7 @@ export class CreateLedgerUseCase implements BaseUseCase<CreateLedgerUseCaseReque
     const isIdValid = TextUtil.isUUID(categoryId);
     
     if(!isIdValid) return Result.fail<Category>("invalid id");
-    const category = await this.CategoryRepo.findCatgoryById(categoryId);
+    const category = await this.categoryRepo.findCatgoryById(categoryId);
     
     if(Guard.againstNullOrUndefined(category, "category").succeeded) 
       return Result.fail<Category>("couldn't find category by id = " + categoryId);
@@ -76,7 +80,7 @@ export class CreateLedgerUseCase implements BaseUseCase<CreateLedgerUseCaseReque
 
       const ledger = ledgerOrError.getValue();
 
-      await this.LegderRepo.save(ledger);
+      await this.ledgerRepo.save(ledger);
 
       return Result.ok<Ledger>(ledger);
     } catch (error) {

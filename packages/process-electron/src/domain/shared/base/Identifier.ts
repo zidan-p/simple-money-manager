@@ -19,7 +19,8 @@ export class Identifier<T> {
   }
 
   /**
-   * Return raw value of identifier
+   * Return raw value of identifier.
+   * // ugh, it just..
    */
 
   toValue (): T {
