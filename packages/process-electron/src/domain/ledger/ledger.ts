@@ -57,7 +57,7 @@ export class Ledger extends AggregateRoot<LedgerProps>{
 
     const ledger = new Ledger({
       ...props,
-      date: props.date ? props.date : new Date()
+      date: props.date ? props.date : new Date() 
     }, id)
 
     const isNewlyCreated = !!id === false;

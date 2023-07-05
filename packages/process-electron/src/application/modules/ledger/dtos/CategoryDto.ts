@@ -1,5 +1,5 @@
 import { Mapper } from "application/shared/utils/baseIMapper";
-import { ILedgerDto, LedgerMap } from "./LedgerDTO";
+import { LedgerDto, LedgerMap } from "./LedgerDto";
 import { Category } from "domain/ledger/category";
 import { Result } from "domain/shared/logic/Result";
 import { WatchedList } from "domain/shared/base/WacthedList";
@@ -8,19 +8,19 @@ import { Ledger } from "domain/ledger/ledger";
 
 
 
-export type ICategoryDto = {
+export type CategoryDto = {
   categoryId: number | string;
   name: string;
   description: string;
   icon: string;
-  ledgers? : ILedgerDto[] | [];
+  ledgers? : LedgerDto[] | [];
 }
 
 /**
  * should i really use Result class to handle this?
  */
 export class CategoryMap extends Mapper<Category>{
-  public static toDomain(raw: ICategoryDto): Result<Category>{
+  public static toDomain(raw: CategoryDto): Result<Category>{
 
     let ledgersWatchedList;
     if(!!raw.ledgers?.length){
@@ -42,7 +42,7 @@ export class CategoryMap extends Mapper<Category>{
     return categoryOrError;
   }
 
-  public static toDTO(category: Category): ICategoryDto{
+  public static toDTO(category: Category): CategoryDto{
     return{
       categoryId: category.categoryId.id.toString(),
       description: category.description,

@@ -9,7 +9,7 @@ import { Result } from "domain/shared/logic/Result";
  * representation ledger json object from database.
  * configure it to make sure the api is suit
  */
-export type ILedgerDto = {
+export type LedgerDto = {
   ledgerId: number | string;
   amount: number;
   type: "income" | "expense";
@@ -26,7 +26,7 @@ export class LedgerMap extends Mapper<Ledger>{
    * should i return the `Result` object?
    * it also can be dificult to handle error if the data doesn't match
    */
-  public static toDomain(raw: ILedgerDto): Result<Ledger> {
+  public static toDomain(raw: LedgerDto): Result<Ledger> {
     const ledgerOrError =  Ledger.create({
       categoryId: CategoryId.create(new UniqueEntityID(raw.categoryId)),
       amount: raw.amount,
@@ -41,7 +41,7 @@ export class LedgerMap extends Mapper<Ledger>{
     return ledgerOrError;
   }
 
-  public static toDTO(ledger: Ledger): ILedgerDto{
+  public static toDTO(ledger: Ledger): LedgerDto{
     return {
       amount: ledger.amount,
       description: ledger.description,
