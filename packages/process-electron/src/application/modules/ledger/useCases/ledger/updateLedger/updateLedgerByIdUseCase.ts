@@ -36,11 +36,16 @@ class UpdateLedgerByIdUseCase implements BaseUseCase<UpdateLedgerByIdDTO, Result
 
   async execute(request: UpdateLedgerByIdDTO): Promise<Result<Ledger>> {
     try {
-      let isLedgerPresent = await this.ledgerRepo.exists(request.ledgerId.toString());
+      let ledger = await this.ledgerRepo.findLedgerById(request.ledgerId.toString());
+      if(ledger === null)
+        return Result.fail<Ledger>("can't fin ledger with id = " + request.ledgerId.toString());
 
-      if(!isLedgerPresent) return Result.fail<Ledger>("can't find ledger with id = " + request.ledgerId);
-
-      let ledger = await this.ledgerRepo.findLedgerById(request.ledgerId.toString()) as Ledger;
+      if(GuardBoolean.has("categoryId", request)){
+        const categoryOrNull = await this.categoryRepo.findCatgoryById(request.categoryId?.toString()!);
+        if(categoryOrNull === null)
+          return Result.fail<Ledger>("can't find categiry with id = " + request.categoryId?.toString());
+        this.changes.addChange(ledger.updateCategory(categoryOrNull!))
+      }
 
       if(GuardBoolean.has("amount", request))
         this.changes.addChange( ledger.updateAmount(request.amount!) );
@@ -51,10 +56,15 @@ class UpdateLedgerByIdUseCase implements BaseUseCase<UpdateLedgerByIdDTO, Result
       if(GuardBoolean.has("description", request))
         this.changes.addChange(ledger.updateDescription(request.description!));
 
-      if(GuardBoolean.has("category"))
-      
+      if(this.changes.getCombinedChangesResult().isFailure){
+        return Result.fail<Ledger>(this.changes.getCombinedChangesResult().error);
+      }
+
+      // save it
+      await this.ledgerRepo.save(ledger);
+      return Result.ok<Ledger>(ledger);
     } catch (error) {
-      
+      return Result.fail<Ledger>(error);
     }
   }
 }
