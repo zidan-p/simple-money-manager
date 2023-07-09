@@ -65,7 +65,7 @@ export class Category extends Entity<CategoryProps> {
       // # so every genre that retrieved, then create the ledger object.
 
       // # check if ledgers have coresponding category id
-      const matchCategoryId = props.ledgers?.newItems().every(ledger => ledger.categoryId.id === id)
+      const matchCategoryId = props.ledgers?.newItems().every(ledger => ledger.category._id === id)
       if(!matchCategoryId) return Result.fail<Category>("ledger(s) category id didn't match");
 
       // don't worry about the id, if it undefined then it will builded

@@ -20,7 +20,7 @@ export interface LedgerProps {
   // UPDATE : i let date to be required, because it always present in object
   // even tough it doesn't provided in create 
 
-  // UPDATE#2 : i just use conditional, it will broke my app if i don't do that
+  // UPDATE#2 : i just use conditional, it will broke my app if i don't do that :)
 }
 
 export class Ledger extends AggregateRoot<LedgerProps>{
@@ -39,8 +39,54 @@ export class Ledger extends AggregateRoot<LedgerProps>{
   /** date always present in object, it will provided by `create` method if absent */
   get date() : Date {return this.props.date!}
 
-  public changeToIcome(): void {this.props.type = "income"}
+  // updater 
+  public updateAmount(amount: number): Result<void>{
+    try {
+      this.props.amount = amount;
+      return Result.ok<void>();
+    } catch (error) {
+      return Result.fail<void>("can't update amount for ledger with id = " + this._id);
+    }
+  }
 
+  public updateType(type: "income" | "expense"): Result<void>{
+    try {
+      this.props.type = type;
+      return Result.ok<void>();
+    } catch (error) {
+      return Result.fail<void>("can't update type for ledger with id = " + this._id);
+    }
+  }
+
+  public updateDescription(description: string): Result<void>{
+    try {
+      this.props.description = description;
+      return Result.ok<void>();
+    } catch (error) {
+      return Result.fail<void>("can't update description for ledger with id = " + this._id);
+    }
+  }
+
+  public updateCategory(category: Category): Result<void>{
+    try {
+      this.props.category = category;
+      return Result.ok<void>();
+    } catch (error) {
+      return Result.fail<void>("can't update category for ledger with id = " + this._id);
+    }
+  }
+
+  public updateDate(date: Date): Result<void>{
+    try {
+      this.props.date = date;
+      return Result.ok<void>();
+    } catch (error) {
+      return Result.fail<void>("can't update date for ledger with id = " + this._id);
+    }
+  }
+
+  // some mutating state
+  public changeToIcome(): void {this.props.type = "income"}
   public changeToExpense(): void {this.props.type = "expense"}
 
   private constructor (props: LedgerProps, id?: UniqueEntityID){

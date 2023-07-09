@@ -36,7 +36,7 @@ export class CreateLedgerUseCase implements BaseUseCase<CreateLedgerUseCaseReque
   ){}
 
   /**
-   * NOTE: why i don't separate this method to another class or utilities?
+   * NOTE: why i don't separate this method to another , service or utilities?
    * that because this method receive the specific argument, in this case useCase DTO.
    * so even tough i separate this method, i'm sure i will create the similar of this method
    * in this useCase.
