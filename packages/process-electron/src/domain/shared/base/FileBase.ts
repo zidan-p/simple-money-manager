@@ -15,11 +15,8 @@ import { Entity } from "./Entity";
 
 
 export interface FileProps {
-  name: string;
+  fileName: string;
   size: number; // in bytes
-  encoding: string;
-  type: string;
-  mimetype: 'image/png';
   extension: string;
 
   // content: ArrayBuffer;
@@ -29,6 +26,13 @@ export interface FileProps {
 }
 
 
-export abstract class File<TProps> extends Entity<TProps extends FileProps>{
+export abstract class FileBase<TProps extends FileProps> extends Entity<TProps>{
   
+  get fileName () : string { return this.props.fileName};
+
+  get size () : number {return this.props.size};
+
+  get extension(): string {return this.props.extension};
+
+  get getFile(): Promise<ArrayBuffer> {return this.props.getFile();}
 }

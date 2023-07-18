@@ -1,3 +1,4 @@
+import { FileBase } from "domain/shared/base/FileBase";
 
 
 
@@ -11,5 +12,17 @@
 // path: 'uploads/ed84692635f46d86c4be044f4acca667',
 // size: 25471
 
-export class Category extends Entity<CategoryProps> {
+
+export interface CategoryFileProps {
+  
+  fileName: string;
+  size: number;
+  encoding: string;
+  extension: string;
+  getFile : ()=> Promise<ArrayBuffer>
+}
+
+export class CategoryFile extends FileBase<CategoryFileProps> {
+  
+  
 }
