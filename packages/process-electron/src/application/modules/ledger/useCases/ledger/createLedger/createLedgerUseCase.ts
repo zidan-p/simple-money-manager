@@ -61,7 +61,7 @@ export class CreateLedgerUseCase implements BaseUseCase<CreateLedgerUseCaseReque
   }
 
   public async execute(request: CreateLedgerUseCaseRequestDTO): Promise<Result<Ledger>> {
-    let category;
+    // let category;
     try {
       const categoryOrError = await this.getCategory(request);
       if(categoryOrError.isFailure) return Result.fail<Ledger>(categoryOrError.error);

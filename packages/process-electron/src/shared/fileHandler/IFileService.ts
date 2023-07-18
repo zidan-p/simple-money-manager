@@ -1,4 +1,4 @@
-import { FileBase, FileProps } from "domain/shared/base/FileBase";
+import { FileBase, FileProps } from "shared/fileHandler/FileBase";
 
 
 

@@ -1,8 +1,10 @@
 import { Mapper } from "application/shared/utils/baseIMapper";
+import { Category } from "domain/ledger/category";
 import { CategoryId } from "domain/ledger/categoryId";
 import { Ledger } from "domain/ledger/ledger";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
 import { Result } from "domain/shared/logic/Result";
+import { CategoryDto, CategoryMap } from "./CategoryDto";
 
 
 /**
@@ -14,7 +16,8 @@ export type LedgerDto = {
   amount: number;
   type: "income" | "expense";
   description: string;
-  categoryId: string | number;
+  // categoryId: string | number;
+  category: CategoryDto;
   date?: string; // date string iso
 }
 
@@ -27,8 +30,13 @@ export class LedgerMap extends Mapper<Ledger>{
    * it also can be dificult to handle error if the data doesn't match
    */
   public static toDomain(raw: LedgerDto): Result<Ledger> {
+
+    const categoryOrError = CategoryMap.toDomain(raw.category);
+    if(categoryOrError.isFailure)
+      return Result.fail<Ledger>(categoryOrError.errorValue);
+
     const ledgerOrError =  Ledger.create({
-      categoryId: CategoryId.create(new UniqueEntityID(raw.categoryId)),
+      category: categoryOrError.getValue(),
       amount: raw.amount,
       date: raw.date? new Date(raw.date) : undefined,
       description: raw.description,
@@ -48,7 +56,7 @@ export class LedgerMap extends Mapper<Ledger>{
       type: ledger.type,
       date: ledger.date.toISOString(),
       ledgerId: ledger.ledgerId.id.toString(),
-      categoryId: ledger.categoryId.id.toString()
+      category: CategoryMap.toDTO(ledger.category)
     }
   }
 }

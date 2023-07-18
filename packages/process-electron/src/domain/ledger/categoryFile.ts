@@ -1,4 +1,4 @@
-import { FileBase } from "domain/shared/base/FileBase";
+import { FileBase } from "shared/fileHandler/FileBase";
 
 
 
@@ -24,5 +24,5 @@ export interface CategoryFileProps {
 
 export class CategoryFile extends FileBase<CategoryFileProps> {
   
-  
+
 }
