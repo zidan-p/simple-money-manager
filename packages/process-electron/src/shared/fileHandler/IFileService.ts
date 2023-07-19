@@ -4,14 +4,17 @@ import { FileBase, FileProps } from "shared/fileHandler/FileBase";
 
 
 
-export interface IFileService<T extends FileProps> {
-  getFileById(fileId: string): Promise<FileBase<T>[]>;
-  getFilesByIds(fileIds: string[]): Promise<FileBase<T>>;
-  getFileByName(fileName: string): Promise<FileBase<T>>;
+export interface IFileService<TFileClass extends FileBase<any>> {
+  // type TFileClass = FileBase<TFileClass>;
 
-  removeFileById(fileId: string): Promise<FileBase<T>>;
-  removeFilesByIds(fileIds: string[]): Promise<FileBase<T>[]>;
-  removeFileByFileName(fileName: string): Promise<FileBase<T>>;
+  getFileById(fileId: string): Promise<TFileClass>;
+  getFilesByIds(fileIds: string[]): Promise<TFileClass[]>;
+  // getFileByName(fileName: string): Promise<T<TFileClass>>;
 
-  exists(file: FileBase<T>): boolean;
+  removeFileById(fileId: string): Promise<TFileClass>;
+  removeFilesByIds(fileIds: string[]): Promise<TFileClass[]>;
+  // removeFileByFileName(fileName: string): Promise<T<TFileClass>>;
+
+  exists(file: string): boolean;
+  existsPromise(file: string): Promise<boolean>;
 }

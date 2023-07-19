@@ -6,12 +6,13 @@ import { WatchedList } from "domain/shared/base/WacthedList";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
 import { Result } from "domain/shared/logic/Result";
 import { Guard } from "domain/shared/logic/Guard";
+import { CategoryFile } from "./categoryFile";
 
 
 export interface CategoryProps {
   name: string;
   description: string;
-  icon: string;
+  icon: CategoryFile;
   ledgers? : WatchedList<Ledger>;
 };
 
@@ -27,7 +28,7 @@ export class Category extends Entity<CategoryProps> {
    * the icon path? i don't know, it maybe will be file object or just its path.
    * for now i'll stick with the path
    */
-  get icon(): string {return this.props.icon;}
+  get icon(): CategoryFile {return this.props.icon;}
 
   get ledgers(): Ledger[] {return this.props.ledgers?.currentItems() ?? []}
 

@@ -56,7 +56,7 @@ export class CreateLedgerUseCase implements BaseUseCase<CreateLedgerUseCaseReque
     if(Guard.againstNullOrUndefined(category, "category").succeeded) 
       return Result.fail<Category>("couldn't find category by id = " + categoryId);
     
-    return Result.ok<Category>(category);
+    return Result.ok<Category>(category!);
 
   }
 

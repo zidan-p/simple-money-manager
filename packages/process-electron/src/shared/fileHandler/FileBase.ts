@@ -15,7 +15,8 @@ import { Entity } from "../../domain/shared/base/Entity";
 
 
 export interface FileProps {
-  fileName: string;
+  fieldName: string; // ex: ledger/icon (it can be used as directory or group file in another file system)
+  fileName: string; // the file name that creted
   size: number; // in bytes
   extension: string;
 
@@ -25,7 +26,12 @@ export interface FileProps {
   getFile : ()=> Promise<ArrayBuffer>
 }
 
-
+/**
+ * NOTE: for performance when finding file, maybe it's better to use timestamp as file name
+ * rather than uid?
+ * 
+ * i don't know. but for now, i'll use the uid as the file name
+ */
 export abstract class FileBase<TProps extends FileProps> extends Entity<TProps>{
   
   get fileName () : string { return this.props.fileName};

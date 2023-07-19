@@ -19,4 +19,9 @@ export class GuardBoolean {
       return false;
     return true
   }
+
+  public static include<T>(arrayValue: T, array: readonly T[]): boolean{
+    if(array === undefined || array === null || !Array.isArray(array)) return false;
+    return array.includes(arrayValue);
+  }
 }
