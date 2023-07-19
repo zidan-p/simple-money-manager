@@ -25,7 +25,7 @@ interface CreateCategoryRequestDTO {
   // ledgers? : WatchedList<Ledger>;
 }
 
-class CreateCategoryUseCase implements BaseUseCase<CreateCategoryRequestDTO, Result<Category>>{
+export class CreateCategoryUseCase implements BaseUseCase<CreateCategoryRequestDTO, Result<Category>>{
 
   constructor(
     private readonly categoryRepo: ICategoryRepository,

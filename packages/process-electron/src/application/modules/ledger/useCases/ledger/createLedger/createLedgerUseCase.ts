@@ -51,7 +51,7 @@ export class CreateLedgerUseCase implements BaseUseCase<CreateLedgerUseCaseReque
     const isIdValid = TextUtil.isUUID(categoryId);
     
     if(!isIdValid) return Result.fail<Category>("invalid id");
-    const category = await this.categoryRepo.findCatgoryById(categoryId);
+    const category = await this.categoryRepo.findCategoryById(categoryId);
     
     if(Guard.againstNullOrUndefined(category, "category").succeeded) 
       return Result.fail<Category>("couldn't find category by id = " + categoryId);

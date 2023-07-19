@@ -38,6 +38,15 @@ export abstract class FileBase<TProps extends FileProps> extends Entity<TProps>{
 
   get size () : number {return this.props.size};
 
+  /**
+   * @example
+   * ```
+   * "ledger/icon/12j3quw12we.png"
+   * ```
+   * that is how file id look like, it's will similar with how that file directory represent
+   */
+  get fileId () : string {return this.props.fieldName + "/" + this.props.fileName}
+
   get extension(): string {return this.props.extension};
 
   get getFile(): Promise<ArrayBuffer> {return this.props.getFile();}

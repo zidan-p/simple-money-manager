@@ -36,9 +36,13 @@ export class CategoryFile extends FileBase<CategoryFileProps> {
 
   get extension(): ImageExtensionType{ return this.props.extension}
 
-  async fileObject(): Promise<ArrayBuffer> {
-    const fileObject =  await this.props.getFile();
-    return fileObject;
+  async fileObject(): Promise<Result<ArrayBuffer> | Result<void>> {
+    try {
+      const fileObject =  await this.props.getFile();
+      return Result.ok<ArrayBuffer>(fileObject); 
+    } catch (error) {
+      return Result.fail<void>(error);
+    }
   }
 
   private constructor(props: CategoryFileProps, id?: UniqueEntityID){

@@ -2,6 +2,7 @@ import { ILedgerRepository } from "application/modules/ledger/providerContracts/
 import { BaseUseCase } from "application/shared/utils/baseIUseCase";
 import { Ledger } from "domain/ledger/ledger";
 import { Guard } from "domain/shared/logic/Guard";
+import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
 import { Result } from "domain/shared/logic/Result";
 
 
@@ -18,10 +19,10 @@ export class FindLedgerByIdUseCase implements BaseUseCase<FindLedgerByIdUseCaseD
 
   async execute(request: FindLedgerByIdUseCaseDTO): Promise<Result<Ledger>> {
     try {
-      const categoryOrNull = await this.ledgerRepo.findLedgerById(request.ledgerId.toString());
-      if(!Guard.againstNullOrUndefined(categoryOrNull, "category").succeeded)
+      const ledgerOrNull = await this.ledgerRepo.findLedgerById(request.ledgerId.toString());
+      if(ledgerOrNull === null)
         return Result.fail<Ledger>("can't find ledger with id = "+request.ledgerId);
-      return Result.ok<Ledger>(categoryOrNull!);
+      return Result.ok<Ledger>(ledgerOrNull!);
     } catch (error) {
       console.log(error); 
       return Result.fail<Ledger>(error);

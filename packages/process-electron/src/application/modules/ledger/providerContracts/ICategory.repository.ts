@@ -3,7 +3,7 @@ import { Category } from "domain/ledger/category";
 import { CategoryId } from "domain/ledger/categoryId";
 
 export interface ICategoryRepository extends Omit<IBaseRepo<Category>, "exists"> {
-  findCatgoryById(categoryId: string | CategoryId): Promise<Category>
+  findCategoryById(categoryId: string | CategoryId): Promise<Category | null>
   findCategoriesByIds(categoryId: string[] | CategoryId[]) : Promise<Category[]>
 
   /** 

@@ -32,6 +32,35 @@ export class Category extends Entity<CategoryProps> {
 
   get ledgers(): Ledger[] {return this.props.ledgers?.currentItems() ?? []}
 
+  // ## updater
+
+  public updateName(name : string): Result<void>{
+    try {
+      this.props.name = name;
+      return Result.ok()
+    } catch (error) {
+      return Result.fail(error);
+    }
+  }
+
+  public updateDescription(description: string) : Result<void>{
+    try {
+      this.props.description = description;
+      return Result.ok();
+    } catch (error) {
+      return Result.fail(error);
+    }
+  }
+
+  public updateIcon(newIcon: CategoryFile): Result<void>{
+    try {
+      this.props.icon = newIcon;
+      return Result.ok();
+    } catch (error) {
+      return Result.fail(error);
+    }
+  }
+
   public addLedger(ledger: Ledger): void {
 
     // # Note, how to make sure its performance is ideal?

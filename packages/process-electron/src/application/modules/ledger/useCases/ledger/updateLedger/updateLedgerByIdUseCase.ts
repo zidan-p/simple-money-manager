@@ -41,7 +41,7 @@ class UpdateLedgerByIdUseCase implements BaseUseCase<UpdateLedgerByIdDTO, Result
         return Result.fail<Ledger>("can't fin ledger with id = " + request.ledgerId.toString());
 
       if(GuardBoolean.has("categoryId", request)){
-        const categoryOrNull = await this.categoryRepo.findCatgoryById(request.categoryId?.toString()!);
+        const categoryOrNull = await this.categoryRepo.findCategoryById(request.categoryId?.toString()!);
         if(categoryOrNull === null)
           return Result.fail<Ledger>("can't find categiry with id = " + request.categoryId?.toString());
         this.changes.addChange(ledger.updateCategory(categoryOrNull!))

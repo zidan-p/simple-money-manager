@@ -10,7 +10,7 @@ export class GuardBoolean {
   /**
    * 
    * @param propName has this property
-   * @param object in this obejecy
+   * @param object in this obeject
    * @returns {boolean}
    */
   public static has(propName: string, object: object): boolean{
