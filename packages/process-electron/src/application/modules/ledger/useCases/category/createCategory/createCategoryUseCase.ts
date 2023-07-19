@@ -37,7 +37,7 @@ export class CreateCategoryUseCase implements BaseUseCase<CreateCategoryRequestD
       if(!this.categoryFileRepo.exists(request.iconId))
         return Result.fail<CategoryFile>("couldn't file with id = " + request.iconId + "in field " + this.categoryFileRepo.fieldName);
       
-      return Result.ok<CategoryFile>(await this.categoryFileRepo.getFileById(request.iconId));
+      return Result.ok<CategoryFile>(await this.categoryFileRepo.getFileById(request.iconId) as CategoryFile);
     } catch (error) {
       return Result.fail<CategoryFile>(error);
     }
