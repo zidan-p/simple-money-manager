@@ -49,5 +49,5 @@ export abstract class FileBase<TProps extends FileProps> extends Entity<TProps>{
 
   get extension(): string {return this.props.extension};
 
-  get getFile(): Promise<ArrayBuffer> {return this.props.getFile();}
+  get getFile(): ()=>Promise<ArrayBuffer> {return this.props.getFile;}
 }

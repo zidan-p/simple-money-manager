@@ -59,6 +59,7 @@ export class CreateCategoryUseCase implements BaseUseCase<CreateCategoryRequestD
       if(categoryOrError.isFailure)
         return Result.fail<Category>(categoryOrError.errorValue);
       
+      this.categoryRepo.save(categoryOrError.getValue());
       return Result.ok<Category>(categoryOrError.getValue());
 
     } catch (error) {

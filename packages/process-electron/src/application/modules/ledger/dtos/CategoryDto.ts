@@ -4,6 +4,7 @@ import { Category } from "domain/ledger/category";
 import { Result } from "domain/shared/logic/Result";
 import { WatchedList } from "domain/shared/base/WacthedList";
 import { Ledger } from "domain/ledger/ledger";
+import { CategoryFileDto, CategoryFileMap } from "./CategoryFileDto";
 
 
 
@@ -12,7 +13,7 @@ export type CategoryDto = {
   categoryId: number | string;
   name: string;
   description: string;
-  icon: string;
+  icon: CategoryFileDto;
   ledgers? : LedgerDto[] | [];
 }
 
@@ -30,9 +31,14 @@ export class CategoryMap extends Mapper<Category>{
       ledgersWatchedList = new WatchedList<Ledger>(ledgerList.map(l => l.getValue()));
     }
 
+    const iconOrError = CategoryFileMap.toDomain(raw.icon);
+    if(iconOrError.isFailure)
+      return Result.fail<Category>(iconOrError.errorValue);
+
+
     const categoryOrError = Category.create({
       description: raw.description,
-      icon: raw.icon,
+      icon: iconOrError.getValue(),
       name: raw.name,
       ledgers: ledgersWatchedList
     })
