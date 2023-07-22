@@ -7,7 +7,7 @@ import { Result } from "domain/shared/logic/Result";
 
 
 
-interface DeleteLedgerByIdUseCaseDTO {
+export interface DeleteLedgerByIdUseCaseDTO {
   ledgerId: string | number;
 }
 

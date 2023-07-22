@@ -6,7 +6,7 @@ import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
 import { Result } from "domain/shared/logic/Result";
 
 
-interface FindLedgerByIdUseCaseDTO {
+export interface FindLedgerByIdUseCaseDTO {
   ledgerId: string | number;
 }
 

@@ -11,7 +11,7 @@ import { Result } from "domain/shared/logic/Result";
 
 
 
-interface UpdateLedgerByIdDTO {
+export interface UpdateLedgerByIdDTO {
   // ini yg penting
   ledgerId: number | string; 
 
@@ -24,7 +24,7 @@ interface UpdateLedgerByIdDTO {
 }
 
 
-class UpdateLedgerByIdUseCase implements BaseUseCase<UpdateLedgerByIdDTO, Result<Ledger>>, WithChanges{
+export class UpdateLedgerByIdUseCase implements BaseUseCase<UpdateLedgerByIdDTO, Result<Ledger>>, WithChanges{
   public changes: Changes;
   constructor(
     private readonly ledgerRepo: ILedgerRepository,

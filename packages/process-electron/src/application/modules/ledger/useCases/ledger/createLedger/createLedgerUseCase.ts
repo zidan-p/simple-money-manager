@@ -11,7 +11,7 @@ import { CategoryId } from "domain/ledger/categoryId";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
 import { CategoryDto } from "application/modules/ledger/dtos/CategoryDto";
 
-interface CreateLedgerUseCaseRequestDTO {
+export interface CreateLedgerUseCaseRequestDTO {
   // ledgerId: number | string; 
   amount: number;
   type: "income" | "expense";
