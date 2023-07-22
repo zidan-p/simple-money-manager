@@ -24,4 +24,12 @@ export class GuardBoolean {
     if(array === undefined || array === null || !Array.isArray(array)) return false;
     return array.includes(arrayValue);
   }
+
+  public static isNullOrUndefined (argument: any): boolean {
+    if (argument === null || argument === undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
 }

@@ -7,6 +7,8 @@
 
 export abstract class BaseIpcController{
 
+  abstract executeImpl(request: any): Promise<any>;
+
   ok(value: any){
     return value
   }

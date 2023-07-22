@@ -20,7 +20,7 @@ export interface UpdateCategoryByIdRequestDto {
 
 
 
-export class UpdateCategoryById implements BaseUseCase<UpdateCategoryByIdRequestDto, Result<Category>>, WithChanges{
+export class UpdateCategoryByIdUseCase implements BaseUseCase<UpdateCategoryByIdRequestDto, Result<Category>>, WithChanges{
   public changes : Changes;
   constructor(
     private readonly categoryFileRepo: ICategoryFileRepository,

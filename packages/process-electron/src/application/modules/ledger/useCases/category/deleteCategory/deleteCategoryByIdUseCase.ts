@@ -16,7 +16,7 @@ export interface DeleteCategoryByIdRequestDto {
 }
 
 
-export class DeleteCategoryById implements BaseUseCase<DeleteCategoryByIdRequestDto, Result<Category>>{
+export class DeleteCategoryByIdUseCase implements BaseUseCase<DeleteCategoryByIdRequestDto, Result<Category>>{
 
   constructor(
     private readonly CategoryRepo: ICategoryRepository,

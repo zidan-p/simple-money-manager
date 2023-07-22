@@ -3,12 +3,12 @@ import { CategoryFile } from "domain/ledger/categoryFile";
 import { IFileService } from "shared/fileHandler/IFileService";
 import { CreateCategoryRequestDTO, CreateCategoryUseCase } from "../categoryContainer";
 import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
+import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 
 
 
 
-
-class CreateCategoryController extends BaseIpcController{
+export class CreateCategoryController extends BaseIpcController{
 
   constructor(
     private fileAdapter: IFileService<CategoryFile>,
@@ -31,9 +31,9 @@ class CreateCategoryController extends BaseIpcController{
       const result = await this.UseCase.execute(dto);
 
       if(result.isFailure)
-        return this.fail(result.errorValue);
+        return this.fail(result.errorValue());
       
-      return this.ok(result.getValue)
+      return this.ok(CategoryMap.toDTO(result.getValue()));
 
 
     } catch (error) {
