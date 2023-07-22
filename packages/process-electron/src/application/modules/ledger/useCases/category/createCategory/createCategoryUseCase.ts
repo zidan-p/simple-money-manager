@@ -14,7 +14,7 @@ import { CategoryFile } from "domain/ledger/categoryFile";
 
 
 
-interface CreateCategoryRequestDTO {
+export interface CreateCategoryRequestDTO {
   name: string;
   description: string;
   iconId: string; // this will be file id if not file name

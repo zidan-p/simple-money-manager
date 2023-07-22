@@ -11,7 +11,7 @@ import { Result } from "domain/shared/logic/Result";
 
 
 
-interface UpdateCategoryByIdRequestDto {
+export interface UpdateCategoryByIdRequestDto {
   categoryId: string;
   name?: string;
   description?: string;

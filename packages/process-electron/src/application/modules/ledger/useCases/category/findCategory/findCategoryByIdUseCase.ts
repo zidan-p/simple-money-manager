@@ -9,7 +9,7 @@ import { Result } from "domain/shared/logic/Result";
 
 
 
-interface FindCategoryByIdRequestDto {
+export interface FindCategoryByIdRequestDto {
   categoryId: string;
 }
 

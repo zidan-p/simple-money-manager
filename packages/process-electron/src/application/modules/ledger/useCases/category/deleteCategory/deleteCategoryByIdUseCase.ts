@@ -11,7 +11,7 @@ import { Result } from "domain/shared/logic/Result";
 
 
 
-interface DeleteCategoryByIdRequestDto {
+export interface DeleteCategoryByIdRequestDto {
   categoryId: string;
 }
 
