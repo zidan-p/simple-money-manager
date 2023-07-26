@@ -12,6 +12,6 @@ export interface ICategoryRepository extends Omit<IBaseRepo<Category>, "exists">
    */
   exists(categoryId: string | CategoryId) : Promise<Boolean>  
 
-  removeCategoryById(categoryId: string | CategoryId) : Promise<Category>
-  removeCategoryByIds(categoryId: string[] | CategoryId[]) : Promise<Category>
+  removeCategoryById(categoryId: string | CategoryId) : Promise<Category | null>
+  removeCategoryByIds(categoryId: string[] | CategoryId[]) : Promise<Category[]>
 }

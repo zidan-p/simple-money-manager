@@ -22,7 +22,7 @@ export interface ILedgerRepository extends IBaseRepo<Ledger> {
    * so i utilize this feature from sequelize to return its object when deleted.
    * you can use this object as metadata for your app.
    */
-  removeLedgerById(ledgerId: string | LedgerId): Promise<Ledger>
+  removeLedgerById(ledgerId: string | LedgerId): Promise<Ledger | null>
 }
 
 /**
