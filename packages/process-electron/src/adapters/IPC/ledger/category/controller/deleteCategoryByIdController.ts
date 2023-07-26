@@ -3,6 +3,7 @@ import { DeleteCategoryByIdRequestDto } from "../categoryContainer";
 import { DeleteLedgerByIdUseCase } from "application/modules/ledger/useCases/ledger/deleteLedger/deleteLedgerByIdUseCase";
 import { DeleteCategoryByIdUseCase } from "application/modules/ledger/useCases/category/deleteCategory/deleteCategoryByIdUseCase";
 import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
+import { DELETE_CATEGORY_BY_ID } from "../categoryChannelNames";
 
 
 
@@ -14,6 +15,8 @@ import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 
 
 export class DeleteCategoryByIdController extends BaseIpcController{
+
+  public readonly channelName = DELETE_CATEGORY_BY_ID;
 
   constructor(
     private useCase: DeleteCategoryByIdUseCase

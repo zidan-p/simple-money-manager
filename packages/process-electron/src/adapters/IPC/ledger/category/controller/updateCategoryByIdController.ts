@@ -5,6 +5,7 @@ import { CategoryFile } from "domain/ledger/categoryFile";
 import { CategoryFileDto } from "application/modules/ledger/dtos/CategoryFileDto";
 import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
 import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
+import { UPDATE_CATEGORY_BY_ID } from "../categoryChannelNames";
 
 
 
@@ -17,6 +18,8 @@ import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 
 
 export class UpdateCategoryByIdController extends BaseIpcController{
+
+  public readonly channelName = UPDATE_CATEGORY_BY_ID;
 
   constructor(
     private useCase: UpdateCategoryByIdUseCase,

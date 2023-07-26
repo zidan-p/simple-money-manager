@@ -1,6 +1,7 @@
 import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
 import { FindLedgerByIdUseCase, FindLedgerByIdUseCaseDTO } from "../ledgerContainer";
 import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
+import { GET_LEDGER_BY_ID } from "../ledgerChannelNames";
 
 
 
@@ -15,6 +16,9 @@ import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
 
 
 export class FindLedgerByIdController extends BaseIpcController{
+
+  public readonly channelName = GET_LEDGER_BY_ID;
+
   constructor(
     private useCase: FindLedgerByIdUseCase
   ){super()}

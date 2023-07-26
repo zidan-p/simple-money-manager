@@ -14,7 +14,7 @@ export class LedgerRepository implements ILedgerRepository{
   constructor(
     // TODO: fix this type
     // NOTE: i want to make this model more similar to how sequelize model operate
-    private readonly categoryModel: any 
+    private readonly ledgerModel: any 
   ){}
 
   parseLedgerId(ledgerId: string | LedgerId ): string{
@@ -23,7 +23,7 @@ export class LedgerRepository implements ILedgerRepository{
 
   async findLedgerById(ledgerId: string | LedgerId): Promise<Ledger | null> {
     try {
-      const founded : LedgerDto | null = await this.categoryModel.findById(
+      const founded : LedgerDto | null = await this.ledgerModel.findById(
         this.parseLedgerId(ledgerId)
       );
       if(!founded) return null;
@@ -43,7 +43,7 @@ export class LedgerRepository implements ILedgerRepository{
 
   async findLedgersByIds(ledgerId: string[] | LedgerId[]): Promise<Ledger[]> {
     try {
-      const founded: LedgerDto[] | null = await this.categoryModel.findByIds(
+      const founded: LedgerDto[] | null = await this.ledgerModel.findByIds(
         ledgerId.map(id => this.parseLedgerId(id))
       )
       if(!founded) return [];
@@ -63,7 +63,7 @@ export class LedgerRepository implements ILedgerRepository{
 
   async exists(ledgerId: string | LedgerId): Promise<boolean> {
     try {
-      const founded: boolean = await this.categoryModel.exists(
+      const founded: boolean = await this.ledgerModel.exists(
         this.parseLedgerId(ledgerId)
       )
       return founded;
@@ -75,7 +75,7 @@ export class LedgerRepository implements ILedgerRepository{
 
   async removeLedgerById(ledgerId: string | LedgerId): Promise<Ledger | null> {
     try {
-      const founded: LedgerDto | null = await this.categoryModel.removeById(
+      const founded: LedgerDto | null = await this.ledgerModel.removeById(
         this.parseLedgerId(ledgerId)
       )
       if(!founded) return null;
@@ -94,7 +94,7 @@ export class LedgerRepository implements ILedgerRepository{
 
   async removeLedgerByIds(ledgerId: string[] | LedgerId[]): Promise<Ledger[]> {
     try {
-      const founded: LedgerDto[] | null = await this.categoryModel.removeByIds(
+      const founded: LedgerDto[] | null = await this.ledgerModel.removeByIds(
         ledgerId.map(id => this.parseLedgerId(id))
       )
       if(!founded) return [];
@@ -117,7 +117,7 @@ export class LedgerRepository implements ILedgerRepository{
     try {
       const savedData = LedgerMap.toDTO(t);
 
-      const categoryUpdated : LedgerDto = await this.categoryModel.save(savedData);
+      const categoryUpdated : LedgerDto = await this.ledgerModel.save(savedData);
       return LedgerMap.toDomain(categoryUpdated).getValue();
 
     } catch (error) {

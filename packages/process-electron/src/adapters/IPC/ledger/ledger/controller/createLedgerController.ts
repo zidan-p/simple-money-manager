@@ -1,6 +1,7 @@
 import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
 import { CreateLedgerUseCase, CreateLedgerUseCaseRequestDTO } from "../ledgerContainer";
 import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
+import { CREATE_LEDGER } from "../ledgerChannelNames";
 
 
 
@@ -9,6 +10,8 @@ import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
 
 
 export class CreateLedgerController extends BaseIpcController{
+
+  public readonly channelName = CREATE_LEDGER;
 
   constructor(
     private useCase: CreateLedgerUseCase

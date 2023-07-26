@@ -1,5 +1,6 @@
 import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
 import { FindCategoryByIdRequestDto, FindCategoryByIdUseCase } from "../categoryContainer";
+import { GET_CATEGORY_BY_ID } from "../categoryChannelNames";
 
 
 
@@ -9,6 +10,8 @@ import { FindCategoryByIdRequestDto, FindCategoryByIdUseCase } from "../category
 
 
 export class FindCategoryByIdController extends BaseIpcController{
+
+  public readonly channelName = GET_CATEGORY_BY_ID;
 
   constructor(
     private useCase: FindCategoryByIdUseCase

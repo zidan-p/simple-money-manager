@@ -2,6 +2,7 @@ import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
 import { UpdateCategoryByIdUseCase } from "../../category/categoryContainer";
 import { UpdateLedgerByIdDTO, UpdateLedgerByIdUseCase } from "../ledgerContainer";
 import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
+import { UPDATE_LEDGER_BY_ID } from "../ledgerChannelNames";
 
 
 
@@ -18,6 +19,9 @@ import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
 
 
 export class UpdateLedgerById extends BaseIpcController{
+
+  public readonly channelName = UPDATE_LEDGER_BY_ID;
+
   constructor(
     private useCase: UpdateLedgerByIdUseCase
   ){super()}
