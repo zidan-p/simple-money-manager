@@ -3,6 +3,7 @@ import { ILedgerRepository } from "application/modules/ledger/providerContracts/
 import { Ledger } from "domain/ledger/ledger";
 import { LedgerId } from "domain/ledger/ledgerId";
 import { Result } from "domain/shared/logic/Result";
+import { ILedgerModel } from "./ILedgerModel";
 
 
 
@@ -14,7 +15,7 @@ export class LedgerRepository implements ILedgerRepository{
   constructor(
     // TODO: fix this type
     // NOTE: i want to make this model more similar to how sequelize model operate
-    private readonly ledgerModel: any 
+    private readonly ledgerModel: ILedgerModel 
   ){}
 
   parseLedgerId(ledgerId: string | LedgerId ): string{
@@ -63,7 +64,7 @@ export class LedgerRepository implements ILedgerRepository{
 
   async exists(ledgerId: string | LedgerId): Promise<boolean> {
     try {
-      const founded: boolean = await this.ledgerModel.exists(
+      const founded: boolean = await this.ledgerModel.exist(
         this.parseLedgerId(ledgerId)
       )
       return founded;

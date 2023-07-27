@@ -3,6 +3,7 @@ import { ICategoryRepository } from "application/modules/ledger/providerContract
 import { Category } from "domain/ledger/category";
 import { CategoryId } from "domain/ledger/categoryId";
 import { Result } from "domain/shared/logic/Result";
+import { ICategoryModel } from "./ICategoryModel";
 
 
 
@@ -14,7 +15,7 @@ export class CategoryRepository implements ICategoryRepository{
   constructor(
     // TODO: fix this type
     // NOTE: i want to make this model more similar to how sequelize model operate
-    private readonly categoryModel: any 
+    private readonly categoryModel: ICategoryModel
   ){}
 
   parseCategoryId(categoryId: string | CategoryId ): string{
@@ -63,7 +64,7 @@ export class CategoryRepository implements ICategoryRepository{
 
   async exists(categoryId: string | CategoryId): Promise<Boolean> {
     try {
-      const founded: boolean = await this.categoryModel.exists(
+      const founded: boolean = await this.categoryModel.exist(
         this.parseCategoryId(categoryId)
       )
       return founded;
