@@ -3,4 +3,9 @@
 
 export class AppChannelWrapper {
     
+
+
+  registerChannel(){
+    
+  }
 }

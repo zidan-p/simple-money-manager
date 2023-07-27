@@ -6,6 +6,7 @@
 
 
 export abstract class BaseIpcController{
+  
 
   abstract executeImpl(request: any): Promise<any>;
 
