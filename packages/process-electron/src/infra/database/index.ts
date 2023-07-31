@@ -7,9 +7,11 @@ import ledgerInit from "./models/LedgerDB.model";
 // # TODO:
 // - automate it with fs
 // - use correct ES5 syntax
-const modelInit: ((s: Sequelize) => ModelStatic<any>)[] = [
-  categoryInit, ledgerInit
-];
+// - export from it import file from...., why i just redefine its Name, whyyy
+const modelInit = {
+  Category : categoryInit, 
+  Ledger : ledgerInit
+} as const;
 
 /**
  * is it correct? i just curently learning about clean code. it is alright if i
@@ -17,6 +19,7 @@ const modelInit: ((s: Sequelize) => ModelStatic<any>)[] = [
  */
 export class DatabaseSMM {
   sequelize!: Sequelize;
+  public readonly models!: {[ K in keyof typeof modelInit] : ReturnType<typeof modelInit[K]>}
 
   constructor() {
     this.inititalizeDatabase();
@@ -41,8 +44,8 @@ export class DatabaseSMM {
   }
 
   initializeModel(){
-    for(const modelInitial of modelInit){
-      modelInitial(this.sequelize);
+    for(const modelInitial in modelInit){
+      this.models[modelInitial as keyof typeof modelInit] = modelInit[ modelInitial as keyof typeof modelInit](this.sequelize);
     }
   }
 }

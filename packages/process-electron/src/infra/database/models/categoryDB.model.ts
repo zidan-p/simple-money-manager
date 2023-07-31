@@ -2,6 +2,7 @@ import { Sequelize, DataTypes, Model, ModelStatic, Optional } from "sequelize";
 import { Table, Column, AllowNull, HasMany, ForeignKey } from "sequelize-typescript";
 import { Ledger } from "./LedgerDB.model";
 
+
 interface LedgerAttributes {
   name: string;
   description: string;
@@ -10,10 +11,12 @@ interface LedgerAttributes {
 
 // # Model<OutputType, InputType>
 export class Category extends Model<LedgerAttributes>{
+  declare id: string;
   public name!: string;
   public description!: string;
   public icon!: string;
 }
+
 
 export default (sequelize: Sequelize) : ModelStatic<Category> => {
   // # the "Model" interface didnt work with this return value.

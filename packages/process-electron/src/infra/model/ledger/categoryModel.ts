@@ -1,28 +1,43 @@
 import { ICategoryModel } from "adapters/repositories/ledger/category/ICategoryModel";
 import { CategoryDto } from "application/modules/ledger/dtos/CategoryDto";
-import { Model } from "sequelize";
+import { DatabaseSMM } from "infra/database";
+import { Model, Sequelize } from "sequelize";
+import { Category } from "infra/database/models/CategoryDB.model";
 
-
-
-
-
+type CategoryBaseParam = {
+  where: object,
+  limit: number,
+  offset: number
+}
 
 
 class CategoryModel implements ICategoryModel{
 
   constructor(
-    private readonly sequelizeCategoryModel: Model
+    private readonly sequelizeConnection: Sequelize
   ){}
 
   baseQuery({
-    where
-  }){
-
+    where = {},
+    limit = 15,
+    offset = 0
+  }:CategoryBaseParam){
+    return {
+      where: where,
+      limit: limit,
+      offset: offset
+    }
   }
 
   async findById(id: string): Promise<CategoryDto | null> {
     try {
-      const result = this.sequelizeCategoryModel.
+      const result = await Category.findByPk(id);
+      return {
+        categoryId  : result?.id!,
+        description : result?.description!,
+        icon        : result?.icon!,
+        name        : result?.name!
+      }
     } catch (error) {
       
     }

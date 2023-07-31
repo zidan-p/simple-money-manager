@@ -6,7 +6,7 @@ import {Sequelize, Model, ModelStatic} from "sequelize";
 /**
  * @summary
  * really, i dont know the best way to associate model in sequelize.
- * only this way that i know. it's confusing if you image the assiciate here.
+ * only this way that i know. it's confusing if you imagine the assiciate here.
  * it maybe will be hard to maintain if the table have been so many.
  */
 // export default (sequelize: Sequelize) => {
