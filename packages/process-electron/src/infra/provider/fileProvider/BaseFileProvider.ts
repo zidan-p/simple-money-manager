@@ -1,20 +1,19 @@
-import { CategoryFile } from "domain/ledger/categoryFile";
-import { IFileService } from "shared/fileHandler/IFileService";
 import fsAsync from "node:fs/promises"
 import path from "node:path"
-import { CategoryFileDto } from "application/modules/ledger/dtos/CategoryFileDto";
-import { ImageExtensionType } from "shared/fileHandler/fileTypes/ImageFileType";
 import { existsSync } from "node:fs";
-
+import { FileDto } from "shared/fileHandler/FileDTO";
+import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
 
 export abstract class BaseFileProvider{
 
   // # Override this
-  readonly field = "category/icon";
+  public field = "";
 
   readonly store = path.resolve(__dirname + "/src/infra/database/storage");
+
   
-  async getFileById(fileId: string): Promise<CategoryFileDto | null> {
+  
+  async getFileById(fileId: string): Promise<FileDto | null> {
     try {
       const filePath = path.resolve(this.store, fileId);
       const fileExtension = path.extname(filePath);
@@ -25,7 +24,7 @@ export abstract class BaseFileProvider{
       }
   
       return {
-        extension : fileExtension as ImageExtensionType,
+        extension : fileExtension,
         fieldName : this.field,
         fileName  : fileName,
         size      : size,
@@ -35,7 +34,7 @@ export abstract class BaseFileProvider{
       return null;
     }
   }
-  async getFilesByIds(fileIds: string[]): Promise<CategoryFileDto[] | null> {
+  async getFilesByIds(fileIds: string[]): Promise<FileDto[] | null> {
     try {
       const dataIds : unknown = fileIds.map(async (fileId) => {
         const data = await this.getFileById(fileId)
@@ -44,12 +43,12 @@ export abstract class BaseFileProvider{
         return data
       });
 
-      return dataIds as CategoryFileDto[];
+      return dataIds as FileDto[];
     } catch (error) {
       return null;
     }
   }
-  async removeFileById(fileId: string): Promise<CategoryFileDto | null> {
+  async removeFileById(fileId: string): Promise<FileDto | null> {
     try {
       const filePath = path.resolve(this.store, fileId);
       const fileDto = await this.getFileById(fileId);
@@ -61,9 +60,9 @@ export abstract class BaseFileProvider{
       return null;
     }
   }
-  async removeFilesByIds(fileIds: string[]): Promise<CategoryFileDto[] | null> {
+  async removeFilesByIds(fileIds: string[]): Promise<FileDto[] | null> {
     try {
-      const fileDtoList : CategoryFileDto[] = [];
+      const fileDtoList : FileDto[] = [];
       fileIds.forEach( async(fileId)=>{
         const result = await this.removeFileById(fileId);
         if(result === null)
@@ -84,8 +83,31 @@ export abstract class BaseFileProvider{
     // i don't know if node js doesn't have exist promise :(
     return existsSync(filePath);
   }
-  async saveFromPath<TFileDto extends FileDto>(file: any): Promise<TFileDto> {
-    
+
+  /** @param {file} string a absolute path that will copy to this app storage */
+  async saveFromPath(fileDir: string): Promise<FileDto | null> {
+    try {
+      const fileName = new UniqueEntityID();
+      const fileExtension = path.extname(fileDir);
+      const dest = path.resolve(this.store, this.field, fileName.toString() + fileExtension);
+      await fsAsync.copyFile(fileDir, dest);
+
+      const size = (await fsAsync.stat(dest)).size;
+      const getFile = async () => {
+        return await fsAsync.readFile(dest);
+      }
+      return {
+        extension : fileExtension,
+        fieldName : this.field,
+        fileName  : fileName.toString(),
+        size      : size,
+        getFile   : getFile
+      }
+
+    } catch (error) {
+      return null;
+    }
   }
+
   
 }

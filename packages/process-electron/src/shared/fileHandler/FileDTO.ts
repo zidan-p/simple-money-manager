@@ -12,5 +12,5 @@ export type FileDto = {
   // content: ArrayBuffer;
 
   // maybe it's better to use callback for grabing file
-  getFile : ()=> Promise<ArrayBuffer>
+  getFile : ()=> Promise<Buffer>
 } 
