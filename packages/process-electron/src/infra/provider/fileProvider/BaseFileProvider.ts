@@ -7,7 +7,7 @@ import { ImageExtensionType } from "shared/fileHandler/fileTypes/ImageFileType";
 import { existsSync } from "node:fs";
 
 
-export abstract class CategoryFileProvider{
+export abstract class BaseFileProvider{
 
   // # Override this
   readonly field = "category/icon";

@@ -41,7 +41,7 @@ class CategoryModel implements ICategoryModel{
     } catch (error) {
       
     }
-  }
+  } 
   findByIds(id: string[]): Promise<CategoryDto[] | null> {
     throw new Error("Method not implemented.");
   }
