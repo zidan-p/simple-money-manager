@@ -3,8 +3,9 @@ import path from "node:path"
 import { existsSync } from "node:fs";
 import { FileDto } from "shared/fileHandler/FileDTO";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
+import { IFileProvider } from "shared/fileHandler/IFileProvider";
 
-export abstract class BaseFileProvider{
+export abstract class BaseFileProvider implements IFileProvider<FileDto>{
 
   // # Override this
   public field = "";
@@ -85,7 +86,7 @@ export abstract class BaseFileProvider{
   }
 
   /** @param {file} string a absolute path that will copy to this app storage */
-  async saveFromPath(fileDir: string): Promise<FileDto | null> {
+  async save(fileDir: string): Promise<FileDto | null> {
     try {
       const fileName = new UniqueEntityID();
       const fileExtension = path.extname(fileDir);

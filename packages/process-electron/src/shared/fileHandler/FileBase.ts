@@ -23,7 +23,7 @@ export interface FileProps {
   // content: ArrayBuffer;
 
   // maybe it's better to use callback for grabing file
-  getFile : ()=> Promise<ArrayBuffer>
+  getFile : ()=> Promise<Buffer>
 }
 
 /**
@@ -49,5 +49,5 @@ export abstract class FileBase<TProps extends FileProps> extends Entity<TProps>{
 
   get extension(): string {return this.props.extension};
 
-  get getFile(): ()=>Promise<ArrayBuffer> {return this.props.getFile;}
+  get getFile(): ()=>Promise<Buffer> {return this.props.getFile;}
 }

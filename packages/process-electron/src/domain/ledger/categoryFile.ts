@@ -23,7 +23,7 @@ export interface CategoryFileProps {
   fileName: string;
   size: number;
   extension: ImageExtensionType;
-  getFile : ()=> Promise<ArrayBuffer>
+  getFile : ()=> Promise<Buffer>
 }
 
 export class CategoryFile extends FileBase<CategoryFileProps> {
@@ -36,10 +36,10 @@ export class CategoryFile extends FileBase<CategoryFileProps> {
 
   get extension(): ImageExtensionType{ return this.props.extension}
 
-  async fileObject(): Promise<Result<ArrayBuffer> | Result<void>> {
+  async fileObject(): Promise<Result<Buffer> | Result<void>> {
     try {
       const fileObject =  await this.props.getFile();
-      return Result.ok<ArrayBuffer>(fileObject); 
+      return Result.ok<Buffer>(fileObject); 
     } catch (error) {
       return Result.fail<void>(error);
     }

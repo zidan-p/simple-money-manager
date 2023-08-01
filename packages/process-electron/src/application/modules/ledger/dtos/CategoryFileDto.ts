@@ -21,11 +21,11 @@ export class CategoryFileMap extends Mapper<CategoryFileDto>{
 
   public static toDTO(categoryFile: CategoryFile): CategoryFileDto{
     return{
-      extension: categoryFile.extension,
-      fieldName: categoryFile.fieldName,
-      fileName: categoryFile.fileName,
-      size: categoryFile.size,
-      getFile: categoryFile.getFile
+      extension : categoryFile.extension,
+      fieldName : categoryFile.fieldName,
+      fileName  : categoryFile.fileName,
+      size      : categoryFile.size,
+      getFile   : categoryFile.getFile
     }
   }
 }

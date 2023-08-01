@@ -17,5 +17,5 @@ export interface IFileProvider<TFileDto extends FileDto> {
   existsPromise(file: string): Promise<boolean>;
 
   // save when in controller
-  save<TFileDto extends FileDto>(file: any): Promise<TFileDto>
+  save(file: any): Promise<TFileDto | null>
 }
