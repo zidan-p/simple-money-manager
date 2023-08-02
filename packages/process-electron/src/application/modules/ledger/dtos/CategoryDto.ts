@@ -2,7 +2,7 @@ import { Mapper } from "application/shared/utils/baseIMapper";
 import { LedgerDto, LedgerMap } from "./LedgerDto";
 import { Category } from "domain/ledger/category";
 import { Result } from "domain/shared/logic/Result";
-import { WatchedList } from "domain/shared/base/WacthedList";
+import { WatchedList, WatchedListDto } from "domain/shared/base/WacthedList";
 import { Ledger } from "domain/ledger/ledger";
 import { CategoryFileDto, CategoryFileMap } from "./CategoryFileDto";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
@@ -15,9 +15,8 @@ export type CategoryDto = {
   name: string;
   description: string;
   icon: CategoryFileDto;
-  ledgers? : {
-    currentIte : LedgerDto[] | []
-  };
+  ledgers? : WatchedListDto<LedgerDto>;
+  // ledgers? : Ledger[];
 }
 
 /**
@@ -26,13 +25,32 @@ export type CategoryDto = {
 export class CategoryMap extends Mapper<Category>{
   public static toDomain(raw: CategoryDto): Result<Category>{
 
-    let ledgersWatchedList;
-    if(!!raw.ledgers?.length){
-      const ledgerList = raw.ledgers?.map(ledger => LedgerMap.toDomain(ledger))
-      if(Result.combine(ledgerList).isFailure) return Result.fail<Category>
+    let ledgersWatchedList: any = {};
+    if(!!raw.ledgers?.currentItems?.length){
+      const ledgerListResults = raw.ledgers.currentItems.map(ledger => LedgerMap.toDomain(ledger))
+      if(Result.combine(ledgerListResults).isFailure) return Result.fail<Category>
         ("fail to map ledgers");
-      ledgersWatchedList = new WatchedList<Ledger>(ledgerList.map(l => l.getValue()));
+      
+      ledgersWatchedList.currentItems = ledgerListResults.map(ledger => ledger.getValue());
     }
+
+    if(!!raw.ledgers?.addedItems?.length){
+      const ledgerListResults = raw.ledgers.addedItems.map(ledger => LedgerMap.toDomain(ledger))
+      if(Result.combine(ledgerListResults).isFailure) return Result.fail<Category>
+        ("fail to map ledgers");
+      
+      ledgersWatchedList.addedItems = ledgerListResults.map(ledger => ledger.getValue());
+    }
+
+    if(!!raw.ledgers?.removedItems?.length){
+      const ledgerListResults = raw.ledgers.removedItems.map(ledger => LedgerMap.toDomain(ledger))
+      if(Result.combine(ledgerListResults).isFailure) return Result.fail<Category>
+        ("fail to map ledgers");
+      
+      ledgersWatchedList.removedItems = ledgerListResults.map(ledger => ledger.getValue());
+    }
+
+    
 
     const iconOrError = CategoryFileMap.toDomain(raw.icon);
     if(iconOrError.isFailure)

@@ -1,7 +1,18 @@
 import { Entity } from "./Entity";
 
 
+export type WatchedListDto<TDto> = {
+  currentItems?  : TDto[] | [],
+  removedItems?  : TDto[] | [],
+  addedItems?    : TDto[] | []
+}
 
+
+export type WatchedListProps<T> = {
+  currentItems?  : T[] | [],
+  removedItems?  : T[] | [],
+  addedItems?    : T[] | []
+}
 
 /**
  * @description
@@ -14,7 +25,10 @@ import { Entity } from "./Entity";
 export class WatchedList<L extends Entity<any>> {
   private _list: L[] = [];
   private _newList: L[] = [];
-  constructor(list: L[]){this._list = list}
+  private _removedList: L[] = [];
+  constructor(list: L[]){
+
+  }
 
   /**
    * this return doesn't represent all associated data.
@@ -38,10 +52,37 @@ export class WatchedList<L extends Entity<any>> {
   }
 
   /**
+   * removed list, it can be from usecase operation
+   */
+  removedItems(): L[]{
+    return this._removedList;
+  }
+
+
+
+  /**
    * when item is already inside then don't need to add
    */
-  addItems(item: L){
+  addNewItems(item: L){
     const alreadyAdded = this._newList.find(l => l.equals(item))
     if (!alreadyAdded) this._newList.push(item);
+  }
+
+  removeNewItems(item: L){
+    const removedList = this._newList.filter(l => !l.equals(item))
+    this._newList = removedList;
+  }
+
+  /**
+   * when item is already inside then don't need to add
+   */
+  addRemovedItems(item: L){
+    const alreadyAdded = this._removedList.find(l => l.equals(item))
+    if (!alreadyAdded) this._removedList.push(item);
+  }
+
+  removeRemovedItems(item: L){
+    const removedList = this._removedList.filter(l => !l.equals(item))
+    this._removedList = removedList;
   }
 }
