@@ -1,3 +1,4 @@
+import { GuardBoolean } from "../logic/GuardBoolean";
 import { Entity } from "./Entity";
 
 
@@ -26,8 +27,21 @@ export class WatchedList<L extends Entity<any>> {
   private _list: L[] = [];
   private _newList: L[] = [];
   private _removedList: L[] = [];
-  constructor(list: L[]){
 
+  constructor(list?: WatchedListProps<L>){
+    if(list === undefined || list === null)
+      return;
+    if(!GuardBoolean.isNullOrUndefined(list.currentItems)){
+      this._list = list.currentItems;
+    }
+
+    if(!GuardBoolean.isNullOrUndefined(list.addedItems)){
+      this._newList = list.addedItems
+    }
+
+    if(!GuardBoolean.isNullOrUndefined(list.removedItems)){
+      this._removedList = list.removedItems;
+    }
   }
 
   /**

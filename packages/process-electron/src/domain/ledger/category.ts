@@ -32,6 +32,9 @@ export class Category extends Entity<CategoryProps> {
 
   get ledgers(): Ledger[] {return this.props.ledgers?.currentItems() ?? []}
 
+  // because object is by reference so i think it alright if i return the wated lis
+  get watchedLedgers(): WatchedList<Ledger> { return this.props.ledgers ?? new WatchedList<Ledger>()}
+
   // ## updater
 
   public updateName(name : string): Result<void>{
@@ -68,7 +71,7 @@ export class Category extends Entity<CategoryProps> {
     // # just for my understanding, i will let it be.
 
     // # update: just use some recent data, let usecase / repo that handle it
-    this.props.ledgers?.addItems(ledger);
+    this.props.ledgers?.addNewItems(ledger);
   }
 
   private constructor (props: CategoryProps, id?: UniqueEntityID){

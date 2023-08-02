@@ -25,7 +25,7 @@ export class GuardBoolean {
     return array.includes(arrayValue);
   }
 
-  public static isNullOrUndefined (argument: any): boolean {
+  public static isNullOrUndefined (argument: any): argument is Exclude<typeof argument, null & undefined> {
     if (argument === null || argument === undefined) {
       return true
     } else {
@@ -33,3 +33,5 @@ export class GuardBoolean {
     }
   }
 }
+
+

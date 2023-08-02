@@ -2,10 +2,11 @@ import { Mapper } from "application/shared/utils/baseIMapper";
 import { LedgerDto, LedgerMap } from "./LedgerDto";
 import { Category } from "domain/ledger/category";
 import { Result } from "domain/shared/logic/Result";
-import { WatchedList, WatchedListDto } from "domain/shared/base/WacthedList";
+import { WatchedList, WatchedListDto, WatchedListProps } from "domain/shared/base/WacthedList";
 import { Ledger } from "domain/ledger/ledger";
 import { CategoryFileDto, CategoryFileMap } from "./CategoryFileDto";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
+import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
 
 
 
@@ -25,13 +26,13 @@ export type CategoryDto = {
 export class CategoryMap extends Mapper<Category>{
   public static toDomain(raw: CategoryDto): Result<Category>{
 
-    let ledgersWatchedList: any = {};
+    let containerWatchedListLedger: WatchedListProps<Ledger> = {};
     if(!!raw.ledgers?.currentItems?.length){
       const ledgerListResults = raw.ledgers.currentItems.map(ledger => LedgerMap.toDomain(ledger))
       if(Result.combine(ledgerListResults).isFailure) return Result.fail<Category>
         ("fail to map ledgers");
       
-      ledgersWatchedList.currentItems = ledgerListResults.map(ledger => ledger.getValue());
+      containerWatchedListLedger.currentItems = ledgerListResults.map(ledger => ledger.getValue());
     }
 
     if(!!raw.ledgers?.addedItems?.length){
@@ -39,7 +40,7 @@ export class CategoryMap extends Mapper<Category>{
       if(Result.combine(ledgerListResults).isFailure) return Result.fail<Category>
         ("fail to map ledgers");
       
-      ledgersWatchedList.addedItems = ledgerListResults.map(ledger => ledger.getValue());
+      containerWatchedListLedger.addedItems = ledgerListResults.map(ledger => ledger.getValue());
     }
 
     if(!!raw.ledgers?.removedItems?.length){
@@ -47,9 +48,10 @@ export class CategoryMap extends Mapper<Category>{
       if(Result.combine(ledgerListResults).isFailure) return Result.fail<Category>
         ("fail to map ledgers");
       
-      ledgersWatchedList.removedItems = ledgerListResults.map(ledger => ledger.getValue());
+      containerWatchedListLedger.removedItems = ledgerListResults.map(ledger => ledger.getValue());
     }
 
+    const watchedListLedgers = new WatchedList<Ledger>(containerWatchedListLedger);
     
 
     const iconOrError = CategoryFileMap.toDomain(raw.icon);
@@ -61,7 +63,7 @@ export class CategoryMap extends Mapper<Category>{
       description: raw.description,
       icon: iconOrError.getValue(),
       name: raw.name,
-      ledgers: ledgersWatchedList
+      ledgers: watchedListLedgers
     }, new UniqueEntityID(raw.categoryId))
 
     if(categoryOrError.isFailure) console.log(categoryOrError.errorValue());
@@ -70,6 +72,14 @@ export class CategoryMap extends Mapper<Category>{
   }
 
   public static toDTO(category: Category): CategoryDto{
+
+    const containerWactedListDto : WatchedListDto<LedgerDto>= {};
+    if(!GuardBoolean.isNullOrUndefined(category.watchedLedgers)){
+      const watched = category.watchedLedgers
+      if(!GuardBoolean.isNullOrUndefined())
+    }
+
+
     return{
       categoryId: category.categoryId.id.toString(),
       description: category.description,
