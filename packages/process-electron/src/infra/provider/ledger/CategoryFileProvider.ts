@@ -1,7 +1,7 @@
 import { CategoryFile } from "domain/ledger/categoryFile";
 import { FileDto } from "shared/fileHandler/FileDTO";
 import { IFileService } from "shared/fileHandler/IFileService";
-import { BaseFileProvider } from "../../provider/fileProvider/BaseFileProvider";
+import { BaseFileProvider } from "../fileProvider/BaseFileProvider";
 import { ICategoryModel } from "adapters/repositories/ledger/category/ICategoryModel";
 import { ICategoryFileRepository } from "application/modules/ledger/providerContracts/iCategoryFile.repository";
 import { IFileProvider } from "shared/fileHandler/IFileProvider";
@@ -10,7 +10,7 @@ import { CategoryFileDto } from "application/modules/ledger/dtos/CategoryFileDto
 
 
 
-export class CategoryFileService implements IFileProvider<CategoryFileDto>{
+export class CategoryFileProvider implements IFileProvider<CategoryFileDto>{
 
   
   constructor(

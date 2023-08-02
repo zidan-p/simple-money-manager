@@ -11,7 +11,10 @@ import ledgerInit from "./models/LedgerDB.model";
 const modelInit = {
   Category : categoryInit, 
   Ledger : ledgerInit
-} as const;
+};
+
+
+type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 
 /**
  * is it correct? i just curently learning about clean code. it is alright if i
@@ -19,7 +22,7 @@ const modelInit = {
  */
 export class DatabaseSMM {
   sequelize!: Sequelize;
-  public readonly models!: {[ K in keyof typeof modelInit] : ReturnType<typeof modelInit[K]>}
+  public models!: { -readonly [ K in keyof typeof modelInit] : ReturnType<typeof modelInit[K]>}
 
   constructor() {
     this.inititalizeDatabase();
@@ -44,8 +47,21 @@ export class DatabaseSMM {
   }
 
   initializeModel(){
-    for(const modelInitial in modelInit){
-      this.models[modelInitial as keyof typeof modelInit] = modelInit[ modelInitial as keyof typeof modelInit](this.sequelize);
+
+    // # TODO:
+    // - use propper way to handle this 😤
+
+    // # UPDATE
+    // - typescript unable to handle for in loop to lookup the key type
+    // - so i will use other way to loop instead  
+
+    // for(const modelInitial in modelInit){
+    //   this.models[modelInitial] = modelInit[modelInitial](this.sequelize);
+    // }
+
+    for(const [key, val] of Object.entries(modelInit)){
+      // ugh, it's just....
+      this.models[key as keyof typeof modelInit] = val(this.sequelize) as any;
     }
   }
 }

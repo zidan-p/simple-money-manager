@@ -42,10 +42,16 @@ export class UpdateCategoryByIdUseCase implements BaseUseCase<UpdateCategoryById
         this.changes.addChange(categoryOrNull.updateDescription(request.description!));
 
       if(GuardBoolean.has("iconId", request)){
-        const fileOrNull = await this.categoryFileRepo.getFileById(request.iconId!);
-        if(fileOrNull === null)
-          return Result.fail<Category>("couldn't find file with id = " + request.iconId);
-        this.changes.addChange(categoryOrNull.updateIcon(fileOrNull));
+        const newFileOrNull = await this.categoryFileRepo.getFileById(request.iconId!);
+        if(newFileOrNull === null)
+          return Result.fail<Category>("couldn't find new file with id = " + request.iconId);
+        
+        const oldFileOrNull = await this.categoryFileRepo.getFileById(categoryOrNull.icon.fileId);
+        if(oldFileOrNull === null)
+          return Result.fail<Category>("Couldn't find new file with id = " + categoryOrNull.icon.fileId);
+        
+        await this.categoryFileRepo.removeFileById(oldFileOrNull.fileId);
+        this.changes.addChange(categoryOrNull.updateIcon(newFileOrNull));
       }
 
       // save

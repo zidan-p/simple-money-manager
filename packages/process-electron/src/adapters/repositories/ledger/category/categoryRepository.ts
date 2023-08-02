@@ -125,7 +125,7 @@ export class CategoryRepository implements ICategoryRepository{
 
       const categoryUpdated : CategoryDto = await this.categoryModel.save(savedData);
 
-      // WARNING: this is wild card hack. i forget to defined return value as optional between Category and null
+      // WARNING: this is wild card hack. i forget to define return value as optional between Category and null
       return CategoryMap.toDomain(categoryUpdated).getValue();
 
     } catch (error) {

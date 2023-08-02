@@ -5,6 +5,7 @@ import { Result } from "domain/shared/logic/Result";
 import { WatchedList } from "domain/shared/base/WacthedList";
 import { Ledger } from "domain/ledger/ledger";
 import { CategoryFileDto, CategoryFileMap } from "./CategoryFileDto";
+import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
 
 
 
@@ -14,7 +15,9 @@ export type CategoryDto = {
   name: string;
   description: string;
   icon: CategoryFileDto;
-  ledgers? : LedgerDto[] | [];
+  ledgers? : {
+    currentIte : LedgerDto[] | []
+  };
 }
 
 /**
@@ -41,7 +44,7 @@ export class CategoryMap extends Mapper<Category>{
       icon: iconOrError.getValue(),
       name: raw.name,
       ledgers: ledgersWatchedList
-    })
+    }, new UniqueEntityID(raw.categoryId))
 
     if(categoryOrError.isFailure) console.log(categoryOrError.errorValue());
 

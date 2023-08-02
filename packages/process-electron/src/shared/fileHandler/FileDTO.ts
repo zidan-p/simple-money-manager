@@ -8,7 +8,6 @@ export type FileDto = {
   fileName: string; // the file name that creted
   size: number; // in bytes
   extension: string;
-
   // content: ArrayBuffer;
 
   // maybe it's better to use callback for grabing file
