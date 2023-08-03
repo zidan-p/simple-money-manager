@@ -3,32 +3,60 @@ import { Table, Column, AllowNull, ForeignKey, BelongsTo } from "sequelize-types
 import { Category } from "./CategoryDB.model";
 
 interface LedgerAttributes {
-  // id: number; // just let sequelize handle it
-  amount: number;
-  type: "income" | "expense";
-  description: string;
-  date: Date;
+  id          : string; 
+  categoryId  : string;
+  amount      : number;
+  type        : "income" | "expense";
+  description : string;
+  date        : Date;
 }
 
 
 // # Model<OutputType, InputType>
 export class Ledger extends Model<LedgerAttributes>{
-  amount!: number;
-  type!: "income" | "expense";
-  description!: string;
-  date!: Date;
+  declare id    : string;
+  categoryId!   : string;
+  amount!       : number;
+  type!         : "income" | "expense";
+  description!  : string;
+  date!         : Date;
 }
 
 
 export default (sequelize: Sequelize) : ModelStatic<Ledger> => {
   // # the "Model" interface didnt work with this return value.
   // # i just let it to be in "sequelize" onbject, not in my object
+  Ledger.belongsTo(Category, {
+    foreignKey: "categoryId",
+    as        : "Category"
+  });
   return Ledger.init({
-    // # NOTE: because it's already handle by equelize, i didn't use another name for primary key
-    amount: DataTypes.BIGINT,
-    type: DataTypes.ENUM("income", "expense"),
-    description: DataTypes.TEXT("medium"),
-    date: DataTypes.TIME
+    id: {
+      allowNull : false,
+      type      : DataTypes.UUID
+    },
+    categoryId : {
+      type      : DataTypes.UUID,
+      references: {
+        model: Category
+      } 
+    },
+    amount  : {
+      allowNull : false,
+      type      : DataTypes.BIGINT
+    },
+    type:{
+      allowNull : false,
+      type      : DataTypes.ENUM("income", "expense")
+    },
+    description: {
+      allowNull : true,
+      type      :DataTypes.TEXT("medium")
+    },
+    date:{
+      allowNull : false,
+      type      : DataTypes.TIME
+    }
   }, {
     sequelize
   })

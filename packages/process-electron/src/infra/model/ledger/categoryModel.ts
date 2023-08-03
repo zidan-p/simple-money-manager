@@ -61,7 +61,7 @@ export class CategoryModel implements ICategoryModel{
       baseQuery.where[Op.or] = ids.map(id => ({id}));
 
       const result = await this.database.models.Category.findAll(baseQuery);
-      const pendingResult= result.map(async (res) => {
+      const pendingResult = result.map(async (res) => {
         const categoryFileDto = await this.categoryFileProvider.getFileById(res.icon);
         if(categoryFileDto === null)
           throw new Error(`icon with id = ${res.icon} not found for catgoryid = ${res.id}`);
@@ -74,7 +74,7 @@ export class CategoryModel implements ICategoryModel{
         }
       });
 
-      const parsedResult =await Promise.all(pendingResult);
+      const parsedResult = await Promise.all(pendingResult);
       return parsedResult;
     } catch (error) {
       console.error(error);

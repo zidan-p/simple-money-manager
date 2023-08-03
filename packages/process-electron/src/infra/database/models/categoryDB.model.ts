@@ -22,11 +22,12 @@ export class Category extends Model<CategoryAttributes>{
 export default (sequelize: Sequelize) : ModelStatic<Category> => {
   // # the "Model" interface didnt work with this return value.
   // # i just let it to be in "sequelize" onbject, not in my object
+  Category.hasMany(Ledger)
   return Category.init({
     // # NOTE: because it's already handle by equelize, i didn't use another name for primary key
     id  : {
       allowNull : false,
-      type      : DataTypes.UUIDV4
+      type      : DataTypes.UUID
     },
     name: {
       allowNull : false,
