@@ -25,7 +25,7 @@ export class GuardBoolean {
     return array.includes(arrayValue);
   }
 
-  public static isNullOrUndefined (argument: any): argument is NonNullable<typeof argument> {
+  public static isNullOrUndefined (argument: any): argument is (null | undefined) {
     if (argument === null || argument === undefined) {
       return true
     } else {

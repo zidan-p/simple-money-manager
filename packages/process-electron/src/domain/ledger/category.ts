@@ -71,6 +71,7 @@ export class Category extends Entity<CategoryProps> {
     // # just for my understanding, i will let it be.
 
     // # update: just use some recent data, let usecase / repo that handle it
+    ledger.updateCategory(this);
     this.props.ledgers?.addNewItems(ledger);
   }
 

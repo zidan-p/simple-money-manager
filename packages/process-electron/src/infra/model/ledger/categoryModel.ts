@@ -6,6 +6,7 @@ import { Category } from "infra/database/models/CategoryDB.model";
 import { CategoryFileProvider } from "infra/provider/ledger/CategoryFileProvider";
 import { Guard } from "domain/shared/logic/Guard";
 import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
+import { LedgerModel } from "./ledgerModel";
 
 type CategoryBaseParam = {
   where: object,
@@ -13,11 +14,12 @@ type CategoryBaseParam = {
   offset: number
 }
 
-class CategoryModel implements ICategoryModel{
+export class CategoryModel implements ICategoryModel{
 
   constructor(
     private readonly database: DatabaseSMM,
-    private readonly categoryFileProvider: CategoryFileProvider
+    private readonly categoryFileProvider: CategoryFileProvider,
+    private readonly LedgerModelDatabase: LedgerModel
   ){}
 
   baseQuery(
@@ -38,7 +40,8 @@ class CategoryModel implements ICategoryModel{
       if(result === null) return null;
 
       const iconOrNull = await this.categoryFileProvider.getFileById(result?.icon!);
-      if(iconOrNull === null) throw new Error(`icon with id = ${result?.icon!} not found for catgoryid = ${id}`);
+      if(iconOrNull === null) throw new Error
+        (`icon with id = ${result?.icon!} not found for catgoryid = ${id}`);
 
       return {
         categoryId  : result?.id!,
@@ -93,7 +96,8 @@ class CategoryModel implements ICategoryModel{
       if(categoryInstance === null) return null;
 
       const iconOrNull = await this.categoryFileProvider.getFileById(categoryInstance?.icon!);
-      if(iconOrNull === null) throw new Error(`icon with id = ${categoryInstance?.icon!} not found for catgoryid = ${id}`);
+      if(iconOrNull === null) throw new Error
+        (`icon with id = ${categoryInstance?.icon!} not found for catgoryid = ${id}`);
 
       const categoryDto = {
         categoryId  : categoryInstance?.id!,
@@ -161,8 +165,21 @@ class CategoryModel implements ICategoryModel{
     categoryInstance.icon = data.icon.fieldName + "/" + data.icon.fileName;
     categoryInstance.name = data.name;
 
-    if(!GuardBoolean.isNullOrUndefined(data.ledgers?.length)){
+    await categoryInstance.save();
+
+    // handle if there are association with ledger that edited
+    if(!GuardBoolean.isNullOrUndefined(data.ledgers)){
       // i assume if there are any ledger
+      // NOTE: if the ledger is new, it will created in database
+      // but if it already present, it just change its category
+      if(!GuardBoolean.isNullOrUndefined(data.ledgers.addedItems))
+        data.ledgers.addedItems.forEach(async (l) => await this.LedgerModelDatabase.save(l));
+      
+      // WARNING!!: it will delete ledger from database
+      if(!GuardBoolean.isNullOrUndefined(data.ledgers.removedItems))
+        await this.LedgerModelDatabase.removeByIds(
+          data.ledgers.removedItems.map(l => l.ledgerId.toString())
+        );
     }
   }
 
