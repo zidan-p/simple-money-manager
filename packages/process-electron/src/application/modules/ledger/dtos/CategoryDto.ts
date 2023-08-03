@@ -74,10 +74,17 @@ export class CategoryMap extends Mapper<Category>{
   public static toDTO(category: Category): CategoryDto{
 
     const containerWactedListDto : WatchedListDto<LedgerDto>= {};
-    if(!GuardBoolean.isNullOrUndefined(category.watchedLedgers)){
-      const watched = category.watchedLedgers
-      if(!GuardBoolean.isNullOrUndefined())
+
+    if(!GuardBoolean.isNullOrUndefined(category.getWatchedLedgers().newItems())){
+      containerWactedListDto.addedItems = category.getWatchedLedgers().newItems().map(l => LedgerMap.toDTO(l));
     }
+    if(!GuardBoolean.isNullOrUndefined(category.getWatchedLedgers().currentItems())){
+      containerWactedListDto.currentItems = category.getWatchedLedgers().currentItems().map(l => LedgerMap.toDTO(l));
+    }
+    if(!GuardBoolean.isNullOrUndefined(category.getWatchedLedgers().removedItems())){
+      containerWactedListDto.removedItems = category.getWatchedLedgers().removedItems().map(l => LedgerMap.toDTO(l));
+    }
+
 
 
     return{
@@ -85,7 +92,7 @@ export class CategoryMap extends Mapper<Category>{
       description: category.description,
       icon: category.icon,
       name: category.name,
-      ledgers: category.ledgers.map(l => LedgerMap.toDTO(l))
+      ledgers: containerWactedListDto
     }
   }
 }

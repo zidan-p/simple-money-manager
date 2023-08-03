@@ -33,7 +33,7 @@ export class Category extends Entity<CategoryProps> {
   get ledgers(): Ledger[] {return this.props.ledgers?.currentItems() ?? []}
 
   // because object is by reference so i think it alright if i return the wated lis
-  get watchedLedgers(): WatchedList<Ledger> { return this.props.ledgers ?? new WatchedList<Ledger>()}
+  getWatchedLedgers(): WatchedList<Ledger> { return this.props.ledgers ?? new WatchedList<Ledger>()}
 
   // ## updater
 

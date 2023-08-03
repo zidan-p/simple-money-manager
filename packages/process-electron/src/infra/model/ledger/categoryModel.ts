@@ -20,15 +20,11 @@ class CategoryModel implements ICategoryModel{
     private readonly categoryFileProvider: CategoryFileProvider
   ){}
 
-  baseQuery({
-    where,
-    limit,
-    offset
-  } : CategoryBaseParam = {
-    where : {},
-    limit : 15,
-    offset : 0
-  }): any{
+  baseQuery(
+    {where,limit,offset} : 
+    CategoryBaseParam = 
+    {where : {}, limit : 15, offset : 0}
+    ): any{
     return {
       where: where as WhereOptions,
       limit: limit,
@@ -166,7 +162,7 @@ class CategoryModel implements ICategoryModel{
     categoryInstance.name = data.name;
 
     if(!GuardBoolean.isNullOrUndefined(data.ledgers?.length)){
-      // i assume if there are any ledger then it is
+      // i assume if there are any ledger
     }
   }
 
