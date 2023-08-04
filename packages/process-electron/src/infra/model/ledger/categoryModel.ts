@@ -98,6 +98,8 @@ export class CategoryModel implements ICategoryModel{
       const iconOrNull = await this.categoryFileProvider.getFileById(categoryInstance?.icon!);
       if(iconOrNull === null) throw new Error
         (`icon with id = ${categoryInstance?.icon!} not found for catgoryid = ${id}`);
+      
+      await this.categoryFileProvider.removeFileById(categoryInstance?.icon!);
 
       const categoryDto = {
         categoryId  : categoryInstance?.id!,
@@ -124,7 +126,8 @@ export class CategoryModel implements ICategoryModel{
         const categoryFileDto = await this.categoryFileProvider.getFileById(res.icon);
         if(categoryFileDto === null)
           throw new Error(`icon with id = ${res.icon} not found for catgoryid = ${res.id}`);
-        
+
+        await this.categoryFileProvider.removeFileById(res.icon);
         return {
           categoryId  : res.id!,
           description : res.description!,
