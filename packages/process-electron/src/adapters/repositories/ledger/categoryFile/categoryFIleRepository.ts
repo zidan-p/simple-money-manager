@@ -6,7 +6,7 @@ import { IFileService } from "shared/fileHandler/IFileService";
 
 
 // it just another name for file services
-class CategoryFileRepository implements ICategoryFileRepository{
+export class CategoryFileRepository implements ICategoryFileRepository{
 
   constructor(
     private fileService : IFileService<CategoryFile>

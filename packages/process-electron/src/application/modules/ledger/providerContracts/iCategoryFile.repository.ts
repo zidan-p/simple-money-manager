@@ -7,5 +7,5 @@ import { IFileService } from "shared/fileHandler/IFileService";
 
 
 export interface ICategoryFileRepository extends IFileService<CategoryFile>{
-  readonly fieldName: "category/icon";
+   fieldName: "category/icon";
 };

@@ -7,6 +7,7 @@ import { CategoryFileProvider } from "infra/provider/ledger/CategoryFileProvider
 import { Guard } from "domain/shared/logic/Guard";
 import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
 import { LedgerModel } from "./ledgerModel";
+import { LedgerDto } from "application/modules/ledger/dtos/LedgerDto";
 
 type CategoryBaseParam = {
   where: object,
@@ -18,8 +19,7 @@ export class CategoryModel implements ICategoryModel{
 
   constructor(
     private readonly database: DatabaseSMM,
-    private readonly categoryFileProvider: CategoryFileProvider,
-    private readonly LedgerModelDatabase: LedgerModel
+    private readonly categoryFileProvider: CategoryFileProvider
   ){}
 
   baseQuery(
@@ -148,6 +148,44 @@ export class CategoryModel implements ICategoryModel{
     }
   }
 
+  /**
+   * 
+   * Damn, i,, just, sigh...
+   * i don't know how to do it. to cross depent between ledger and category.
+   * at first i think it will be a great idea if when category model can access some ldeger model method vice versa.
+   * so i build entiry model without knowing depends each other.
+   * now it i realize it imposible, how can the factory look like if you imagine. it's so ridiculous.
+   * 
+   * so here i am. hopelessly do the dirty work as long it can build 
+   * @param data 
+   * @returns 
+   */
+  async saveLedger(data: LedgerDto) {
+    const ledgerInstance = await this.database.models.Ledger.findByPk(data.ledgerId);
+    if(ledgerInstance === null){
+      const ledger = this.database.models.Ledger.build({
+        amount      : data.amount,
+        description : data.description,
+        id          : data.ledgerId.toString(),
+        type        : data.type,
+        date        : data.date ? new Date(data.date) : new Date(),
+        categoryId  : data.category.categoryId.toString()
+      })
+    
+      await ledger.save();
+      return;
+    }
+
+    ledgerInstance.amount       = data.amount;
+    ledgerInstance.description  = data.description;
+    ledgerInstance.type         = data.type;
+    ledgerInstance.date         = data.date ? new Date(data.date) : new Date();
+    ledgerInstance.categoryId   = data.category.categoryId.toString();
+
+    await ledgerInstance.save();
+    return;
+  }
+
   /** @throws {Error} */
   async save(data: CategoryDto) {
     const categoryInstance = await this.database.models.Category.findByPk(data.categoryId);
@@ -176,13 +214,15 @@ export class CategoryModel implements ICategoryModel{
       // NOTE: if the ledger is new, it will created in database
       // but if it already present, it just change its category
       if(!GuardBoolean.isNullOrUndefined(data.ledgers.addedItems))
-        data.ledgers.addedItems.forEach(async (l) => await this.LedgerModelDatabase.save(l));
+        data.ledgers.addedItems.forEach(async (l) => await this.saveLedger(l));
       
       // WARNING!!: it will delete ledger from database
-      if(!GuardBoolean.isNullOrUndefined(data.ledgers.removedItems))
-        await this.LedgerModelDatabase.removeByIds(
-          data.ledgers.removedItems.map(l => l.ledgerId.toString())
-        );
+      if(!GuardBoolean.isNullOrUndefined(data.ledgers.removedItems)){
+        const baseQuery = this.baseQuery();
+        baseQuery.where[Op.or] = data.ledgers.removedItems.map(l => l.ledgerId);
+
+        await this.database.models.Ledger.destroy(baseQuery);
+      }
     }
   }
 

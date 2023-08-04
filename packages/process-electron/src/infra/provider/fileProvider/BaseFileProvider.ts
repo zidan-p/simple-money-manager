@@ -5,14 +5,16 @@ import { FileDto } from "shared/fileHandler/FileDTO";
 import { UniqueEntityID } from "domain/shared/base/UniqueEntityID";
 import { IFileProvider } from "shared/fileHandler/IFileProvider";
 
-export abstract class BaseFileProvider implements IFileProvider<FileDto>{
+export class BaseFileProvider implements IFileProvider<FileDto>{
 
   // # Override this
   public field = "";
 
   readonly store = path.resolve(__dirname + "/src/infra/database/storage");
 
-  
+  constructor(field: string){
+    this.field = field;
+  }
   
   async getFileById(fileId: string): Promise<FileDto | null> {
     try {
