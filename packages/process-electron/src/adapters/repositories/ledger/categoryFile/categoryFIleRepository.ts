@@ -1,6 +1,9 @@
+import { CategoryFileDto, CategoryFileMap } from "application/modules/ledger/dtos/CategoryFileDto";
 import { ICategoryFileRepository } from "application/modules/ledger/providerContracts/iCategoryFile.repository";
 import { CategoryFile } from "domain/ledger/categoryFile";
+import { Result } from "domain/shared/logic/Result";
 import { FileDto } from "shared/fileHandler/FileDTO";
+import { IFileProvider } from "shared/fileHandler/IFileProvider";
 import { IFileService } from "shared/fileHandler/IFileService";
 
 
@@ -9,31 +12,103 @@ import { IFileService } from "shared/fileHandler/IFileService";
 export class CategoryFileRepository implements ICategoryFileRepository{
 
   constructor(
-    private fileService : IFileService<CategoryFile>
+    private fileService : IFileProvider<CategoryFileDto>
   ){}
 
   public readonly fieldName = "category/icon";
 
-  getFileById(fileId: string): Promise<CategoryFile | null> {
-    return this.fileService.getFileById(fileId);
+  async getFileById(fileId: string): Promise<CategoryFile | null> {
+    try {
+      const founded = await this.fileService.getFileById(fileId);
+      if(founded === null)
+        return null;
+      const builded =  CategoryFileMap.toDomain(founded);
+      if(builded.isFailure)
+        throw builded.errorValue();
+
+      return builded.getValue();
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
-  getFilesByIds(fileIds: string[]): Promise<CategoryFile[] | null> {
-    return this.fileService.getFilesByIds(fileIds);
+  async getFilesByIds(fileIds: string[]): Promise<CategoryFile[] | null> {
+    try {
+      const founded = await this.fileService.getFilesByIds(fileIds);
+      if(founded === null)
+        return null;
+      
+      const builded = founded.map(found => CategoryFileMap.toDomain(found));
+      const combinedResult = Result.combine(builded);
+      if(combinedResult.isFailure)
+        return null;
+
+      return builded.map(build => build.getValue());
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
-  removeFileById(fileId: string): Promise<CategoryFile | null> {
-    return this.fileService.removeFileById(fileId);
+  async removeFileById(fileId: string): Promise<CategoryFile | null> {
+    try {
+      const founded = await this.fileService.removeFileById(fileId);
+      if(founded === null)
+        return null;
+      const builded =  CategoryFileMap.toDomain(founded);
+      if(builded.isFailure)
+        throw builded.errorValue();
+
+      return builded.getValue();
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
-  removeFilesByIds(fileIds: string[]): Promise<CategoryFile[] | null> {
-    return this.fileService.removeFilesByIds(fileIds);
+  async removeFilesByIds(fileIds: string[]): Promise<CategoryFile[] | null> {
+    try {
+      const founded = await this.fileService.removeFilesByIds(fileIds);
+      if(founded === null)
+        return null;
+      
+      const builded = founded.map(found => CategoryFileMap.toDomain(found));
+      const combinedResult = Result.combine(builded);
+      if(combinedResult.isFailure)
+        return null;
+
+      return builded.map(build => build.getValue());
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
   exists(file: string): boolean {
-    return this.fileService.exists(file);
+    try {
+      return this.fileService.exists(file);
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
   async existsPromise(file: string): Promise<boolean> {
-    return await this.fileService.existsPromise(file)
+    try {
+      return await this.fileService.existsPromise(file)
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
-  save<TFileDto extends FileDto>(file: any): Promise<TFileDto> {
-    throw new Error("Method not implemented.");
+
+  /**@throws error */
+  async save<TFileDto extends FileDto>(fileDir: any): Promise<TFileDto | null> {
+    try {
+      const result =  await this.fileService.save(fileDir);
+      if(result === null)
+        return null;
+      return result as TFileDto;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
 
 }

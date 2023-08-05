@@ -23,5 +23,5 @@ export interface IFileService<TFileClass extends FileBase<any>> {
   existsPromise(file: string): Promise<boolean>;
 
   // save when in controller
-  save<TFileDto extends FileDto>(file: any): Promise<TFileDto>
+  save<TFileDto extends FileDto>(file: any): Promise<TFileDto | null>
 }
