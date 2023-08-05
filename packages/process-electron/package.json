@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx tsc && node .\\dist\\index.js",
+    "dev": "webpack --config webpack/webpack.js && node .\\dist\\bundle.js",
     "build:tsc": "tsc --build",
     "testing": "npx tsc && node .\\dist\\index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,6 +20,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
     "electron": "^24.1.2",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.3",
