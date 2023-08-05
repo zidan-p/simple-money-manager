@@ -4,6 +4,7 @@ import { DeleteLedgerByIdUseCase } from "application/modules/ledger/useCases/led
 import { DeleteCategoryByIdUseCase } from "application/modules/ledger/useCases/category/deleteCategory/deleteCategoryByIdUseCase";
 import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 import { DELETE_CATEGORY_BY_ID } from "../categoryChannelNames";
+import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
@@ -17,6 +18,7 @@ import { DELETE_CATEGORY_BY_ID } from "../categoryChannelNames";
 export class DeleteCategoryByIdController extends BaseIpcController{
 
   public readonly channelName = DELETE_CATEGORY_BY_ID;
+  public readonly channelType = CHANNEL_TYPE.INVOKABLE;
 
   constructor(
     private useCase: DeleteCategoryByIdUseCase

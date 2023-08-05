@@ -6,6 +6,7 @@ import { CategoryFileDto } from "application/modules/ledger/dtos/CategoryFileDto
 import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
 import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 import { UPDATE_CATEGORY_BY_ID } from "../categoryChannelNames";
+import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
@@ -20,6 +21,7 @@ import { UPDATE_CATEGORY_BY_ID } from "../categoryChannelNames";
 export class UpdateCategoryByIdController extends BaseIpcController{
 
   public readonly channelName = UPDATE_CATEGORY_BY_ID;
+  public readonly channelType = CHANNEL_TYPE.INVOKABLE;
 
   constructor(
     private fileAdapter : IFileService<CategoryFile>,
@@ -30,7 +32,7 @@ export class UpdateCategoryByIdController extends BaseIpcController{
 
   async executeImpl(request: any): Promise<any> {
     try {
-      let categoryFileDto : undefined | CategoryFileDto = undefined;
+      let categoryFileDto : null | undefined | CategoryFileDto = undefined;
 
       if(GuardBoolean.has("iconId", request))
         categoryFileDto = await this.fileAdapter.save<CategoryFileDto>(request.iconId);

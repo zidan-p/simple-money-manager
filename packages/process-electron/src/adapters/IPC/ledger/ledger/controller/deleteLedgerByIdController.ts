@@ -3,6 +3,7 @@ import { DeleteLedgerByIdUseCase, DeleteLedgerByIdUseCaseDTO } from "../ledgerCo
 import { DeleteCategoryByIdRequestDto } from "../../category/categoryContainer";
 import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
 import { DELETE_LEDGER_BY_ID } from "../ledgerChannelNames";
+import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
@@ -12,6 +13,7 @@ import { DELETE_LEDGER_BY_ID } from "../ledgerChannelNames";
 export class DeleteLedgerByIdController extends BaseIpcController{
 
   public readonly channelName = DELETE_LEDGER_BY_ID;
+  public readonly channelType = CHANNEL_TYPE.INVOKABLE;
 
   constructor(
     private useCase: DeleteLedgerByIdUseCase

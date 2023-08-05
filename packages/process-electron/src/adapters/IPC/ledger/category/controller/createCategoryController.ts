@@ -5,15 +5,18 @@ import { CreateCategoryRequestDTO, CreateCategoryUseCase } from "../categoryCont
 import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
 import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 import { CREATE_CATEGORY } from "../categoryChannelNames";
+import { IFileProvider } from "shared/fileHandler/IFileProvider";
+import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
 export class CreateCategoryController extends BaseIpcController{
 
   public readonly channelName = CREATE_CATEGORY;
+  public readonly channelType = CHANNEL_TYPE.INVOKABLE;
 
   constructor(
-    private fileAdapter: IFileService<CategoryFile>,
+    private fileAdapter: IFileProvider<CategoryFileDto>,
     private UseCase: CreateCategoryUseCase
   ){
     super();
@@ -24,7 +27,7 @@ export class CreateCategoryController extends BaseIpcController{
       // mmm, why should i return the file dto? 🤔
       // when i using this, the file is already saved somewhere in this project dir.
       // so, with this file adapter, it just how to get the file meta data to process here
-      const categoryFileDto: CategoryFileDto  = await this.fileAdapter.save<CategoryFileDto>(req.categoryIcon);
+      const categoryFileDto  = await this.fileAdapter.save(req.categoryIcon);
   
       const dto: CreateCategoryRequestDTO = {
         description: req.description,

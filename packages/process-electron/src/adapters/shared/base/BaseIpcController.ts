@@ -7,7 +7,8 @@
 
 export abstract class BaseIpcController{
   
-
+  abstract readonly channelName : string;
+  abstract readonly channelType : string;
   abstract executeImpl(request: any): Promise<any>;
 
   ok(value: any){

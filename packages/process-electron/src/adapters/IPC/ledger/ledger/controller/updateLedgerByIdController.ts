@@ -3,24 +3,14 @@ import { UpdateCategoryByIdUseCase } from "../../category/categoryContainer";
 import { UpdateLedgerByIdDTO, UpdateLedgerByIdUseCase } from "../ledgerContainer";
 import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
 import { UPDATE_LEDGER_BY_ID } from "../ledgerChannelNames";
-
-
-
-
-
-
-
-
-
-
-
-
+import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
 export class UpdateLedgerByIdController extends BaseIpcController{
 
   public readonly channelName = UPDATE_LEDGER_BY_ID;
+  public readonly channelType = CHANNEL_TYPE.INVOKABLE;
 
   constructor(
     private useCase: UpdateLedgerByIdUseCase

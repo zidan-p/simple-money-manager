@@ -4,7 +4,7 @@ import { BrowserWindow, app } from "electron";
 
 
 
-export class appWindowWrapper{
+export class AppWindowWrapper{
   private mainWindow!: BrowserWindow;
 
   public init() {
@@ -13,8 +13,6 @@ export class appWindowWrapper{
     app.on('activate', this.onActivate);
   
   }
-
-
 
   private onWindowAllClosed() {
     if (process.platform !== 'darwin') {
