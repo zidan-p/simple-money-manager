@@ -18,7 +18,7 @@ import { UPDATE_LEDGER_BY_ID } from "../ledgerChannelNames";
 
 
 
-export class UpdateLedgerById extends BaseIpcController{
+export class UpdateLedgerByIdController extends BaseIpcController{
 
   public readonly channelName = UPDATE_LEDGER_BY_ID;
 

@@ -5,6 +5,7 @@ import { CategoryFile } from "domain/ledger/categoryFile";
 import { CategoryRepository } from "./category/categoryRepository";
 import { LedgerRepository } from "./ledger/ledgerRepository";
 import { CategoryFileRepository } from "./categoryFile/categoryFIleRepository";
+import { IFileProvider } from "shared/fileHandler/IFileProvider";
 
 
 
@@ -16,14 +17,14 @@ import { CategoryFileRepository } from "./categoryFile/categoryFIleRepository";
 export function ledgerRepositoryFactory(
   model : 
   {
-    categoryModel : ICategoryModel,
-    ledgerModel   : ILedgerModel,
-    fileService   : IFileService<CategoryFile>
+    categoryModel         : ICategoryModel,
+    ledgerModel           : ILedgerModel,
+    categoryFileProvider  : IFileProvider<CategoryFile>
   }
 ){
   const categoryRepository      = new CategoryRepository(model.categoryModel);
   const ledgerRepository        = new LedgerRepository(model.ledgerModel);
-  const categoryFileRepository  = new CategoryFileRepository(model.fileService);
+  const categoryFileRepository  = new CategoryFileRepository(model.categoryFileProvider);
 
   return{
     categoryRepository,

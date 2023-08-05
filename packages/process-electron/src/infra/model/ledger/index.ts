@@ -1,13 +1,12 @@
 import { DatabaseSMM } from "infra/database";
-import { CategoryModel } from "infra/model/ledger/categoryModel";
-import { LedgerModel } from "infra/model/ledger/ledgerModel";
 import { BaseFileProvider } from "infra/provider/fileProvider/BaseFileProvider";
 import { CategoryFileProvider } from "infra/provider/ledger/CategoryFileProvider";
+import { CategoryModel } from "./categoryModel";
+import { LedgerModel } from "./ledgerModel";
 
 
 
-
-export function modelFactory(database: DatabaseSMM){
+export function ledgerModelFactory(database: DatabaseSMM){
   const categoryFileProvider = new CategoryFileProvider(
     new BaseFileProvider("category/icon")
   );
@@ -22,6 +21,9 @@ export function modelFactory(database: DatabaseSMM){
     categoryModel
   )
 
-  
-
+  return {
+    categoryFileProvider,
+    categoryModel,
+    ledgerModel
+  }
 }

@@ -22,8 +22,8 @@ export class UpdateCategoryByIdController extends BaseIpcController{
   public readonly channelName = UPDATE_CATEGORY_BY_ID;
 
   constructor(
-    private useCase: UpdateCategoryByIdUseCase,
-    private fileAdapter : IFileService<CategoryFile>
+    private fileAdapter : IFileService<CategoryFile>,
+    private useCase: UpdateCategoryByIdUseCase
   ){
     super();
   }
