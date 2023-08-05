@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "electron .",
+    "dev": "npx tsc && node .\\dist\\index.js",
     "build:tsc": "tsc --build",
     "testing": "npx tsc && node .\\dist\\index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "electron": "^24.1.2",
-    "typescript": "^5.1.3"
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.3",
+    "webpack": "^5.88.2"
   }
 }

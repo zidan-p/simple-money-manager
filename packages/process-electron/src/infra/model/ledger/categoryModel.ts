@@ -1,10 +1,8 @@
 import { ICategoryModel } from "adapters/repositories/ledger/category/ICategoryModel";
 import { CategoryDto } from "application/modules/ledger/dtos/CategoryDto";
 import { DatabaseSMM } from "infra/database";
-import { FindOptions, Model, Op, Sequelize, WhereOptions } from "sequelize";
-import { Category } from "infra/database/models/CategoryDB.model";
+import { Op, Sequelize, WhereOptions } from "sequelize";
 import { CategoryFileProvider } from "infra/provider/ledger/CategoryFileProvider";
-import { Guard } from "domain/shared/logic/Guard";
 import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
 import { LedgerModel } from "./ledgerModel";
 import { LedgerDto } from "application/modules/ledger/dtos/LedgerDto";
