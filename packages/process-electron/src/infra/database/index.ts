@@ -2,7 +2,7 @@ import { Sequelize, ModelStatic, Model } from "sequelize";
 import * as path from "node:path";
 import categoryInit from "./models/CategoryDB.model";
 import ledgerInit from "./models/LedgerDB.model";
-
+import sqlite3 from "sqlite3";
 
 // # TODO:
 // - automate it with fs
@@ -40,6 +40,10 @@ export class DatabaseSMM {
     // # change this to depends on config
     this.sequelize = new Sequelize({
       dialect: "sqlite",
+
+      // i think it will make sqlite work
+      dialectModule : sqlite3,
+
       //NOTE: if you can, change this to more apropriate import resolving;
       // or maybe move it to config file for this database configfile
       storage: "./src/infra/database/storages/db/smm.sqlite"

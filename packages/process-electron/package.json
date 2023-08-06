@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node .\\dist\\bundle.js",
     "dev": "webpack --config webpack/webpack.js && node .\\dist\\bundle.js",
     "build:tsc": "tsc --build",
     "testing": "npx tsc && node .\\dist\\index.js",
