@@ -46,5 +46,8 @@ module.exports = {
   // make suru it doesn't bundle node_modules.
   // i want this app to only bundle the code
   externalsPresets: { node: true }, // in order to ignore built-in modules like path, fs, etc.
-  externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
+  externals: [
+    nodeExternals(), // in order to ignore all modules in node_modules folder
+    ...["pg", "tedious", "pg-hstore"] // dunno, wild hack to fix `Can't resolve 'pg-hstore'`
+  ]
 }
