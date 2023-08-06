@@ -32,7 +32,7 @@ export class AppChannelWrapper {
   }
 
   registerChannel(){
-    this.channels.forEach(channel => {
+    this.channels.forEach((channel: BaseIpcController) => {
       if(channel.channelType === CHANNEL_TYPE.INVOKABLE){
         this.handleInvokable(channel)
       }
