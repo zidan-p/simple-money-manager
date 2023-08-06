@@ -32,6 +32,7 @@ export default (sequelize: Sequelize) : ModelStatic<Ledger> => {
   });
   return Ledger.init({
     id: {
+      primaryKey: true,
       allowNull : false,
       type      : DataTypes.UUID
     },

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .\\dist\\bundle.js",
-    "dev": "webpack --config webpack/webpack.js && node .\\dist\\bundle.js",
+    "start": "electron .\\dist\\index.js",
+    "dev": "tsc --build && tsc-alias && electron .\\dist\\index.js",
     "build:tsc": "tsc --build",
     "testing": "npx tsc && node .\\dist\\index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,8 +26,17 @@
     "electron": "^24.1.2",
     "sqlite3": "^5.1.6",
     "ts-loader": "^9.4.4",
+    "tsc-alias": "^1.8.7",
     "typescript": "^5.1.3",
     "webpack": "^5.88.2",
     "webpack-node-externals": "^3.0.0"
+  },
+  "_moduleAliases": {
+    "adapters": "dist/adapters",
+    "application": "dist/application",
+    "domain": "dist/domain",
+    "infra": "dist/infra",
+    "shared": "dist/shared",
+    "utils": "dist/utils"
   }
 }

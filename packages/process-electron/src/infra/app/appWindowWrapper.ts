@@ -1,13 +1,14 @@
 import { BrowserWindow, app } from "electron";
-
+import electron from "electron";
 
 
 
 
 export class AppWindowWrapper{
-  private mainWindow!: BrowserWindow;
+  private mainWindow!:  BrowserWindow;
 
   public init() {
+
     app.on('ready', this.createWindow);
     app.on('window-all-closed', this.onWindowAllClosed);
     app.on('activate', this.onActivate);
@@ -37,6 +38,6 @@ export class AppWindowWrapper{
     });
 
     this.mainWindow.webContents.openDevTools();
-    this.mainWindow.loadFile('../../index.html');
+    this.mainWindow.loadFile('./../index.html');
   }
 }

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
+    "target": "ESNEXT" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
     "module": "commonjs" /*ESNext*/ /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
     "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */ /* Type declaration files to be included in compilation. */,
     "sourceMap": true,
@@ -17,6 +17,16 @@
     "rootDir": "./src",
     "baseUrl": "./src",
     "outDir": "./dist",
+
+    // ugh, just make it work
+    "paths": {
+      "adapters/*" : ["adapters/*"],
+      "application/*" : ["application/*"],
+      "domain/*" : ["domain/*"],
+      "infra/*" : ["infra/*"],
+      "shared/*" : ["shared/*"],
+      "utils/*" : ["utils/*"]
+    },
 
     // # NOTE: this config is only for sequelize-typescript
     "experimentalDecorators": true,

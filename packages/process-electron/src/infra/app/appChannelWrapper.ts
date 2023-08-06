@@ -17,9 +17,10 @@ export class AppChannelWrapper {
     this.database = new DatabaseSMM();
   }
   
-  init(){
+  async init(){
+    await this.database.initDatabase();
     this.initChannel();
-    this.registerChannel();
+    await this.registerChannel();
   }
 
   initChannel(){
@@ -40,9 +41,13 @@ export class AppChannelWrapper {
   }
 
   handleInvokable(channel: BaseIpcController){
-    ipcMain.handle("APP:" + channel.channelName, (event, ...arg)=>{
-      return channel.executeImpl(arg);
-    })
+    try {
+      ipcMain.handle("APP:" + channel.channelName, (_event, ...arg)=>{
+        return channel.executeImpl(arg);
+      })
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 }

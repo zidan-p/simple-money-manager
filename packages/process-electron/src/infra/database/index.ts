@@ -25,9 +25,12 @@ export class DatabaseSMM {
   public models!: { -readonly [ K in keyof typeof modelInit] : ReturnType<typeof modelInit[K]>}
 
   constructor() {
-    this.inititalizeDatabase();
-    this.initializeModel();
-    this.syncDatabase();
+  }
+
+  async initDatabase(){
+    await this.inititalizeDatabase();
+    await this.initializeModel();
+    await this.syncDatabase();
   }
 
   async syncDatabase(){
@@ -35,7 +38,7 @@ export class DatabaseSMM {
     console.log("database connected");
   }
 
-  inititalizeDatabase() {
+  async inititalizeDatabase() {
     console.log("starting db")
     // # change this to depends on config
     this.sequelize = new Sequelize({
@@ -50,7 +53,7 @@ export class DatabaseSMM {
     })
   }
 
-  initializeModel(){
+  async initializeModel(){
 
     // # TODO:
     // - use propper way to handle this 😤
