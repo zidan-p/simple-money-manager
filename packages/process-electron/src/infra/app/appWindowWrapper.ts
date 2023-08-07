@@ -12,7 +12,7 @@ export class AppWindowWrapper{
     app.on('ready', this.createWindow);
     app.on('window-all-closed', this.onWindowAllClosed);
     app.on('activate', this.onActivate);
-  
+    process.on('warning', e => console.warn(e.stack));
   }
 
   private onWindowAllClosed() {
@@ -37,7 +37,7 @@ export class AppWindowWrapper{
       }
     });
 
-    this.mainWindow.webContents.openDevTools();
+    // this.mainWindow.webContents.openDevTools();
     this.mainWindow.loadFile('./../index.html');
   }
 }

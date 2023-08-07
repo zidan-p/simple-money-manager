@@ -26,10 +26,6 @@ export class Ledger extends Model<LedgerAttributes>{
 export default (sequelize: Sequelize) : ModelStatic<Ledger> => {
   // # the "Model" interface didnt work with this return value.
   // # i just let it to be in "sequelize" onbject, not in my object
-  Ledger.belongsTo(Category, {
-    foreignKey: "categoryId",
-    as        : "Category"
-  });
   return Ledger.init({
     id: {
       primaryKey: true,

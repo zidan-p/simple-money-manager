@@ -3,6 +3,7 @@ import * as path from "node:path";
 import categoryInit from "./models/CategoryDB.model";
 import ledgerInit from "./models/LedgerDB.model";
 import sqlite3 from "sqlite3";
+import { associateModel } from "./setup/associateModel";
 
 // # TODO:
 // - automate it with fs
@@ -16,30 +17,42 @@ const modelInit = {
 
 type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 
+type ModelCollectionType = { -readonly [ K in keyof typeof modelInit] : ReturnType<typeof modelInit[K]>}
+
 /**
  * is it correct? i just curently learning about clean code. it is alright if i
  * use a single database as a base. maybe next time i will 
  */
 export class DatabaseSMM {
   sequelize!: Sequelize;
-  public models!: { -readonly [ K in keyof typeof modelInit] : ReturnType<typeof modelInit[K]>}
+  public models: ModelCollectionType = {} as ModelCollectionType
 
-  constructor() {
-  }
+  constructor() {}
 
   async initDatabase(){
-    await this.inititalizeDatabase();
-    await this.initializeModel();
-    await this.syncDatabase();
+    try {
+      console.log("starting db")
+      await this.inititalizeDatabase();
+      await this.initializeModel();
+      await this.associateModelDatabase();
+      await this.syncDatabase();
+      console.log("database connected");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async syncDatabase(){
-    this.sequelize.sync({alter:true});
-    console.log("database connected");
+    try {
+      await this.sequelize.sync({alter:true});
+    } catch (error) {
+      console.log("warnign in asycn database ------")
+      console.log(error);
+    }
   }
 
   async inititalizeDatabase() {
-    console.log("starting db")
+
     // # change this to depends on config
     this.sequelize = new Sequelize({
       dialect: "sqlite",
@@ -65,10 +78,13 @@ export class DatabaseSMM {
     // for(const modelInitial in modelInit){
     //   this.models[modelInitial] = modelInit[modelInitial](this.sequelize);
     // }
-
     for(const [key, val] of Object.entries(modelInit)){
       // ugh, it's just....
       this.models[key as keyof typeof modelInit] = val(this.sequelize) as any;
     }
+  }
+
+  async associateModelDatabase(){
+    associateModel(this);
   }
 }

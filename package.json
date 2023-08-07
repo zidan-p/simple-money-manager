@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start:electron" : "npm run start -w @simple-money-manager/process-electron",
     "dev:desktop-view": "npm run dev -w @simple-money-manager/desktop-view",
     "dev:electron": "npm run dev -w @simple-money-manager/process-electron",
     "dev:desktop": "npm run dev ",

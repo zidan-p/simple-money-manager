@@ -1,4 +1,5 @@
 import {Sequelize, Model, ModelStatic} from "sequelize";
+import { DatabaseSMM } from "..";
 
 
 
@@ -12,3 +13,15 @@ import {Sequelize, Model, ModelStatic} from "sequelize";
 // export default (sequelize: Sequelize) => {
 //     const {Ledger!, Category as ModelStatic} = sequelize.models
 // }
+
+export function associateModel(database: DatabaseSMM){
+  const Category = database.models.Category;
+  const Ledger = database.models.Ledger;
+
+  // one to many (Category - Ledger)
+  Category.hasMany(Ledger);
+  Ledger.belongsTo(Category, {
+    foreignKey: "categoryId",
+    as        : "Category"
+  });
+}
