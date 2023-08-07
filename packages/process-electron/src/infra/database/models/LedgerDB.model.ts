@@ -15,7 +15,7 @@ interface LedgerAttributes {
 // # Model<OutputType, InputType>
 export class Ledger extends Model<LedgerAttributes>{
   declare id    : string;
-  categoryId!   : string;
+  declare categoryId   : string;
   amount!       : number;
   type!         : "income" | "expense";
   description!  : string;
@@ -26,18 +26,24 @@ export class Ledger extends Model<LedgerAttributes>{
 export default (sequelize: Sequelize) : ModelStatic<Ledger> => {
   // # the "Model" interface didnt work with this return value.
   // # i just let it to be in "sequelize" onbject, not in my object
+
+  // i want to make category id is read by typescript but didn't make
+  // it trigger error when initialize model
+  // @ts-ignore
   return Ledger.init({
     id: {
       primaryKey: true,
       allowNull : false,
-      type      : DataTypes.UUID
-    },
-    categoryId : {
       type      : DataTypes.UUID,
-      references: {
-        model: Category
-      } 
+      defaultValue: DataTypes.UUIDV4
     },
+    // categoryId : {
+    //   type      : DataTypes.UUID,
+    //   references: {
+    //     model: Category,
+    //     key  : "id"
+    //   } 
+    // },
     amount  : {
       allowNull : false,
       type      : DataTypes.BIGINT

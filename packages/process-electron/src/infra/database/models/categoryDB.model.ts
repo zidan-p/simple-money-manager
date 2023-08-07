@@ -27,7 +27,8 @@ export default (sequelize: Sequelize) : ModelStatic<Category> => {
     id  : {
       primaryKey: true,
       allowNull : false,
-      type      : DataTypes.UUID
+      type      : DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
       allowNull : false,
