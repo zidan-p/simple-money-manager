@@ -9,7 +9,11 @@ import { IFileProvider } from "shared/fileHandler/IFileProvider";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 import { ICategoryFileInterceptor } from "../interceptor/categoryFileInterceptor";
 
-
+export type CreateCategoryControllerDto = {
+  description: string;
+  name: string;
+  categoryIcon : string;
+}
 
 export class CreateCategoryController extends BaseIpcController{
 
@@ -23,7 +27,7 @@ export class CreateCategoryController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(req: any): Promise<any>{
+  async executeImpl(req: CreateCategoryControllerDto): Promise<any>{
     try {
       // mmm, why should i return the file dto? 🤔
       // when i using this, the file is already saved somewhere in this project dir.
@@ -33,7 +37,7 @@ export class CreateCategoryController extends BaseIpcController{
       const dto: CreateCategoryRequestDTO = {
         description: req.description,
         name: req.name,
-        iconId: req.iconId
+        iconId: categoryFileDto.id()
       }
 
       const result = await this.UseCase.execute(dto);

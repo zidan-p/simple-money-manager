@@ -6,6 +6,9 @@ import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
+export type FindCategoryByIdControllerDto = {
+  categoryId: string;
+}
 
 
 
@@ -21,7 +24,7 @@ export class FindCategoryByIdController extends BaseIpcController{
     super()
   }
 
-  async executeImpl(request: any): Promise<any> {
+  async executeImpl(request: FindCategoryByIdControllerDto): Promise<any> {
     try {
       const dto : FindCategoryByIdRequestDto = {
         categoryId: request.categoryId

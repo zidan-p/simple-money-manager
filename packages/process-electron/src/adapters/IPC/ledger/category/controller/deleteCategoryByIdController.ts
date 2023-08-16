@@ -11,7 +11,9 @@ import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
-
+export type DeleteCategoryByIdControllerDto = {
+  categoryId: string;
+}
 
 
 
@@ -26,7 +28,7 @@ export class DeleteCategoryByIdController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(req: any): Promise<any>{
+  async executeImpl(req: DeleteCategoryByIdControllerDto): Promise<any>{
     try {
       const dto : DeleteCategoryByIdRequestDto = {
         categoryId: req.categoryId

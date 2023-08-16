@@ -10,6 +10,9 @@ export type FileDto = {
   extension: string;
   // content: ArrayBuffer;
 
+  // from fieldname/filename ex "ledger/icon/21JNJ29NJSJWNJEWE"
+  id?: () => string;
+
   // maybe it's better to use callback for grabing file
   getFile : ()=> Promise<Buffer>
 } 

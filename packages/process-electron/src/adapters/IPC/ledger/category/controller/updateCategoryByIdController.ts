@@ -13,10 +13,12 @@ import { ICategoryFileInterceptor } from "../interceptor/categoryFileInterceptor
 
 
 
-
-
-
-
+export type UpdateCategoryByIdControllerDto = {
+  categoryId : string;
+  description: string;
+  name: string;
+  categoryIcon : string;
+}
 
 
 export class UpdateCategoryByIdController extends BaseIpcController{
@@ -31,17 +33,17 @@ export class UpdateCategoryByIdController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(request: any): Promise<any> {
+  async executeImpl(request: UpdateCategoryByIdControllerDto): Promise<any> {
     try {
       let categoryFileDto : null | undefined | CategoryFileDto = undefined;
 
       if(GuardBoolean.has("iconId", request))
-        categoryFileDto = await this.fileAdapter.save(request.iconId);
+        categoryFileDto = await this.fileAdapter.save(request.categoryIcon);
       
       const dto: UpdateCategoryByIdRequestDto = {
         categoryId: request.categoryId,
         description: request.description,
-        iconId: request.iconId,
+        iconId: GuardBoolean.has("id",categoryFileDto) ? categoryFileDto.id() : undefined,
         name: request.name
       }
 

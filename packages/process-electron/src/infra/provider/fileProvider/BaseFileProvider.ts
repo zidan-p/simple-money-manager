@@ -103,6 +103,7 @@ export class BaseFileProvider implements IFileProvider<FileDto>{
         extension : fileExtension,
         fieldName : this.field,
         fileName  : fileName.toString(),
+        id        : () => this.field + "/" + fileName.toString(),
         size      : size,
         getFile   : getFile
       }
