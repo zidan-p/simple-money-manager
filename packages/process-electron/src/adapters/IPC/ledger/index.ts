@@ -9,6 +9,8 @@ import { DeleteLedgerByIdController } from "./ledger/controller/deleteLedgerById
 import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
 import { FindLedgerByIdController } from "./ledger/controller/findLedgerByIdController";
 import { UpdateLedgerByIdController } from "./ledger/controller/updateLedgerByIdController";
+import { IFileService } from "shared/fileHandler/IFileService";
+import { ICategoryFileInterceptor } from "./category/interceptor/categoryFileInterceptor";
 
 
 
@@ -23,11 +25,14 @@ export function ledgerControllerIpcFactory(
     categoryRepository      : ICategoryRepository,
     ledgerRepository        : ILedgerRepository,
     categoryFileRepository  : ICategoryFileRepository,
+  },
+  Interceptor : {
+    categoryFileInterceptor         : ICategoryFileInterceptor
   }
 ): BaseIpcController[]{
   return[
     new CreateCategoryController(
-      repository.categoryFileRepository, 
+      Interceptor.categoryFileInterceptor, 
       new CreateCategoryUseCase(
         repository.categoryRepository,
         repository.categoryFileRepository
@@ -45,7 +50,7 @@ export function ledgerControllerIpcFactory(
       )
     ),
     new UpdateCategoryByIdController(
-      repository.categoryFileRepository,
+      Interceptor.categoryFileInterceptor,
       new UpdateCategoryByIdUseCase(
         repository.categoryFileRepository,
         repository.categoryRepository

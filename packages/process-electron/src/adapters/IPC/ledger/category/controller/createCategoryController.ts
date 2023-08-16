@@ -7,6 +7,7 @@ import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 import { CREATE_CATEGORY } from "../categoryChannelNames";
 import { IFileProvider } from "shared/fileHandler/IFileProvider";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
+import { ICategoryFileInterceptor } from "../interceptor/categoryFileInterceptor";
 
 
 
@@ -16,7 +17,7 @@ export class CreateCategoryController extends BaseIpcController{
   public readonly channelType = CHANNEL_TYPE.INVOKABLE;
 
   constructor(
-    private fileAdapter: IFileProvider<CategoryFileDto>,
+    private fileAdapter: ICategoryFileInterceptor,
     private UseCase: CreateCategoryUseCase
   ){
     super();

@@ -25,3 +25,7 @@ export interface IFileService<TFileClass extends FileBase<any>> {
   // save when in controller
   save<TFileDto extends FileDto>(file: any): Promise<TFileDto | null>
 }
+
+// export interface IFileService<TFileDto extends FileDto>{
+//   save(file: any): Promise<TFileDto | null>;
+// }

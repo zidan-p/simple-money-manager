@@ -7,6 +7,7 @@ import { GuardBoolean } from "domain/shared/logic/GuardBoolean";
 import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 import { UPDATE_CATEGORY_BY_ID } from "../categoryChannelNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
+import { ICategoryFileInterceptor } from "../interceptor/categoryFileInterceptor";
 
 
 
@@ -24,7 +25,7 @@ export class UpdateCategoryByIdController extends BaseIpcController{
   public readonly channelType = CHANNEL_TYPE.INVOKABLE;
 
   constructor(
-    private fileAdapter : IFileService<CategoryFile>,
+    private fileAdapter : ICategoryFileInterceptor,
     private useCase: UpdateCategoryByIdUseCase
   ){
     super();
@@ -35,7 +36,7 @@ export class UpdateCategoryByIdController extends BaseIpcController{
       let categoryFileDto : null | undefined | CategoryFileDto = undefined;
 
       if(GuardBoolean.has("iconId", request))
-        categoryFileDto = await this.fileAdapter.save<CategoryFileDto>(request.iconId);
+        categoryFileDto = await this.fileAdapter.save(request.iconId);
       
       const dto: UpdateCategoryByIdRequestDto = {
         categoryId: request.categoryId,

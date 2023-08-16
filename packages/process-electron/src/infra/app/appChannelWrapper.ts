@@ -24,20 +24,44 @@ export class AppChannelWrapper {
   }
 
   initChannel(){
-    if(this.database === null || this.database === undefined)
-      return;
-    const models = ledgerModelFactory(this.database);
-    const repositories = ledgerRepositoryFactory(models);
-    const controller = ledgerControllerIpcFactory(repositories);
-    this.channels = controller;
+    try {
+      console.log(" :: starting initialize channel");
+      
+      if(this.database === null || this.database === undefined)
+        return;
+      const models = ledgerModelFactory(this.database);
+      const repositories = ledgerRepositoryFactory(models);
+  
+      // TODO : separate between repo and interceptor
+      const categoryFileInterceptor = repositories.categoryFileRepository;
+      const interceptor = {categoryFileInterceptor};
+  
+      const controller = ledgerControllerIpcFactory(repositories, interceptor);
+      this.channels = controller;
+
+      console.log(" :: finish initialize channel");
+    } catch (error) {
+      console.log(" :( channel initial error");
+      console.error(error);
+    }
   }
 
   registerChannel(){
-    this.channels.forEach((channel: BaseIpcController) => {
-      if(channel.channelType === CHANNEL_TYPE.INVOKABLE){
-        this.handleInvokable(channel)
-      }
-    })
+    try {
+      
+      console.log(" :: start registering channel");
+
+      this.channels.forEach((channel: BaseIpcController) => {
+        if(channel.channelType === CHANNEL_TYPE.INVOKABLE){
+          this.handleInvokable(channel)
+        }
+      })
+
+      console.log(" :: finish registering channel");
+    } catch (error) {
+      console.log(" :( channel registering error");
+      console.error(error);
+    }
   }
 
   handleInvokable(channel: BaseIpcController){

@@ -31,12 +31,12 @@ export class DatabaseSMM {
 
   async initDatabase(){
     try {
-      console.log("starting db")
+      console.log(" :: starting db")
       await this.inititalizeDatabase();
       await this.initializeModel();
       await this.associateModelDatabase();
       await this.syncDatabase();
-      console.log("database connected");
+      console.log(" :: database connected");
     } catch (error) {
       console.error(error);
     }
@@ -44,6 +44,7 @@ export class DatabaseSMM {
 
   async syncDatabase(){
     try {
+      console.log("sync database")
       await this.sequelize.sync({alter:true});
     } catch (error) {
       console.log("warnign in asycn database ------")
@@ -72,7 +73,7 @@ export class DatabaseSMM {
     // - use propper way to handle this 😤
 
     // # UPDATE
-    // - typescript unable to handle for in loop to lookup the key type
+    // - typescript (i) unable to handle for in loop to lookup the key type
     // - so i will use other way to loop instead  
 
     // for(const modelInitial in modelInit){

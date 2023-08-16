@@ -19,9 +19,10 @@ export function associateModel(database: DatabaseSMM){
   const Ledger = database.models.Ledger;
 
   // one to many (Category - Ledger)
-  Category.hasMany(Ledger);
-  Ledger.belongsTo(Category, {
-    foreignKey: "categoryId",
-    as        : "Category"
+  Category.hasMany(Ledger, {
+    foreignKey: "categoryId"
+  });
+  Ledger.belongsTo(Category,{
+    foreignKey: "categoryId"
   });
 }

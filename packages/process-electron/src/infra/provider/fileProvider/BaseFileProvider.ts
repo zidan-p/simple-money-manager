@@ -87,7 +87,7 @@ export class BaseFileProvider implements IFileProvider<FileDto>{
     return existsSync(filePath);
   }
 
-  /** @param {file} string a absolute path that will copy to this app storage */
+  /** @param {file} string an absolute path that will be copied to this app storage */
   async save(fileDir: string): Promise<FileDto | null> {
     try {
       const fileName = new UniqueEntityID();
