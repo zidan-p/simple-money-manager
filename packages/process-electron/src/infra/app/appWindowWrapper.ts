@@ -1,6 +1,6 @@
-import { BrowserWindow, app } from "electron";
+import { BrowserWindow, app, ipcMain } from "electron";
 import electron from "electron";
-
+import { actions } from "infra/actions";
 
 
 
@@ -9,6 +9,7 @@ export class AppWindowWrapper{
 
   public init() {
 
+    // core action, I think better placed here
     app.on('ready', this.createWindow);
     app.on('window-all-closed', this.onWindowAllClosed);
     app.on('activate', this.onActivate);
@@ -25,6 +26,12 @@ export class AppWindowWrapper{
     if (!this.mainWindow) {
       this.createWindow();
     }
+  }
+
+  private registerAction(){
+    actions.forEach(action => {
+      ipcMain.on( action.name, action.handler)
+    })
   }
 
   private createWindow() {

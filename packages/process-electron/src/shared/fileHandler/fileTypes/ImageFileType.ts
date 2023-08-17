@@ -2,7 +2,7 @@
 
 
 /**
- *  browser suported image file type
+ *  browser supported image file type
  */
 export const ImageExtensionTypes = [
   "jpg" , "jpeg" , "jfif" , "pjpeg" , "pjp" ,
