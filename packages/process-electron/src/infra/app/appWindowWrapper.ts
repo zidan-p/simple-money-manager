@@ -38,6 +38,7 @@ export class AppWindowWrapper{
     });
 
     // this.mainWindow.webContents.openDevTools();
-    this.mainWindow.loadFile('./../index.html');
+    // this.mainWindow.loadFile('./../index.html');
+    this.mainWindow.loadURL("http://localhost:3005")
   }
 }

@@ -10,6 +10,7 @@
     "dev:desktop-view": "npm run dev -w @simple-money-manager/desktop-view",
     "dev:electron": "npm run dev -w @simple-money-manager/process-electron",
     "dev:desktop": "npm run dev ",
+    "dev" : "run-p dev:desktop-view dev:electron",
     "build:view": "",
     "build:electron": ""
   },
