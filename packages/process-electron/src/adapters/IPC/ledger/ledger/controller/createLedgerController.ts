@@ -1,8 +1,9 @@
-import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
+import { BaseIpcController, FailController, SuccessController } from "adapters/shared/base/BaseIpcController";
 import { CreateLedgerUseCase, CreateLedgerUseCaseRequestDTO } from "../ledgerContainer";
 import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
 import { CREATE_LEDGER } from "../ledgerChannelNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
+import { CategoryDto } from "application/modules/ledger/dtos/CategoryDto";
 
 
 
@@ -22,7 +23,7 @@ export class CreateLedgerController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(request: any): Promise<any> {
+  async executeImpl(request: CreateLedgerControllerDto): Promise<SuccessController<CategoryDto> | FailController<CategoryDto> > {
     try {
       const dto : CreateLedgerUseCaseRequestDTO = {
         amount: request.amount,

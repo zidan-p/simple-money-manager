@@ -1,9 +1,10 @@
-import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
+import { BaseIpcController, FailController, SuccessController } from "adapters/shared/base/BaseIpcController";
 import { UpdateCategoryByIdUseCase } from "../../category/categoryContainer";
 import { UpdateLedgerByIdDTO, UpdateLedgerByIdUseCase } from "../ledgerContainer";
 import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
 import { UPDATE_LEDGER_BY_ID } from "../ledgerChannelNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
+import { CategoryDto } from "application/modules/ledger/dtos/CategoryDto";
 
 
 export interface UpdateCategoryByIdControllerDto{
@@ -24,7 +25,7 @@ export class UpdateLedgerByIdController extends BaseIpcController{
     private useCase: UpdateLedgerByIdUseCase
   ){super()}
   
-  async executeImpl(request: any): Promise<any> {
+  async executeImpl(request: UpdateCategoryByIdControllerDto): Promise<SuccessController<CategoryDto> | FailController<CategoryDto>> {
     try {
       const dto: UpdateLedgerByIdDTO = {
         ledgerId: request.ledgerId,

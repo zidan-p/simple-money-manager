@@ -2,7 +2,7 @@ import { CategoryFileDto } from "application/modules/ledger/dtos/CategoryFileDto
 import { CategoryFile } from "domain/ledger/categoryFile";
 import { IFileService } from "shared/fileHandler/IFileService";
 import { CreateCategoryRequestDTO, CreateCategoryUseCase } from "../categoryContainer";
-import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
+import { BaseIpcController, FailController, SuccessController } from "adapters/shared/base/BaseIpcController";
 import { CategoryDto, CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 import { CREATE_CATEGORY } from "../categoryChannelNames";
 import { IFileProvider } from "shared/fileHandler/IFileProvider";
@@ -27,7 +27,7 @@ export class CreateCategoryController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(req: CreateCategoryControllerDto): Promise<CategoryDto>{
+  async executeImpl(req: CreateCategoryControllerDto): Promise<SuccessController<CategoryDto> | FailController<CategoryDto>>{
     try {
       // mmm, why should i return the file dto? 🤔
       // when i using this, the file is already saved somewhere in this project dir.

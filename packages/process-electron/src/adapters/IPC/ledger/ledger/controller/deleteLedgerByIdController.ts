@@ -1,9 +1,10 @@
-import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
+import { BaseIpcController, FailController, SuccessController } from "adapters/shared/base/BaseIpcController";
 import { DeleteLedgerByIdUseCase, DeleteLedgerByIdUseCaseDTO } from "../ledgerContainer";
 import { DeleteCategoryByIdRequestDto } from "../../category/categoryContainer";
 import { LedgerMap } from "application/modules/ledger/dtos/LedgerDto";
 import { DELETE_LEDGER_BY_ID } from "../ledgerChannelNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
+import { CategoryDto } from "application/modules/ledger/dtos/CategoryDto";
 
 
 
@@ -23,7 +24,7 @@ export class DeleteLedgerByIdController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(request: DeleteLedgerByIdControllerDto): Promise<any> {
+  async executeImpl(request: DeleteLedgerByIdControllerDto): Promise<SuccessController<CategoryDto> | FailController<CategoryDto>> {
     try {
       const dto: DeleteLedgerByIdUseCaseDTO = {
         ledgerId: request.ledgerId

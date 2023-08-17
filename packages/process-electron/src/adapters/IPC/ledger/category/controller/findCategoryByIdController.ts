@@ -1,7 +1,8 @@
-import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
+import { BaseIpcController, FailController, SuccessController } from "adapters/shared/base/BaseIpcController";
 import { FindCategoryByIdRequestDto, FindCategoryByIdUseCase } from "../categoryContainer";
 import { GET_CATEGORY_BY_ID } from "../categoryChannelNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
+import { CategoryDto } from "application/modules/ledger/dtos/CategoryDto";
 
 
 
@@ -24,7 +25,7 @@ export class FindCategoryByIdController extends BaseIpcController{
     super()
   }
 
-  async executeImpl(request: FindCategoryByIdControllerDto): Promise<any> {
+  async executeImpl(request: FindCategoryByIdControllerDto): Promise<SuccessController<CategoryDto> | FailController<CategoryDto>> {
     try {
       const dto : FindCategoryByIdRequestDto = {
         categoryId: request.categoryId

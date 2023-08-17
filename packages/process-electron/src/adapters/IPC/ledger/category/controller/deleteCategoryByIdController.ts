@@ -1,8 +1,8 @@
-import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
+import { BaseIpcController, FailController, SuccessController } from "adapters/shared/base/BaseIpcController";
 import { DeleteCategoryByIdRequestDto } from "../categoryContainer";
 import { DeleteLedgerByIdUseCase } from "application/modules/ledger/useCases/ledger/deleteLedger/deleteLedgerByIdUseCase";
 import { DeleteCategoryByIdUseCase } from "application/modules/ledger/useCases/category/deleteCategory/deleteCategoryByIdUseCase";
-import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
+import { CategoryDto, CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 import { DELETE_CATEGORY_BY_ID } from "../categoryChannelNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
@@ -28,7 +28,7 @@ export class DeleteCategoryByIdController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(req: DeleteCategoryByIdControllerDto): Promise<any>{
+  async executeImpl(req: DeleteCategoryByIdControllerDto): Promise<SuccessController<CategoryDto> | FailController<CategoryDto> >{
     try {
       const dto : DeleteCategoryByIdRequestDto = {
         categoryId: req.categoryId
