@@ -7,7 +7,7 @@ import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
-export interface DeleteCategoryByIdControllerDto {
+export interface DeleteLedgerByIdControllerDto {
   ledgerId: string | number;
 }
 
@@ -23,7 +23,7 @@ export class DeleteLedgerByIdController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(request: DeleteCategoryByIdControllerDto): Promise<any> {
+  async executeImpl(request: DeleteLedgerByIdControllerDto): Promise<any> {
     try {
       const dto: DeleteLedgerByIdUseCaseDTO = {
         ledgerId: request.ledgerId

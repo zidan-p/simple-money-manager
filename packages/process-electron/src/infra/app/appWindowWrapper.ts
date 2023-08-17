@@ -14,6 +14,7 @@ export class AppWindowWrapper{
     app.on('window-all-closed', this.onWindowAllClosed);
     app.on('activate', this.onActivate);
     process.on('warning', e => console.warn(e.stack));
+    this.registerAction();
   }
 
   private onWindowAllClosed() {

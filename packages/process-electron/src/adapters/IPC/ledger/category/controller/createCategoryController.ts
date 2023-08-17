@@ -3,7 +3,7 @@ import { CategoryFile } from "domain/ledger/categoryFile";
 import { IFileService } from "shared/fileHandler/IFileService";
 import { CreateCategoryRequestDTO, CreateCategoryUseCase } from "../categoryContainer";
 import { BaseIpcController } from "adapters/shared/base/BaseIpcController";
-import { CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
+import { CategoryDto, CategoryMap } from "application/modules/ledger/dtos/CategoryDto";
 import { CREATE_CATEGORY } from "../categoryChannelNames";
 import { IFileProvider } from "shared/fileHandler/IFileProvider";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
@@ -27,7 +27,7 @@ export class CreateCategoryController extends BaseIpcController{
     super();
   }
 
-  async executeImpl(req: CreateCategoryControllerDto): Promise<any>{
+  async executeImpl(req: CreateCategoryControllerDto): Promise<CategoryDto>{
     try {
       // mmm, why should i return the file dto? 🤔
       // when i using this, the file is already saved somewhere in this project dir.
