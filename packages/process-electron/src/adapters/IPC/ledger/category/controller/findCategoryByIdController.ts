@@ -6,7 +6,7 @@ import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
-export type FindCategoryByIdControllerDto = {
+export interface FindCategoryByIdControllerDto {
   categoryId: string;
 }
 

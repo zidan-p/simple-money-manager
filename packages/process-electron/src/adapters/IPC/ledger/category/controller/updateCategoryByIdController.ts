@@ -13,7 +13,7 @@ import { ICategoryFileInterceptor } from "../interceptor/categoryFileInterceptor
 
 
 
-export type UpdateCategoryByIdControllerDto = {
+export interface UpdateCategoryByIdControllerDto {
   categoryId : string;
   description: string;
   name: string;

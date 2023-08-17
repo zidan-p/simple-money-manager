@@ -11,7 +11,7 @@ import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
-export type DeleteCategoryByIdControllerDto = {
+export interface DeleteCategoryByIdControllerDto {
   categoryId: string;
 }
 

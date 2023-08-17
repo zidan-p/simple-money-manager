@@ -8,7 +8,9 @@ import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 
-
+export interface FindCategoryByIdControllerDto {
+  ledgerId : number | string;
+}
 
 
 

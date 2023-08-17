@@ -6,6 +6,14 @@ import { UPDATE_LEDGER_BY_ID } from "../ledgerChannelNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
+export interface UpdateCategoryByIdControllerDto{
+  ledgerId: string | number;
+  amount: number;
+  categoryId: string | number;
+  date: string;
+  description: string;
+  type: "income" | "expense";
+}
 
 export class UpdateLedgerByIdController extends BaseIpcController{
 

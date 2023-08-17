@@ -9,7 +9,7 @@ import { IFileProvider } from "shared/fileHandler/IFileProvider";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 import { ICategoryFileInterceptor } from "../interceptor/categoryFileInterceptor";
 
-export type CreateCategoryControllerDto = {
+export interface CreateCategoryControllerDto {
   description: string;
   name: string;
   categoryIcon : string;
