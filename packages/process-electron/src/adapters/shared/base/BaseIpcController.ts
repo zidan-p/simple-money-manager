@@ -10,7 +10,11 @@ export abstract class BaseIpcController{
   
   abstract readonly channelName : string;
   abstract readonly channelType : string;
+
   abstract executeImpl(request: any): Promise<any>;
+
+  // TODO: use this vvv
+  // abstract executeImpl<TReturn>(request: any): Promise<SuccessController<TReturn> | FailController<TReturn>>;
 
   ok(value: any){
     return value as SuccessController<any>

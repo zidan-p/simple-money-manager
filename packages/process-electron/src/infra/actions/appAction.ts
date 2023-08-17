@@ -9,8 +9,8 @@ export function onClose(){
 }
 
 export function openFileDialog(filterFile: {name: string, extensions: string[]}){
-  return () => {
-    dialog.showOpenDialogSync({
+  return (): string[] => {
+    return dialog.showOpenDialogSync({
       properties: ['openFile', 'openDirectory'],
       filters: [{
         name: filterFile.name,

@@ -1,6 +1,7 @@
+import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 import { BrowserWindow, app, ipcMain } from "electron";
 import electron from "electron";
-import { actions } from "infra/actions";
+import { ActionProperties, actions } from "infra/actions";
 
 
 
@@ -31,8 +32,27 @@ export class AppWindowWrapper{
 
   private registerAction(){
     actions.forEach(action => {
-      ipcMain.on( action.name, action.handler)
+
+      switch(action.channelType){
+        case CHANNEL_TYPE.INVOKABLE:
+          this.handleInvokable(action);
+          break;
+        case CHANNEL_TYPE.SENDABLE:
+          this.handleSendable(action);
+          break;
+      }
+
     })
+  }
+
+  private handleInvokable(action: ActionProperties){
+    ipcMain.handle("ELECTRON:" + action.name, (_event, ...arg)=>{
+      return action.handler;
+    })
+  }
+
+  private handleSendable(action: ActionProperties){
+    ipcMain.on( action.name, action.handler)
   }
 
   private createWindow() {
