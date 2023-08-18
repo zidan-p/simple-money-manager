@@ -41,48 +41,8 @@ export const actions = asActionCollection([
   }
 ]);
 
-const aqwer = actions[1]["handler"]
-// export const actions : ActionCollection<typeof actions> = [
-//   {
-//     name: CLOSE,
-//     channelType: CHANNEL_TYPE.SENDABLE,
-//     handler: onClose
-//   },
-//   {
-//     name: OPEN_DIALOG_IMAGE_SELECTOR,
-//     channelType: CHANNEL_TYPE.INVOKABLE,
-//     handler: openFileDialog({name: "images", extensions: [...ImageExtensionTypes]})
-//   }
-// ] as const;
-
-///////////////////////////////////////
-function createAThing<TData>(obj: object){
-  console.log(obj);
-}
-createAThing({hello: " hali"})
-
-type ASomethingType<TGeneric> = {
-  data: TGeneric
-}
-
-const aThingGeneric: ASomethingType = {
-  data: "hello"
-}
-
-const testFunction = <T>(x : T) =>{
-  return x;
-}
-
-let assw = testFunction("string")
-
-type GetArrayReturnType<T> = T extends () => (infer U)[] ? U : never;
-
-// Output === { name: string }
-type Output = GetArrayReturnType<() => [{ name: string }, {nom : number}]>;
-
-///////////////////////////////////////
-
-const accrt = actions[0]["handler"];
+const accrt = actions[1]["handler"];
+const a: string[] = accrt();
 
 const acct = [
   {
