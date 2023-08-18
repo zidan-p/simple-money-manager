@@ -21,7 +21,11 @@ export type ActionCollection<T> = T extends readonly [infer TObject]
 type ExtractActionSignature<T extends (...args: any) => any> = 
   (...param : Parameters<T>) => ReturnType<T>
 
-export const actions : ActionCollection = [
+const asActionCollection = <T extends ActionCollection<any>[]>(x: T) => {
+  return x 
+}
+
+export const actions = asActionCollection([
   {
     name: CLOSE,
     channelType: CHANNEL_TYPE.SENDABLE,
@@ -32,14 +36,41 @@ export const actions : ActionCollection = [
     channelType: CHANNEL_TYPE.INVOKABLE,
     handler: openFileDialog({name: "images", extensions: [...ImageExtensionTypes]})
   }
-] as const;
+]);
+
+const aqwer = actions[0]["handler"]
+// export const actions : ActionCollection<typeof actions> = [
+//   {
+//     name: CLOSE,
+//     channelType: CHANNEL_TYPE.SENDABLE,
+//     handler: onClose
+//   },
+//   {
+//     name: OPEN_DIALOG_IMAGE_SELECTOR,
+//     channelType: CHANNEL_TYPE.INVOKABLE,
+//     handler: openFileDialog({name: "images", extensions: [...ImageExtensionTypes]})
+//   }
+// ] as const;
 
 ///////////////////////////////////////
 function createAThing<TData>(obj: object){
   console.log(obj);
 }
-
 createAThing({hello: " hali"})
+
+type ASomethingType<TGeneric> = {
+  data: TGeneric
+}
+
+const aThingGeneric: ASomethingType = {
+  data: "hello"
+}
+
+const testFunction = <T>(x : T) =>{
+  return x;
+}
+
+let assw = testFunction("string")
 
 ///////////////////////////////////////
 
