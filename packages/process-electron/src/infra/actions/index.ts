@@ -13,15 +13,18 @@ export type ActionProperties<THandler> = {
 // export type ActionCollection<T> = any[] extends ActionProperties[];
 export type ActionCollection<T> = T extends readonly [infer TObject]
   ? TObject extends ActionProperties<infer THandler>
-  ? ActionProperties<THandler>
-  : ActionProperties<(...args: any[]) => any>
+    ? ActionProperties<THandler> 
+    : ActionProperties<(...args: any[]) => any>
   : never
 
 
 type ExtractActionSignature<T extends (...args: any) => any> = 
   (...param : Parameters<T>) => ReturnType<T>
 
-const asActionCollection = <T extends ActionCollection<any>[]>(x: T) => {
+const asActionCollection = <T extends ActionCollection<any>[] >(
+  // finally, my 6 hours .....
+  x: [...({[K in keyof T] : T[K]})]
+) => {
   return x 
 }
 
@@ -38,7 +41,7 @@ export const actions = asActionCollection([
   }
 ]);
 
-const aqwer = actions[0]["handler"]
+const aqwer = actions[1]["handler"]
 // export const actions : ActionCollection<typeof actions> = [
 //   {
 //     name: CLOSE,
@@ -71,6 +74,11 @@ const testFunction = <T>(x : T) =>{
 }
 
 let assw = testFunction("string")
+
+type GetArrayReturnType<T> = T extends () => (infer U)[] ? U : never;
+
+// Output === { name: string }
+type Output = GetArrayReturnType<() => [{ name: string }, {nom : number}]>;
 
 ///////////////////////////////////////
 
