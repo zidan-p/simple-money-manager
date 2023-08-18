@@ -4,8 +4,8 @@ import { CREATE_LEDGER, DELETE_LEDGER_BY_ID, GET_LEDGER_BY_ID, UPDATE_LEDGER_BY_
 import { contextBridge, ipcRenderer } from "electron";
 import { ActionApi, actionsMeta } from "infra/actions";
 
-// maybe next time bundle the renderer api to the controller?
-// i mean these controller name must be all called here 
+// maybe next time put the renderer api to the controller?
+// i mean these controller name must be all called here, it's redundant
 const ledgerChannel: ledgerAPI = {
   createCategory      : (...param) => ipcRenderer.invoke("APP:" + CREATE_CATEGORY, param),
   findCategoryById    : (...param) => ipcRenderer.invoke("APP:" + GET_CATEGORY_BY_ID, param),
