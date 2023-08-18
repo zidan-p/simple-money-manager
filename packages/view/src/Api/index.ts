@@ -1,9 +1,11 @@
+import {ledgerAPI} from "@simple-money-manager/process-electron/src/adapters/IPC/ledger/functionApis"
 
 // let it be an `any` object first, i can't think how it look next
-let _ServiceDependency = {};
+let _ServiceDependency: ledgerAPI = {} as ledgerAPI;
+
 
 /**
- * in ther future, when this object would has been injected.
+ * in the future, when this object would has been injected.
  * the object maybe look like this
  * ```
  * // async function
@@ -18,11 +20,11 @@ let _ServiceDependency = {};
  * you can get those function with `inject` function
  */
 
-export function provide(dependecy: object): string[]{
+export function provide(dependecy: object & ledgerAPI): string[]{
     _ServiceDependency = dependecy;
     return Object.keys(_ServiceDependency);
 }
 
-export function inject(serviceDependecyName: string): any{
-    return _ServiceDependency[serviceDependecyName as keyof typeof _ServiceDependency];
+export function inject<T extends keyof ledgerAPI>(serviceDependecyName: T): typeof _ServiceDependency[T]{
+    return _ServiceDependency[serviceDependecyName];
 }

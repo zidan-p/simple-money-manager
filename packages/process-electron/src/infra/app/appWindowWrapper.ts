@@ -1,6 +1,5 @@
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 import { BrowserWindow, app, ipcMain } from "electron";
-import electron from "electron";
 import { ActionProperties, actions } from "infra/actions";
 
 
@@ -61,7 +60,8 @@ export class AppWindowWrapper{
       width: 800,
       title: `Yet another Electron Application`,
       webPreferences: {
-        nodeIntegration: false
+        nodeIntegration: false,
+        preload: "./../preload/preloadScript.js"
       }
     });
 
