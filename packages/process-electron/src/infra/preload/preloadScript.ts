@@ -23,7 +23,7 @@ const actionChannel: ActionApi = {
   
   // I don't know why, but typescript doesn't infer the return type of callback function.
   // there are somethins that can handle that, but obviously that's is not me.
-  openDialogImageSelector: () => ipcRenderer.invoke(actionsMeta.openDialogImageSelector.name) as Promise<string[]>
+  openDialogImageSelector: () => ipcRenderer.invoke(actionsMeta.openDialogImageSelector.name),
 }
 
 contextBridge.exposeInMainWorld("Electron", {

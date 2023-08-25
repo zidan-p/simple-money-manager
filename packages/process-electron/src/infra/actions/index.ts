@@ -1,6 +1,6 @@
 import { ImageExtensionTypes } from "shared/fileHandler/fileTypes/ImageFileType";
-import { onClose, openFileDialog } from "./appAction";
-import { CLOSE, OPEN_DIALOG_IMAGE_SELECTOR } from "./appActionNames";
+import { maximize, minimize, onClose, openFileDialog, unmaximize } from "./appAction";
+import { CLOSE, MAXIMIZE, MINIMIZE, OPEN_DIALOG_IMAGE_SELECTOR, UNMAXIMIZE } from "./appActionNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
@@ -19,7 +19,8 @@ export type ActionCollection<T> = T extends readonly [infer TObject]
 
 
 type ExtractActionSignature<T extends (...args: any) => any> = 
-  (...param : Parameters<T>) => ReturnType<T>
+  // it can be promise because it is accessed by rendered
+  (...param : Parameters<T>) => ReturnType<T> | Promise<ReturnType<T>>
 
 const asActionCollection = <T extends ActionCollection<any>[] >(
   // finally, my 6 hours .....
@@ -28,6 +29,8 @@ const asActionCollection = <T extends ActionCollection<any>[] >(
   return x 
 }
 
+
+// where are the actions palced
 export const actions = asActionCollection([
   {
     name: CLOSE,
@@ -38,21 +41,23 @@ export const actions = asActionCollection([
     name: OPEN_DIALOG_IMAGE_SELECTOR,
     channelType: CHANNEL_TYPE.INVOKABLE,
     handler: openFileDialog({name: "images", extensions: [...ImageExtensionTypes]})
+  },
+  {
+    name: MAXIMIZE,
+    channelType: CHANNEL_TYPE.SENDABLE,
+    handler: maximize
+  },
+  {
+    name: MINIMIZE,
+    channelType: CHANNEL_TYPE.SENDABLE,
+    handler: minimize
+  },
+  {
+    name: UNMAXIMIZE,
+    channelType: CHANNEL_TYPE.SENDABLE,
+    handler: unmaximize
   }
 ]);
-
-const accrt = actions[1]["handler"];
-const a: string[] = accrt();
-
-const acct = [
-  {
-    name: CLOSE,
-    channelType: CHANNEL_TYPE.SENDABLE,
-    handler: onClose
-  }
-]
-
-type qwer =   typeof acct[0]["handler"]
 
 // what a mess
 export type ActionApi = {
