@@ -1,4 +1,4 @@
-import { provide, inject, injectBulk } from "./src/Api";
+import { provide, inject} from "./src/Api";
 import App from "./src/App/app";
 
 
@@ -13,7 +13,6 @@ export {
      * inject depency to view API
      */
     inject, 
-    injectBulk,
 
     /**
      * The main react APP

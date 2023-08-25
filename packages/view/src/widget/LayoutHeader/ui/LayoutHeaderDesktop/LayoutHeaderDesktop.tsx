@@ -3,7 +3,7 @@ import Minus from "./icons/minus-icon.svg";
 import Close from "./icons/close-icon.svg";
 import { inject } from "@s-m-n/view/Api";
 
-// const closeApp = inject("close");
+const closeApp = inject("close") ?? (()=>{});
 
 export const LayoutHeaderDesktop = () => {
   return (
@@ -19,7 +19,7 @@ export const LayoutHeaderDesktop = () => {
           <Maximize className=" w-3 h-3" />
         </div>
         <div 
-          // onClick={() => closeApp()}
+          onClick={() => closeApp()}
           className="p-3 px-4 text-gray-600 hover:text-white hover:bg-red-800"
         >
           <Close className=" w-3 h-3" />

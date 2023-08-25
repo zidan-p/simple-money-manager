@@ -31,10 +31,13 @@ export function provide(dependecy: object & ViewApi): string[]{
   return Object.keys(_ServiceDependency);
 }
 
-export function inject<T extends keyof ViewApi>(serviceDependecyName: T): typeof _ServiceDependency[T]{
-  return _ServiceDependency[serviceDependecyName];
-}
+export function inject<T extends keyof ViewApi>(serviceDependencyName: T): typeof _ServiceDependency[T]{
+  if(_ServiceDependency === null || _ServiceDependency === undefined)
+    return (()=>{console.log("Empty Dependency")}) as typeof _ServiceDependency[T];
 
-export function injectBulk<T extends ViewApi>(serviceDependecy: T){
-  _ServiceDependency = serviceDependecy;
+  // if present
+  if(serviceDependencyName in _ServiceDependency)
+    return _ServiceDependency[serviceDependencyName];
+
+  return (()=>{console.log("Empty Dependency")}) as typeof _ServiceDependency[T];
 }

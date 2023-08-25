@@ -1,6 +1,7 @@
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 import { BrowserWindow, app, ipcMain } from "electron";
 import { ActionProperties, actions } from "infra/actions";
+import path from "node:path";
 
 
 
@@ -63,7 +64,8 @@ export class AppWindowWrapper{
       title: `Yet another Electron Application`,
       webPreferences: {
         nodeIntegration: false,
-        preload: "./../preload/preloadScript.js"
+        // preload: path.resolve(__dirname,"/dist/infra/preload/preloadScript.js")
+        preload: path.resolve(__dirname, "./../../../preloadScript.js")
       }
     });
 

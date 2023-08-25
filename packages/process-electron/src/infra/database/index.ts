@@ -73,7 +73,7 @@ export class DatabaseSMM {
     // - use propper way to handle this 😤
 
     // # UPDATE
-    // - typescript (i) unable to handle for in loop to lookup the key type
+    // - typescript (i) unable to handle for in loop to lookup for the key type
     // - so i will use other way to loop instead  
 
     // for(const modelInitial in modelInit){
