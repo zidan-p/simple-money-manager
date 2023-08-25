@@ -65,7 +65,9 @@ export class AppWindowWrapper{
       webPreferences: {
         nodeIntegration: false,
         // preload: path.resolve(__dirname,"/dist/infra/preload/preloadScript.js")
-        preload: path.resolve(__dirname, "./../../../preloadScript.js")
+
+        // 📝 NOTE : fix this so it only get the root directory, not app directory
+        preload: path.resolve(__dirname, "./../preload/preloadScript.js")
       }
     });
 

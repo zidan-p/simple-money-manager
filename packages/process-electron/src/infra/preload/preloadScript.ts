@@ -4,6 +4,13 @@ import { CREATE_LEDGER, DELETE_LEDGER_BY_ID, GET_LEDGER_BY_ID, UPDATE_LEDGER_BY_
 import { contextBridge, ipcRenderer } from "electron";
 import { ActionApi, actionsMeta } from "infra/actions";
 
+const style = 
+`
+  color: blue;
+  font-weight: bold;
+`
+console.log("%creading preload script.....", style);
+
 // maybe next time put the renderer api to the controller?
 // i mean these controller name must be all called here, it's redundant
 const ledgerChannel: ledgerAPI = {
@@ -39,3 +46,5 @@ contextBridge.exposeInMainWorld("Electron", {
 })
 
 export {rootHandler};
+
+console.log("%cfinish read preload script....", style);
