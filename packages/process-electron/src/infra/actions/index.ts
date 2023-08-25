@@ -59,36 +59,27 @@ export const actions = asActionCollection([
   }
 ]);
 
-// what a mess
-// export type ActionApi = {
-//   close: ExtractActionSignature<typeof actions[0]["handler"]>,
-//   openDialogImageSelector: ExtractActionSignature<typeof actions[1]["handler"]>
-// }
-
-type toActionsApi<T extends ActionProperties<any>[]> = {
-  [K in T[number] as K["name"]] : K["handler"]
-}
-
-type ObjectUnion = typeof actions[number];
-type ActionApiType = {
-  [K in ObjectUnion as K["name"]] : K["handler"]
+// neat
+export type ActionApi = {
+  [K in typeof actions[number] as K["name"]] : ExtractActionSignature<K["handler"]>
 }
 
 
-// export type ActionApi = {
-//   [K in typeof actions[number] as K["name"]] : K["handler"]
-// }
-
-// export type ActionApi = toActionsApi<typeof actions>
-
-// metadata for each action
-export const actionsMeta = {
-  close: {
-    name: CLOSE,
-    channelType: CHANNEL_TYPE.SENDABLE
-  },
-  openDialogImageSelector: {
-    name: OPEN_DIALOG_IMAGE_SELECTOR,
-    channelType: CHANNEL_TYPE.INVOKABLE
+type ActionMeta = {
+  [K in typeof actions[number] as K["name"]] : {
+    name : K["name"],
+    channelType : K["channelType"]
   }
 }
+
+
+// metadata for each action
+// will electron sandbox prevent to accessing actions ?
+// let we see
+export const actionsMeta = actions.map(action => ({
+  [action.name] : {
+    name: action.name,
+    channelType : action.channelType
+  }
+  // only thing i know to make it
+})) as unknown as ActionMeta;
