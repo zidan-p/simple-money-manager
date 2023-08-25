@@ -19,14 +19,23 @@ const ledgerChannel: ledgerAPI = {
 
 
 const actionChannel: ActionApi = {
+
+  // all invokeable event must be prefixed witj "ELECTRON:"
+  openDialogImageSelector: () => ipcRenderer.invoke("ELECTRON:" + actionsMeta.openDialogImageSelector.name),
+
   close: () => ipcRenderer.send(actionsMeta.close.name),
-  
-  // I don't know why, but typescript doesn't infer the return type of callback function.
-  // there are somethins that can handle that, but obviously that's is not me.
-  openDialogImageSelector: () => ipcRenderer.invoke(actionsMeta.openDialogImageSelector.name),
+  maximaze: () => ipcRenderer.send(actionsMeta.maximaze.name),
+  minimize: () => ipcRenderer.send(actionsMeta.minimize.name),
+  unmaximize: () => ipcRenderer.send(actionsMeta.unmaximize.name)
+}
+
+const rootHandler = {
+  ...ledgerChannel,
+  ...actionChannel
 }
 
 contextBridge.exposeInMainWorld("Electron", {
-  ...ledgerChannel,
-  ...actionChannel
+  rootHandler
 })
+
+export {rootHandler};

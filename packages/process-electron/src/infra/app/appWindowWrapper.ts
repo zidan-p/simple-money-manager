@@ -13,8 +13,10 @@ export class AppWindowWrapper{
     app.on('ready', this.createWindow);
     app.on('window-all-closed', this.onWindowAllClosed);
     app.on('activate', this.onActivate);
-    process.on('warning', e => console.warn(e.stack));
     this.registerAction();
+
+    process.on('warning', e => console.warn(e.stack));
+    process.on("uncaughtException", e => console.error(e));
   }
 
   private onWindowAllClosed() {
@@ -44,14 +46,14 @@ export class AppWindowWrapper{
     })
   }
 
-  private handleInvokable(action: ActionProperties){
+  private handleInvokable<Thandler>(action: ActionProperties<Thandler>){
     ipcMain.handle("ELECTRON:" + action.name, (_event, ...arg)=>{
       return action.handler;
     })
   }
 
-  private handleSendable(action: ActionProperties){
-    ipcMain.on( action.name, action.handler)
+  private handleSendable<Thandler>(action: ActionProperties<Thandler>){
+    ipcMain.on( action.name, action.handler as () => void)
   }
 
   private createWindow() {
@@ -66,6 +68,7 @@ export class AppWindowWrapper{
     });
 
     // this.mainWindow.webContents.openDevTools();
-    this.mainWindow.loadFile('./../index.html');
+    // this.mainWindow.loadFile('./../index.html');
+    this.mainWindow.loadURL("http://localhost:3005")
   }
 }
