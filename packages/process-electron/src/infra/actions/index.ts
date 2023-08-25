@@ -5,9 +5,9 @@ import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
 export type ActionProperties<THandler> = {
-  name: string;
-  channelType: string;
-  handler: THandler;
+  readonly name: string;
+  readonly channelType: string;
+  readonly handler: THandler;
 }
 
 // export type ActionCollection<T> = any[] extends ActionProperties[];
@@ -24,7 +24,7 @@ type ExtractActionSignature<T extends (...args: any) => any> =
 
 const asActionCollection = <T extends ActionCollection<any>[] >(
   // finally, my 6 hours .....
-  x: [...({[K in keyof T] : T[K]})]
+  x: [...({readonly [K in keyof T] : T[K]})]
 ) => {
   return x 
 }
@@ -60,10 +60,26 @@ export const actions = asActionCollection([
 ]);
 
 // what a mess
-export type ActionApi = {
-  close: ExtractActionSignature<typeof actions[0]["handler"]>,
-  openDialogImageSelector: ExtractActionSignature<typeof actions[1]["handler"]>
+// export type ActionApi = {
+//   close: ExtractActionSignature<typeof actions[0]["handler"]>,
+//   openDialogImageSelector: ExtractActionSignature<typeof actions[1]["handler"]>
+// }
+
+type toActionsApi<T extends ActionProperties<any>[]> = {
+  [K in T[number] as K["name"]] : K["handler"]
 }
+
+type ObjectUnion = typeof actions[number];
+type ActionApiType = {
+  [K in ObjectUnion as K["name"]] : K["handler"]
+}
+
+
+// export type ActionApi = {
+//   [K in typeof actions[number] as K["name"]] : K["handler"]
+// }
+
+// export type ActionApi = toActionsApi<typeof actions>
 
 // metadata for each action
 export const actionsMeta = {

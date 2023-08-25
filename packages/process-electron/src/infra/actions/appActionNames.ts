@@ -5,9 +5,9 @@
 
 
 
-export const CLOSE = "close";
-export const MINIMIZE = "minimize";
-export const MAXIMIZE = "maximaze";
-export const UNMAXIMIZE = "unmaximize";
-export const RESTORE_DOWN = "restoreDown";
-export const OPEN_DIALOG_IMAGE_SELECTOR = "openDialogImageSelector";
+export const CLOSE = "close" as const;
+export const MINIMIZE = "minimize" as const;
+export const MAXIMIZE = "maximaze" as const;
+export const UNMAXIMIZE = "unmaximize" as const;
+export const RESTORE_DOWN = "restoreDown" as const;
+export const OPEN_DIALOG_IMAGE_SELECTOR = "openDialogImageSelector" as const;
