@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .\\dist\\index.js",
+    "webpack" : "webpack --config webpack.config.js",
     "dev": "tsc --build && tsc-alias && electron --trace-warnings .\\dist\\index.js",
     "build:tsc": "tsc --build",
     "testing": "npx tsc && node .\\dist\\index.js",
