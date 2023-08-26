@@ -73,13 +73,20 @@ type ActionMeta = {
 }
 
 
-// metadata for each action
-// will electron sandbox prevent to accessing actions ?
-// let we see
-export const actionsMeta = actions.map(action => ({
-  [action.name] : {
+
+
+// what a big mess
+const actionsMeta : ActionMeta = {} as ActionMeta ;
+
+actions.forEach(action => {
+  actionsMeta[action.name] = {
+    // @ts-ignore
     name: action.name,
-    channelType : action.channelType
+    // @ts-ignore
+    channelType: action.channelType
   }
-  // only thing i know to make it
-})) as unknown as ActionMeta;
+})
+
+export {actionsMeta}
+
+console.log(actionsMeta);
