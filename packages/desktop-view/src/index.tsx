@@ -10,8 +10,9 @@ const domNode = document.getElementById("root")
 const root = createRoot(domNode as HTMLDivElement);
 // inject(window.Electron as PreloadType );
 // injectBulk(window.Electron as PreloadType)
-provide(window.Electron as PreloadType ?? {})
-
+// console.log(window.Electron);
+const service = provide(window.Electron as PreloadType ?? {})
+console.log(service);
 
 root.render(
     <React.StrictMode>

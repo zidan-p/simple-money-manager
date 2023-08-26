@@ -43,10 +43,12 @@ const config = {
 
       // these two didn't work well.
       // i must fix it
-      "sequelize": require.resolve("sequelize"),
-      "sqlite3": require.resolve("sqlite3"),
+      // see: https://webpack.js.org/configuration/externals/#externalstypevar
+      "sequelize": 'require("sequelize")',
+      "sqlite3": 'require("sqlite3")',
     }
   ], 
+  externalsType: 'var',
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {

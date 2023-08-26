@@ -58,6 +58,9 @@ export class AppWindowWrapper{
   }
 
   private createWindow() {
+
+    console.log(__dirname); // magic... (when it's called here, the app can read the dir) 
+
     this.mainWindow = new BrowserWindow({
       height: 600,
       width: 800,
@@ -67,12 +70,13 @@ export class AppWindowWrapper{
         // preload: path.resolve(__dirname,"/dist/infra/preload/preloadScript.js")
 
         // 📝 NOTE : use webpack
-        preload: path.resolve("./preload-script.js")
+        // preload: path.resolve(__dirname,"/dist/preload-script.js")
+        preload: path.resolve("dist/preload-script.js")
       }
     });
 
     // this.mainWindow.webContents.openDevTools();
-    this.mainWindow.loadFile('./../index.html');
-    // this.mainWindow.loadURL("http://localhost:3005")
+    // this.mainWindow.loadFile('./../index.html');
+    this.mainWindow.loadURL("http://localhost:3005")
   }
 }

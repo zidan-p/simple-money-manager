@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .\\dist\\electron-bundle.js",
     "webpack" : "webpack --config webpack.config.js",
-    "dev": "tsc --build && tsc-alias && electron --trace-warnings .\\dist\\electron-bundle.js",
+    "dev": "webpack --config webpack.config.js && electron --trace-warnings .\\dist\\electron-bundle.js",
     "build:tsc": "tsc --build",
     "testing": "npx tsc && node .\\dist\\electron-bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"

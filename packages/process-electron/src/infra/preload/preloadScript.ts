@@ -42,7 +42,7 @@ const rootHandler = {
 }
 
 contextBridge.exposeInMainWorld("Electron", {
-  rootHandler
+  ...rootHandler
 })
 
 export {rootHandler};
