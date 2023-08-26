@@ -66,13 +66,13 @@ export class AppWindowWrapper{
         nodeIntegration: false,
         // preload: path.resolve(__dirname,"/dist/infra/preload/preloadScript.js")
 
-        // 📝 NOTE : fix this so it only get the root directory, not app directory
-        preload: path.resolve(__dirname, "./../preload/preloadScript.js")
+        // 📝 NOTE : use webpack
+        preload: path.resolve("./preload-script.js")
       }
     });
 
     // this.mainWindow.webContents.openDevTools();
-    // this.mainWindow.loadFile('./../index.html');
-    this.mainWindow.loadURL("http://localhost:3005")
+    this.mainWindow.loadFile('./../index.html');
+    // this.mainWindow.loadURL("http://localhost:3005")
   }
 }

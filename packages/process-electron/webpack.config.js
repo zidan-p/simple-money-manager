@@ -8,7 +8,17 @@ const nodeExternals = require('webpack-node-externals');
  * */
 const config = {
   mode : "development",
-  entry: './src/index.ts',
+  devtool : "source-map",
+  entry: {
+    electron: {
+      import: "./src/index.ts",
+      filename: "electron-bundle.js"
+    },
+    preload: {
+      import : "./src/infra/preload/preloadScript.ts",
+      filename: "preload-script.js"
+    }
+  },
   module: {
     rules: [
       {
@@ -18,6 +28,7 @@ const config = {
       },
     ],
   },
+  
   externalsPresets: { node: true }, // in order to ignore built-in modules like path, fs, etc.
   externals: [
     // in order to ignore all modules in node_modules folder
@@ -26,11 +37,14 @@ const config = {
     // my hack. apparently nodeExternals doesn't work in my project.
     // so wheter i want or not, i must manually define all external dependecy
     {
-      "sequelize": "sequelize",
       "sequelize-typescript": "sequelize-typescript",
       "uuid": "uuid",
       "electron": "electron",
-      "sqlite3": "sqlite3",
+
+      // these two didn't work well.
+      // i must fix it
+      "sequelize": require.resolve("sequelize"),
+      "sqlite3": require.resolve("sqlite3"),
     }
   ], 
   resolve: {
@@ -45,8 +59,9 @@ const config = {
     }
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name]-electron-bundle.js', // overrrided in entry
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
 }
 

@@ -2,8 +2,13 @@ import { Sequelize, ModelStatic, Model } from "sequelize";
 import * as path from "node:path";
 import categoryInit from "./models/CategoryDB.model";
 import ledgerInit from "./models/LedgerDB.model";
-import sqlite3 from "sqlite3";
+// import sqlite3 from "sqlite3";
 import { associateModel } from "./setup/associateModel";
+
+
+// Hack to fix webpack won't requiring sequelize and sqlite
+const Seq = require("sequelize");
+const sqlite3 = require("sqlite3");
 
 // # TODO:
 // - automate it with fs
@@ -55,7 +60,8 @@ export class DatabaseSMM {
   async inititalizeDatabase() {
 
     // # change this to depends on config
-    this.sequelize = new Sequelize({
+    // this.sequelize = new Sequelize({
+    this.sequelize = new Seq({
       dialect: "sqlite",
 
       // i think it will make sqlite work
