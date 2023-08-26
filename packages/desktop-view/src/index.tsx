@@ -12,6 +12,7 @@ const root = createRoot(domNode as HTMLDivElement);
 // injectBulk(window.Electron as PreloadType)
 // console.log(window.Electron);
 const service = provide(window.Electron as PreloadType ?? {})
+console.log("service....")
 console.log(service);
 
 root.render(

@@ -65,6 +65,7 @@ export class AppWindowWrapper{
       height: 600,
       width: 800,
       title: `Yet another Electron Application`,
+      frame: false,
       webPreferences: {
         nodeIntegration: false,
         // preload: path.resolve(__dirname,"/dist/infra/preload/preloadScript.js")

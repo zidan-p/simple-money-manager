@@ -33,11 +33,9 @@ export function provide(dependecy: object & ViewApi): string[]{
 
 export function inject<T extends keyof ViewApi>(serviceDependencyName: T): typeof _ServiceDependency[T]{
   if(_ServiceDependency === null || _ServiceDependency === undefined)
-    return (()=>{console.log("Empty Dependency")}) as typeof _ServiceDependency[T];
-
-  // if present
+    return (()=>{console.error("Empty Dependency")}) as typeof _ServiceDependency[T];
   if(serviceDependencyName in _ServiceDependency)
     return _ServiceDependency[serviceDependencyName];
 
-  return (()=>{console.log("Empty Dependency")}) as typeof _ServiceDependency[T];
+  return (()=>{console.error("Empty Dependency")}) as typeof _ServiceDependency[T];
 }

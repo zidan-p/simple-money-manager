@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* set deaggable for header in electron app */
+.draggable-frame {
+  -webkit-app-region: drag;
+}
