@@ -16,19 +16,19 @@ export const LayoutHeaderDesktop = () => {
       <div className="flex">
         <div
           onClick={() => inject("minimize")()}
-          className="p-3 px-4 text-gray-600 hover:text-white hover:bg-gray-400"
+          className="p-3 px-4 text-gray-600 hover:text-white hover:bg-gray-400 cursor-pointer"
         >
           <Minus className=" w-3 h-3" />
         </div>
         <div 
           onClick={() => inject("unmaximize")()}
-          className="p-3 px-4 text-gray-600 hover:text-white hover:bg-gray-400"
+          className="p-3 px-4 text-gray-600 hover:text-white hover:bg-gray-400 cursor-pointer"
         >
           <Maximize className=" w-3 h-3" />
         </div>
         <div 
           onClick={() => inject("close")()}
-          className="p-3 px-4 text-gray-600 hover:text-white hover:bg-red-800"
+          className="p-3 px-4 text-gray-600 hover:text-white hover:bg-red-800 cursor-pointer"
         >
           <Close className=" w-3 h-3" />
         </div>

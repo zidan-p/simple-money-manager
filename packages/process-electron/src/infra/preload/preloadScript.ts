@@ -30,10 +30,15 @@ const actionChannel: ActionApi = {
   // all invokeable event must be prefixed witj "ELECTRON:"
   openDialogImageSelector: () => ipcRenderer.invoke("ELECTRON:" + actionsMeta.openDialogImageSelector.name),
 
+  // all retievable event emiter should prefixed with "RENDERER" 
+  watchIsMaximize: (callback: (...arg: any) => any) => {
+    ipcRenderer.on("RENDERER"+actionsMeta.watchIsMaximize.name, callback)
+  },
+
   close: () => ipcRenderer.send(actionsMeta.close.name),
   maximaze: () => ipcRenderer.send(actionsMeta.maximaze.name),
   minimize: () => ipcRenderer.send(actionsMeta.minimize.name),
-  unmaximize: () => ipcRenderer.send(actionsMeta.unmaximize.name)
+  unmaximize: () => ipcRenderer.send(actionsMeta.unmaximize.name),
 }
 
 const rootHandler = {

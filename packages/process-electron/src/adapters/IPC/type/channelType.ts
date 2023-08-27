@@ -3,7 +3,12 @@
 
 
 export const CHANNEL_TYPE = {
-  INVOKABLE : "INVOKABLE",
-  SENDABLE  : "SENDABLE"
+  /** from rendere to main then returned to rendere */
+  INVOKABLE     : "INVOKABLE", 
 
+  /** from renderer to main */
+  SENDABLE      : "SENDABLE", 
+  
+  /** from main to rendere */
+  RETRIEVEABLE  : "RETIEVABLE" 
 } as const

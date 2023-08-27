@@ -1,6 +1,6 @@
 import { ImageExtensionTypes } from "shared/fileHandler/fileTypes/ImageFileType";
-import { maximize, minimize, onClose, openFileDialog, unmaximize } from "./appAction";
-import { CLOSE, MAXIMIZE, MINIMIZE, OPEN_DIALOG_IMAGE_SELECTOR, UNMAXIMIZE } from "./appActionNames";
+import { maximize, minimize, onClose, openFileDialog, unmaximize, watchIsMaximize } from "./appAction";
+import { CLOSE, MAXIMIZE, MINIMIZE, OPEN_DIALOG_IMAGE_SELECTOR, UNMAXIMIZE, WATCH_IS_MAXIMIZE } from "./appActionNames";
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 
 
@@ -56,6 +56,12 @@ export const actions = asActionCollection([
     name: UNMAXIMIZE,
     channelType: CHANNEL_TYPE.SENDABLE,
     handler: unmaximize
+  },
+  {
+    // event listener
+    name: WATCH_IS_MAXIMIZE,
+    channelType: CHANNEL_TYPE.RETRIEVEABLE,
+    handler: watchIsMaximize
   }
 ]);
 

@@ -1,9 +1,13 @@
 import { CHANNEL_TYPE } from "adapters/IPC/type/channelType";
 import { BrowserWindow, app, ipcMain } from "electron";
 import { ActionProperties, actions } from "infra/actions";
+import { EventListenerHandlerElectron } from "infra/actions/appAction";
 import path from "node:path";
 
 
+// it a mess
+// see: appAction.ts file 
+type RetrievableHandler = (name: `RENDERER:${any}`, callback: (...args:any) => any) => any;
 
 export class AppWindowWrapper{
   private mainWindow!:  BrowserWindow;
@@ -42,6 +46,9 @@ export class AppWindowWrapper{
         case CHANNEL_TYPE.SENDABLE:
           this.handleSendable(action);
           break;
+        case CHANNEL_TYPE.RETRIEVEABLE :
+          this.handleRetrievable<any>(action)
+          break;
       }
 
     })
@@ -51,6 +58,12 @@ export class AppWindowWrapper{
     ipcMain.handle("ELECTRON:" + action.name, (_event, ...arg)=>{
       return action.handler;
     })
+  }
+
+  private handleRetrievable<Thandler extends any>
+  (action: ActionProperties<EventListenerHandlerElectron>){
+    // it already handled in action
+    action.
   }
 
   private handleSendable<Thandler>(action: ActionProperties<Thandler>){
